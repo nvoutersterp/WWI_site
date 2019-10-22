@@ -12,6 +12,9 @@
     <
 </head>
 <body>
+<header id="header02" class="flex-header" >
+    <a href="#kleding">kleding</a>
+</header>
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">
     <div>
@@ -30,6 +33,12 @@
     </div>
 </header>
 
+<main class="content">
+
+
+
+
+
 
 <!-- database doet het -->
 <?php
@@ -37,7 +46,7 @@ include 'function.php';
 
 $conn = dbconect();
 
-$sql = "SELECT temperature FROM vehicletemperatures";
+$sql = "SELECT temperature FROM vehicletemperatures WHERE Temperature<3.01 ORDER BY Temperature desc";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -51,5 +60,14 @@ if ($result->num_rows > 0) {
 $conn->close();
 ?>
 
+</main>
+<a href="#header02">
+    <button type="button" class="page_up_button">
+        <img src="images/external-content.duckduckgo.jpg">
+    </button>
+</a>
+<footer>
+    <!-- te komen -->
+</footer>
 </body>
 </html>
