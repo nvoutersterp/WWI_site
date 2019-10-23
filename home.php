@@ -12,7 +12,7 @@
     <
 </head>
 <body>
-<header id="header02" class="flex-header" >
+<header id="header02" class="flex-header">
     <a href="#kleding">kleding</a>
 </header>
 <!-- floading header with nav -->
@@ -36,36 +36,35 @@
 <main class="content">
 
 
+    <!-- database doet het -->
+    <?php
+    include 'function.php';
 
+    $conn = dbconect();
 
+    $sql = "SELECT temperature FROM vehicletemperatures WHERE Temperature<3.01 ORDER BY Temperature desc";
+    $result = $conn->query($sql);
 
-
-<!-- database doet het -->
-<?php
-include 'function.php';
-
-$conn = dbconect();
-
-$sql = "SELECT temperature FROM vehicletemperatures WHERE Temperature<3.01 ORDER BY Temperature desc";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "temp: " . $row["temperature"] . "<br>";
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            print ("temp: " . $row["temperature"] . "<br>");
+        }
+    } else {
+        print ("geen reseltaten");
     }
-} else {
-    echo "geen reseltaten";
-}
 
-$conn->close();
-?>
+    $conn->close();
+    ?>
 
 </main>
-<a href="#header02">
-    <button type="button" class="page_up_button">
-        <img src="images/external-content.duckduckgo.jpg">
-    </button>
-</a>
+
+<!-- werkt nog niet!
+
+<button onclick="topFunction()" class="page_up_button" title="Go to top">
+    <img src="images/external-content.duckduckgo.jpg">
+</button> -->
+
+
 <footer>
     <!-- te komen -->
 </footer>

@@ -79,14 +79,24 @@ header input {
 }
 
 /*overig*/
+/*page up button*/
 .page_up_button {
-    overflow: hidden;
+    display: none;
     position: fixed;
-    float: end;
-    height: 30px;
-    width: 30px;
-    border-radius: 50px;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
     border: none;
+    outline: none;
+    background-color: lightblue;
+    color: darkblue;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 20px;
+}
+
+.page_up_button:hover {
+    background-color: gray;
 }
 
 a button img {
@@ -94,3 +104,5 @@ a button img {
     width: 20px;
     border-radius: 20px;
 }
+
+/*wat anders*/
