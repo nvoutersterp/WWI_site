@@ -12,11 +12,11 @@ function dbconect() {
 
 //account//
 //password//
-function hashPassword($password) {
+function hashPassword(string $password) {
     return password_hash($password, 1);
 }
 
-function verifyPassword($password, $hash) {
+function verifyPassword(string $password, string $hash) {
     if (password_verify($password, $hash)) {
         return true;
     } else {
@@ -24,7 +24,7 @@ function verifyPassword($password, $hash) {
     }
 }
 
-function accountLogin($password, $username) {
+function accountLogin(string $password, string $username) {
     $conn = dbconect();
     $sql = "SELECT hashedpassword FROM people WHERE LogonName='$username'";
     $result = $conn->query($sql);
@@ -41,15 +41,24 @@ function accountLogin($password, $username) {
 }
 
 //username//
-function checkUsername($username) {
+function checkUsername(string $username) {
+    $conn = dbconect();
+    $sql = "SELECT logonname From people where LogonName='$username'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows = 0) {
+        if insertUsername($username);
+
+    } else {
+        return false;
+    }
+}
+
+function insertUsername(string $username) {
 
 }
 
-function insertUsername($username) {
-
-}
-
-function insertAccountData(string $info, $username) {
+function insertAccountData(array $info, string $username) {
 
 }
 
