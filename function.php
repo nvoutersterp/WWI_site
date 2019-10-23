@@ -1,4 +1,6 @@
 <?php
+//actieve gebruiker
+$currentUserData = array();
 
 //start db conectie
 function dbconect() {
@@ -9,14 +11,17 @@ function dbconect() {
     return $connection;
 }
 
-
 //account//
 //password//
-function hashPassword(string $password) {
-    return password_hash($password, 1);
+function insertPassword($username, $password){
+    $conn = dbconect();
+    $hash = password_hash($password, 1);
+    $sql = "update people set HashedPassword='$hash' where LogonName = '$username'";
+    $conn->query($sql);
+    $conn->close();
 }
 
-function verifyPassword(string $password, string $hash) {
+function verifyPassword($password, $hash) {
     if (password_verify($password, $hash)) {
         return true;
     } else {
@@ -24,41 +29,57 @@ function verifyPassword(string $password, string $hash) {
     }
 }
 
-function accountLogin(string $password, string $username) {
+function setCurrentUser($username) {
+    $conn = dbconect();
+    $sql = "select PersonID,firstName,middelName,lastName,LogonName,IsSalesperson,PhoneNumber,postalCode,street,city from people where LogonName = '$username'";
+    $result = $conn->query($sql);
+    $conn->close();
+    $currentUserData = $result; //verwerken resultaat
+}
+
+function accountLogin($password, $username) {
     $conn = dbconect();
     $sql = "SELECT hashedpassword FROM people WHERE LogonName='$username'";
     $result = $conn->query($sql);
+    $conn->close();
 
     if ($result->num_rows > 0) {
         if (verifyPassword($password,$sql)) {
-            return true;
+            setCurrentUser($username);
+            return true; //mag inloggen
         } else {
-            return false;
+            return false; //wachtwoord klopt niet
         }
     } else {
-        return false;
+        return false; //mail/naam klopt niet
     }
 }
 
 //username//
-function checkUsername(string $username) {
+function checkUsername($username) {
     $conn = dbconect();
     $sql = "SELECT logonname From people where LogonName='$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows = 0) {
-        if insertUsername($username);
-
+        $sql2 = "insert into people (LogonName) value ('$username')";
+        $conn->query($sql2);
+        return true;
     } else {
         return false;
     }
+    $conn->close();
 }
 
-function insertUsername(string $username) {
-
+function createAccount($username, $wachtwoord) {
+    if (checkUsername($username)) {
+        insertPassword($username, $wachtwoord);
+    } else {
+        return false; //naam bestaat al
+    }
 }
 
-function insertAccountData(array $info, string $username) {
+function insertAccountData(array $info, $username) {
 
 }
 
