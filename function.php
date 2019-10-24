@@ -62,7 +62,7 @@ function checkUsername($username) {
     $result = $conn->query($sql);
 
     if ($result->num_rows = 0) {
-        $sql2 = "insert into people (LogonName) value ('$username')";
+        $sql2 = "insert into people (LogonName) value ('$username')"; //mist personID!!!!!!!!
         $conn->query($sql2);
         return true;
     } else {
@@ -80,7 +80,10 @@ function createAccount($username, $wachtwoord) {
 }
 
 function insertAccountData(array $info, $username) {
-
+    $conn = dbconect();
+    $sql = "update people set firstName='$info[voornaam]',middelName='$info[tussenvoegsel]',lastName='$info[achternaam]',PhoneNumber='$info[phonenummer]', EmailAddress='$username',postalCode='$info[postcode]',street='$info[straat]',city='$info[stad]' where LogonName='$username'";
+    $conn->query($sql);
+    $conn->close();
 }
 
 ?>
