@@ -34,7 +34,7 @@ function setCurrentUser($username) {
     $sql = "select PersonID,firstName,middelName,lastName,LogonName,IsSalesperson,PhoneNumber,postalCode,street,city from people where LogonName = '$username'";
     $result = $conn->query($sql);
     $conn->close();
-    $currentUserData = $result; //verwerken resultaat
+    return $result; //verwerken resultaat
 }
 
 function accountLogin($password, $username) {
@@ -45,8 +45,8 @@ function accountLogin($password, $username) {
 
     if ($result->num_rows > 0) {
         if (verifyPassword($password,$sql)) {
-            setCurrentUser($username);
-            return true; //mag inloggen
+            $data = setCurrentUser($username);
+            return $data; //mag inloggen
         } else {
             return false; //wachtwoord klopt niet
         }
@@ -62,7 +62,10 @@ function checkUsername($username) {
     $result = $conn->query($sql);
 
     if ($result->num_rows = 0) {
-        $sql2 = "insert into people (LogonName) value ('$username')"; //mist personID!!!!!!!!
+        $sql3 = "select max(personID) from people";
+        $maxID = $conn->query($sql3); //zoek hoogste sleutel/id
+        $maxID++;
+        $sql2 = "insert into people (PersonID,LogonName) value ('$maxID','$username')";
         $conn->query($sql2);
         return true;
     } else {
@@ -74,6 +77,7 @@ function checkUsername($username) {
 function createAccount($username, $wachtwoord) {
     if (checkUsername($username)) {
         insertPassword($username, $wachtwoord);
+        return true;
     } else {
         return false; //naam bestaat al
     }
@@ -84,6 +88,12 @@ function insertAccountData(array $info, $username) {
     $sql = "update people set firstName='$info[voornaam]',middelName='$info[tussenvoegsel]',lastName='$info[achternaam]',PhoneNumber='$info[phonenummer]', EmailAddress='$username',postalCode='$info[postcode]',street='$info[straat]',city='$info[stad]' where LogonName='$username'";
     $conn->query($sql);
     $conn->close();
+}
+
+if (createAccount('test01','test02')){
+    print ("gelukt");
+} else {
+    print ("niet zo gelukt");
 }
 
 ?>
