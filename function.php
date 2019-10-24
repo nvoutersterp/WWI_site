@@ -1,4 +1,5 @@
 <?php
+
 //actieve gebruiker
 $currentUserData = array();
 
@@ -37,7 +38,7 @@ function setCurrentUser(string $username) {
     return $result; //verwerken resultaat
 }
 
-function accountLogin(string $password, string $username) {
+function accountLogin($password, $username) {
     $conn = dbconect();
     $sql = "SELECT hashedpassword FROM people WHERE LogonName='$username'";
     $result = $conn->query($sql);
@@ -46,7 +47,7 @@ function accountLogin(string $password, string $username) {
     if ($result->num_rows > 0) {
         if (verifyPassword($password,$sql)) {
             $data = setCurrentUser($username);
-            return $data; //mag inloggen
+            return true; //mag inloggen
         } else {
             return false; //wachtwoord klopt niet
         }
@@ -60,13 +61,19 @@ function checkUsername(string $username) {
     $conn = dbconect();
     $sql = "SELECT logonname From people where LogonName='$username'";
     $result = $conn->query($sql);
+    $niewID = 0;
 
-    if ($result->num_rows = 0) {
+    if ($result->num_rows == 0) {
         $sql3 = "select max(personID) from people";
-        $maxID = $conn->query($sql3); //zoek hoogste sleutel/id
-        $maxID++;
-        $sql2 = "insert into people (PersonID,LogonName) value ('$maxID','$username')";
+        $result2 = $conn->query($sql3); //zoek hoogste sleutel/id
+        $maxID = $result2->fetch_assoc();
+        foreach ($maxID as $getal) {
+            $niewID = $getal;
+        }
+        $niewID++;
+        $sql2 = "insert into people (PersonID,LogonName) value ('$niewID[0]','$username')";
         $conn->query($sql2);
+        $conn->close();
         return true;
     } else {
         return false;
@@ -90,12 +97,10 @@ function insertAccountData(array $info, string $username) {
     $conn->close();
 }
 
-if (createAccount('test01','test02')){
+
+
+if (accountLogin('test02','test02')){
     print ("gelukt");
 } else {
     print ("niet zo gelukt");
 }
-
-?>
-
-
