@@ -13,7 +13,7 @@ function dbconect() {
 
 //account//
 //password//
-function insertPassword($username, $password){
+function insertPassword(string $username, string $password){
     $conn = dbconect();
     $hash = password_hash($password, 1);
     $sql = "update people set HashedPassword='$hash' where LogonName = '$username'";
@@ -21,7 +21,7 @@ function insertPassword($username, $password){
     $conn->close();
 }
 
-function verifyPassword($password, $hash) {
+function verifyPassword(string $password, string $hash) {
     if (password_verify($password, $hash)) {
         return true;
     } else {
@@ -29,7 +29,7 @@ function verifyPassword($password, $hash) {
     }
 }
 
-function setCurrentUser($username) {
+function setCurrentUser(string $username) {
     $conn = dbconect();
     $sql = "select PersonID,firstName,middelName,lastName,LogonName,IsSalesperson,PhoneNumber,postalCode,street,city from people where LogonName = '$username'";
     $result = $conn->query($sql);
@@ -37,7 +37,7 @@ function setCurrentUser($username) {
     return $result; //verwerken resultaat
 }
 
-function accountLogin($password, $username) {
+function accountLogin(string $password, string $username) {
     $conn = dbconect();
     $sql = "SELECT hashedpassword FROM people WHERE LogonName='$username'";
     $result = $conn->query($sql);
@@ -56,7 +56,7 @@ function accountLogin($password, $username) {
 }
 
 //username//
-function checkUsername($username) {
+function checkUsername(string $username) {
     $conn = dbconect();
     $sql = "SELECT logonname From people where LogonName='$username'";
     $result = $conn->query($sql);
@@ -74,7 +74,7 @@ function checkUsername($username) {
     $conn->close();
 }
 
-function createAccount($username, $wachtwoord) {
+function createAccount(string $username, string $wachtwoord) {
     if (checkUsername($username)) {
         insertPassword($username, $wachtwoord);
         return true;
@@ -83,7 +83,7 @@ function createAccount($username, $wachtwoord) {
     }
 }
 
-function insertAccountData(array $info, $username) {
+function insertAccountData(array $info, string $username) {
     $conn = dbconect();
     $sql = "update people set firstName='$info[voornaam]',middelName='$info[tussenvoegsel]',lastName='$info[achternaam]',PhoneNumber='$info[phonenummer]', EmailAddress='$username',postalCode='$info[postcode]',street='$info[straat]',city='$info[stad]' where LogonName='$username'";
     $conn->query($sql);
