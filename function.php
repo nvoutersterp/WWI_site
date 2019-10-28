@@ -98,9 +98,10 @@ function insertAccountData(array $info, string $username) {
 }
 
 
-
-if (accountLogin('test02','test02')){
+if (createAccount('test05','test05')){
     print ("gelukt");
 } else {
     print ("niet zo gelukt");
 }
+
+
