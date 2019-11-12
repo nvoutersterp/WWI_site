@@ -12,7 +12,7 @@
 </head>
 <body>
 <header id="header02" class="flex-header">
-    <a href="#kleding">kleding</a>
+    <a href="productpagina.php" name="home" content="kleding">kleding</a>
 </header>
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">

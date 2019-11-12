@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+
 <header id="header02" class="flex-header">
     <a href="#kleding">kleding</a>
 </header>
@@ -34,8 +35,16 @@
 
 <main>
 
+    <br>
+    <br>
+    <br>
+    <br>
 
-    //te komen//
+    <?php
+    print ($_GET['home']);
+    ?>
+
+    <!--te komen-->
 
 
 
@@ -72,5 +81,3 @@
 </footer>
 </body>
 </html>
-
-//hiddes bijschrift!!//
