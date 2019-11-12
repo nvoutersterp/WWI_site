@@ -22,7 +22,7 @@
         </a>
     </div>
     <div>
-        <input size="30" type="search" name="search" value="" placeholder="    Hoi, wat wil je kopen?" value="" autocapitalize="off"
+        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
                autocomplete="off" spellcheck="false">
     </div>
     <div class="header-right">
@@ -33,6 +33,7 @@
 </header>
 
 <main>
+
 
     //te komen//
 
@@ -72,4 +73,4 @@
 </body>
 </html>
 
-//hiddes bijschrift//
+//hiddes bijschrift!!//
