@@ -105,4 +105,12 @@ if (createAccount('test05','test05')){
     print ("niet zo gelukt");
 }
 
+function zoekenproducten($naam)
+{
+    if (isset($_POST["naam"])) {
+        $productnaam = $_POST["naam"] ;
+    } else {
+        echo "N0, mail is not set";
+    }
+}
 
