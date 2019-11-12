@@ -32,6 +32,45 @@
     </div>
 </header>
 
-//te komen//
+<main>
+
+
+    //te komen//
+
+
+
+</main>
+
+
+<button onclick="topFunction()" class="page_up_button" title="Go to top">
+    <img src="images/external-content.duckduckgo.jpg">
+    <script>
+        upbutton = document.getElementsByClassName("page_up_button");
+
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                upbutton.style.display = "block";
+            } else {
+                upbutton.style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</button>
+
+
+<footer>
+    <!-- te komen -->
+</footer>
+</body>
+</html>
 
 //hiddes bijschrift!!//
