@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+<form action="home.php" method="POST">
 <header id="header02" class="flex-header">
     <a href="#kleding">kleding</a>
 </header>
@@ -24,6 +25,8 @@
     <div>
         <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
                autocomplete="off" spellcheck="false">
+        <input type="submit" name="submit" value=">>">
+
     </div>
     <div class="header-right">
         <a class="menu" href="#inloggen">/inloggen\</a>
@@ -32,6 +35,7 @@
     </div>
 </header>
 
+</form>
 <main class="content">
 
 
@@ -58,6 +62,7 @@
 </main>
 
 
+
 <button onclick="topFunction()" class="page_up_button" title="Go to top">
     <img src="images/external-content.duckduckgo.jpg">
     <script>
@@ -81,7 +86,6 @@
         }
     </script>
 </button>
-
 
 <footer>
     <!-- te komen -->
