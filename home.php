@@ -34,7 +34,7 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-
+<br>
 </form>
 <main class="content">
 
@@ -42,21 +42,30 @@
     <!-- database doet het -->
     <?php
     include 'function.php';
-
+    $dbname = "wideworldimporters";
+    $output = "";
     $conn = dbconect();
 
-    $sql = "SELECT temperature FROM vehicletemperatures WHERE Temperature<3.01 ORDER BY Temperature desc";
-    $result = $conn->query($sql);
+    mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            print ("temp: " . $row["temperature"] . "<br>");
+    //verkrijgen
+    if(isset($_POST['search'])) {
+        $searchq = $_POST['search'];
+        $query1 = mysqli_query($conn, " SELECT *
+ FROM stockitems 
+ WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
+        $count = mysqli_num_rows($query1);
+        if ($count == 0) {
+            $output = 'Er zijn geen resultaten gevonden...';
+        } else {
+            while ($row = mysqli_fetch_array($query1)) {
+                $naamitem = $row['StockItemName'];
+                $output .= '<div>' . $naamitem;
+            }
         }
-    } else {
-        print ("geen reseltaten");
+        mysqli_close($conn);
     }
-
-    $conn->close();
+    print("$output");
     ?>
 
 </main>

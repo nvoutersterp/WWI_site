@@ -102,7 +102,7 @@ function insertAccountData(array $info, string $username) {
 if (createAccount('test05','test05')){
     print ("gelukt");
 } else {
-    print ("niet zo gelukt");
+   // print ("niet zo gelukt");
 }
 
 function zoekenproducten($naam)

@@ -26,7 +26,7 @@ if(isset($_POST['search'])) {
  WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
     $count = mysqli_num_rows($query1);
     if ($count == 0) {
-        $output = 'Er zijn geen resultaten gevonden';
+        $output = 'Er zijn geen resultaten gevonden...';
     } else {
         while ($row = mysqli_fetch_array($query1)) {
             $naamitem = $row['StockItemName'];
