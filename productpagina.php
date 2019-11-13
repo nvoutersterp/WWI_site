@@ -31,7 +31,7 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-<br><br><br>
+<br><br><br><br>
 <main>
 
     <?php
@@ -100,5 +100,3 @@
 </footer>
 </body>
 </html>
-
-//hiddes bijschrift!!//
