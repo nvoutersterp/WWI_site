@@ -62,6 +62,7 @@
         mysqli_close($conn);
 
     print("$output");
+    print("<br>$count producten gevonden")
     ?>
 
     <!--te komen-->
