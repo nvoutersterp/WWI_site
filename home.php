@@ -13,27 +13,43 @@
 <body>
 
 <header id="header02" class="flex-header">
-    <form action="productpagina.php" method="POST">
 
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Clothing">
         <input type="submit" name="submit" value="kleding">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Mugs">
         <input type="submit" name="submit" value="Mokken">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="T-Shirts">
         <input type="submit" name="submit" value="T-Shirts">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
         <input type="submit" name="submit" value="Kheb geen idee">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
         <input type="submit" name="submit" value="Nieuwe computer items">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="USB Novelties">
         <input type="submit" name="submit" value="USB sticks">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Furry Footwear">
         <input type="submit" name="submit" value="Zachte Sokken">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Toys">
         <input type="submit" name="submit" value="Speelgoed">
+    </form>
+    <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Packaging Materials">
         <input type="submit" name="submit" value="Inpak Materiaal">
-        
+    </form>
 
 </header>
 
@@ -45,9 +61,11 @@
         </a>
     </div>
     <div>
-        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
-               autocomplete="off" spellcheck="false">
-        <input type="submit" name="submit" value=">>">
+        <form action="productpagina.php" method="POST">
+            <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
+                   autocomplete="off" spellcheck="false">
+            <input type="submit" name="submit" value=">>">
+        </form>
 
     </div>
     <div class="header-right">
@@ -56,8 +74,7 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-<br><br><br>
-</form>
+<br><br><br><br>
 <main class="content">
 
 
@@ -71,7 +88,7 @@
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
     //verkrijgen zoekopdracht
-    if(isset($_POST["search"])) {
+    if (isset($_POST["search"])) {
         $searchq = $_POST["search"];
         $query1 = mysqli_query($conn, " SELECT *
  FROM stockitems 
@@ -92,9 +109,7 @@
     ?>
 
 
-
 </main>
-
 
 
 <button onclick="topFunction()" class="page_up_button" title="Go to top">
