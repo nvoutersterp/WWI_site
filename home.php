@@ -13,7 +13,7 @@
 <body>
 <header id="header02" class="flex-header">
     <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="kleding">
+        <input type="hidden" name="input" value="Clothing">
         <input type="submit" name="submit" value="kleding">
 </header>
 <!-- floading header with nav -->
