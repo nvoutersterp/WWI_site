@@ -16,6 +16,7 @@
         <input type="hidden" name="input" value="Clothing">
         <input type="submit" name="submit" value="kleding">
 </header>
+
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">
     <div>

@@ -47,7 +47,7 @@
         $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
        } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
-//query
+        $query1 = mysqli_query($conn, "select * from stockitems where ");
     }
         $count = mysqli_num_rows($query1);
         if ($count == 0) {
