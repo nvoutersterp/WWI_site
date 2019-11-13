@@ -31,13 +31,14 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-
+<br><br><br>
 <main>
 
     <?php
     include 'function.php';
     $dbname = "wideworldimporters";
     $conn = dbconect();
+    $output = "";
 
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 

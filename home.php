@@ -56,7 +56,7 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-<br>
+<br><br><br>
 </form>
 <main class="content">
 
@@ -70,9 +70,9 @@
 
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-    //verkrijgen
-    if(isset($_POST['search'])) {
-        $searchq = $_POST['search'];
+    //verkrijgen zoekopdracht
+    if(isset($_POST["search"])) {
+        $searchq = $_POST["search"];
         $query1 = mysqli_query($conn, " SELECT *
  FROM stockitems 
  WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
@@ -89,6 +89,8 @@
     }
     print("$output");
     ?>
+
+
 
 </main>
 
