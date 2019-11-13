@@ -45,10 +45,10 @@
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
         $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
-        } elseif (true){
-        $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
+       } elseif (isset($_POST['input'])) {
+        $inputq = $_POST['input'];
 
+    }
         $count = mysqli_num_rows($query1);
         if ($count == 0) {
             $output = 'Er zijn geen resultaten gevonden...';
@@ -59,7 +59,7 @@
             }
         }
         mysqli_close($conn);
-    }
+
     print("$output");
     ?>
 
