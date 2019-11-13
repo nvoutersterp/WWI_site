@@ -74,8 +74,8 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-<br><br><br><br>
 <main>
+    <br><br><br><br>
 
     <?php
     include 'function.php';
@@ -101,7 +101,7 @@
         $output = 'Er zijn geen resultaten gevonden...';
     } else {
         while ($row = mysqli_fetch_array($query1)) {
-            if ($bladeren){
+            if ($bladeren) {
                 $naamitem = $row['StockItemID'];
             } else {
                 $naamitem = $row['StockItemName'];
