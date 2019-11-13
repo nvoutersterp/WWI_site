@@ -73,7 +73,7 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-
+<br><br><br><br>
 <main>
 
     <?php
@@ -82,6 +82,7 @@
     $output = '';
     $bladeren = false;
     $conn = dbconect();
+    $output = "";
 
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
@@ -110,6 +111,7 @@
     mysqli_close($conn);
 
     print("$output");
+    print("<br>$count producten gevonden")
     ?>
 
     <!--te komen-->

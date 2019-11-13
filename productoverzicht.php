@@ -32,7 +32,7 @@
     </div>
 </header>
 <?php
-include 'function.php;';
+include "function.php";
 if(isset($_POST['StockItemID'])){
     dbconnect();
     $stmt = $pdo->prepare("SELECT");
@@ -42,11 +42,18 @@ else{
 
 }
 ?>
+<br><br><br><br>
 <div>
     <h1>naam product</h1>
-    <img src="#">
-    <p>aantal</p>
+    <img src="images/wwi%20logo%20text.png">
+    <p><select name="cars">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+        </select>maat</p>
     <p>prijs</p>
+    <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
 </body>
