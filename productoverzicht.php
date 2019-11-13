@@ -46,7 +46,7 @@ else{
 <div id="productoverzicht">
     <h1>naam product</h1>
     <img src="images/wwi%20logo%20text.png">
-    <p><select name="cars">
+    <p><select name="maat">
             <option value="s">S</option>
             <option value="m">M</option>
             <option value="l">L</option>
