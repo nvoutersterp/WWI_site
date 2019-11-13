@@ -11,9 +11,47 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+
 <header id="header02" class="flex-header">
-    <a href="#kleding">kleding</a>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Clothing">
+        <input type="submit" name="submit" value="kleding">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Mugs">
+        <input type="submit" name="submit" value="Mokken">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="T-Shirts">
+        <input type="submit" name="submit" value="T-Shirts">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Airline Novelties">
+        <input type="submit" name="submit" value="Kheb geen idee">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Computing Novelties">
+        <input type="submit" name="submit" value="Nieuwe computer items">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="USB Novelties">
+        <input type="submit" name="submit" value="USB sticks">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Furry Footwear">
+        <input type="submit" name="submit" value="Zachte Sokken">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Toys">
+        <input type="submit" name="submit" value="Speelgoed">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Packaging Materials">
+        <input type="submit" name="submit" value="Inpak Materiaal">
+    </form>
+
 </header>
+
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">
     <div>
@@ -22,8 +60,12 @@
         </a>
     </div>
     <div>
-        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
-               autocomplete="off" spellcheck="false">
+        <form action="productpagina.php" method="POST">
+            <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
+                   autocomplete="off" spellcheck="false">
+            <input type="submit" name="submit" value=">>">
+        </form>
+
     </div>
     <div class="header-right">
         <a class="menu" href="#inloggen">/inloggen\</a>
@@ -37,6 +79,8 @@
     <?php
     include 'function.php';
     $dbname = "wideworldimporters";
+    $output = '';
+    $bladeren = false;
     $conn = dbconect();
     $output = "";
 
@@ -45,23 +89,29 @@
     //verkrijgen
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Kan niet zoeken');
-       } elseif (isset($_POST['input'])) {
+        $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Geen overeenkomst');
+    } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
-        $query1 = mysqli_query($conn, "select StockItemID from stockitemstockgroups where StockGroupID on (select StockGroupID from stockgroups where StockGroupName = '$inputq')");
+        $bladeren = true;
+        $query1 = mysqli_query($conn, "select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq')") or die('Geen overeenkomst');
     }
-        $count = mysqli_num_rows($query1);
-        if ($count == 0) {
-            $output = 'Er zijn geen resultaten gevonden...';
-        } else {
-            while ($row = mysqli_fetch_array($query1)) {
+    $count = mysqli_num_rows($query1);
+    if ($count == 0) {
+        $output = 'Er zijn geen resultaten gevonden...';
+    } else {
+        while ($row = mysqli_fetch_array($query1)) {
+            if ($bladeren){
+                $naamitem = $row['StockItemID'];
+            } else {
                 $naamitem = $row['StockItemName'];
-                $output .= '<div>' . $naamitem;
             }
+            $output .= '<div>' . $naamitem;
         }
-        mysqli_close($conn);
+    }
+    mysqli_close($conn);
 
     print("$output");
+    print("<br>$count producten gevonden")
     ?>
 
     <!--te komen-->
