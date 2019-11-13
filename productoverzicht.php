@@ -46,8 +46,14 @@ else{
 <div>
     <h1>naam product</h1>
     <img src="images/wwi%20logo%20text.png">
-    <p>aantal</p>
+    <p><select name="cars">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+        </select>maat</p>
     <p>prijs</p>
+    <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
 </body>
