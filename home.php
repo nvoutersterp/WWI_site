@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-<form action="home.php" method="POST">
 <header id="header02" class="flex-header">
-    <a href="productpagina.php" name="home" content="kleding">kleding</a>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="kleding">
+        <input type="submit" name="submit" value="kleding">
 </header>
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">
