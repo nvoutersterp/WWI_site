@@ -75,13 +75,12 @@
     </div>
 </header>
 <main>
-    <br><br><br><br>
+    <br><br><br><br><br><br>
 
     <?php
     include 'function.php';
     $dbname = "wideworldimporters";
     $output = '';
-    $bladeren = false;
     $conn = dbconect();
     $output = "";
 
@@ -90,14 +89,13 @@
     //verkrijgen
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT *
+        $query1 = mysqli_query($conn, " SELECT StockItemID
  FROM stockitems 
  WHERE stockitemname LIKE '%$searchq%'
  OR SearchDetails LIKE '%$searchq%'
  OR StockItemID LIKE '%$searchq%'") or die('Geen overeenkomst');
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
-        $bladeren = true;
         $query1 = mysqli_query($conn, "select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq')") or die('Geen overeenkomst');
     }
     $count = mysqli_num_rows($query1);
@@ -105,12 +103,7 @@
         $output = 'Er zijn geen resultaten gevonden...';
     } else {
         while ($row = mysqli_fetch_array($query1)) {
-            if ($bladeren) {
-                $naamitem = $row['StockItemID'];
-            } else {
-                $naamitem = $row['StockItemName'];
-            }
-            $output .= '<div>' . $naamitem;
+            $output .= '<div>' . $row['StockItemID'];
         }
     }
     mysqli_close($conn);
