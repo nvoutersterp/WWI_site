@@ -11,10 +11,30 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+
 <header id="header02" class="flex-header">
     <form action="productpagina.php" method="POST">
+
         <input type="hidden" name="input" value="Clothing">
         <input type="submit" name="submit" value="kleding">
+        <input type="hidden" name="input" value="Mugs">
+        <input type="submit" name="submit" value="Mokken">
+        <input type="hidden" name="input" value="T-Shirts">
+        <input type="submit" name="submit" value="T-Shirts">
+        <input type="hidden" name="input" value="Airline Novelties">
+        <input type="submit" name="submit" value="Kheb geen idee">
+        <input type="hidden" name="input" value="Computing Novelties">
+        <input type="submit" name="submit" value="Nieuwe computer items">
+        <input type="hidden" name="input" value="USB Novelties">
+        <input type="submit" name="submit" value="USB sticks">
+        <input type="hidden" name="input" value="Furry Footwear">
+        <input type="submit" name="submit" value="Zachte Sokken">
+        <input type="hidden" name="input" value="Toys">
+        <input type="submit" name="submit" value="Speelgoed">
+        <input type="hidden" name="input" value="Packaging Materials">
+        <input type="submit" name="submit" value="Inpak Materiaal">
+        
+
 </header>
 
 <!-- floading header with nav -->
