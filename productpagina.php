@@ -90,7 +90,11 @@
     //verkrijgen
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT * FROM stockitems WHERE stockitemname LIKE '%$searchq%'") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, " SELECT *
+ FROM stockitems 
+ WHERE stockitemname LIKE '%$searchq%'
+ OR SearchDetails LIKE '%$searchq%'
+ OR StockItemID LIKE '%$searchq%'") or die('Geen overeenkomst');
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $bladeren = true;
