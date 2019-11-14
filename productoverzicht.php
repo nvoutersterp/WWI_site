@@ -35,6 +35,7 @@
 <?php
 include "function.php";
 $dbname = "wideworldimporters";
+$conn = dbconect();
 
 $productID = $_GET['productID'];
 
@@ -43,21 +44,16 @@ $user = "root";
 $pass = "";
 $pdo = new PDO($db, $user, $pass);
 
-dbconect();
-$stmt = $pdo->prepare("SELECT * FROM stockitems WHERE StockItemid=$productID");
-$stmt->execute();
+mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-// loop langs alle rijen
-while ($row = $stmt->fetch()) {
+$query1 = mysqli_query($conn, "SELECT StockItemName, UnitPrice, Photo FROM stockitems WHERE StockItemid='$productID'") or die('Geen overeenkomst');
 
-    // haal de kolom op
-    $naam = $row["StockItemName"];
-    $prijs = $row["UnitPrice"];
-    $afbeelding = $row["Photo"];
-    print($naam . "<br>");
-    print($prijs . "<br>");
-}
-$pdo = NULL;
+$row = mysqli_fetch_array($query1);
+
+$naam = $row['StockItemName'];
+$prijs = $row["UnitPrice"];
+$afbeelding = $row["Photo"];
+
 
 ?>
 
@@ -74,7 +70,7 @@ $pdo = NULL;
             <option value="l">L</option>
             <option value="xl">XL</option>
         </select>maat</p>
-    <p><?php print($prijs);?>></p>
+    <p>€<?php print($prijs);?></p>
     <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
