@@ -19,7 +19,7 @@ $query = mysqli_query($conn,"SELECT * FROM stockitems" );
 while ($row = mysqli_fetch_array($query1)) {
     ?>
     <tr>
-        <td> <?php echo '<img src"data:image;base64, ".base64_encode($row['image'])>'</td>
+        <td> <?php echo '<img src"data:image;base64, '.base64_encode($row['image']).'"alt="Image" style="width: 100px; height: 100px; ">'</td>
     </tr>
 
 
