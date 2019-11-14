@@ -31,40 +31,53 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
+
 <?php
 include "function.php";
-$connect = dbconnect();
 $dbname = "wideworldimporters";
 
+$productID = $_GET['productID'];
+
+$db ="mysql:host=localhost;dbname=cursus;port=3306";
+$user = "root";
+$pass = "";
+$pdo = new PDO($db, $user, $pass);
+
 dbconect();
-$stmt = $pdo->prepare("SELECT StockItemName FROM stockitems WHERE StockItemid=1");
+$stmt = $pdo->prepare("SELECT * FROM stockitems WHERE StockItemid=$productID");
 $stmt->execute();
 
 // loop langs alle rijen
 while ($row = $stmt->fetch()) {
 
-    // haal de kolom ‘naam’ op
+    // haal de kolom op
     $naam = $row["StockItemName"];
+    $prijs = $row["UnitPrice"];
+    $afbeelding = $row["Photo"];
     print($naam . "<br>");
+    print($prijs . "<br>");
 }
+$pdo = NULL;
 
 ?>
 
+
 <br><br><br><br>
 <div id="productoverzicht">
-    <h1>naam</h1>
+    <h1><?php print($naam);?></h1>
     <img src="images/wwi%20logo%20text.png">
+</div>
+<div>
     <p><select name="maat">
             <option value="s">S</option>
             <option value="m">M</option>
             <option value="l">L</option>
             <option value="xl">XL</option>
         </select>maat</p>
-    <p>prijs></p>
+    <p><?php print($prijs);?>></p>
     <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
 </body>
 </html>
 //te komen//
-
