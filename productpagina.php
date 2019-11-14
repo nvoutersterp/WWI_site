@@ -83,6 +83,7 @@
     $output = '';
     $conn = dbconect();
     $output = "";
+    $rij = 1;
 
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
@@ -100,15 +101,29 @@
     }
     $count = mysqli_num_rows($query1);
     if ($count == 0) {
-        $output = 'Er zijn geen resultaten gevonden...';
+        print ('Er zijn geen resultaten gevonden...');
     } else {
+        print ('<div>');
         while ($row = mysqli_fetch_array($query1)) {
-            $output .= '<div>' . $row['StockItemID'];
+            if ($rij % 3 == 1) {
+                print ('<div>');
+            }
+            //gegevens ophalen//
+            $productID = $row['StockItemID'];
+            $query2 = mysqli_query($conn, "select StockItemName, Photo, UnitPrice from stockitems where StockItemID = '$productID'");
+            $result = mysqli_fetch_array($query2);
+            $productNaam = $result['StockItemName'];
+            $productFoto = $result['Photo'];
+            $productPrijs = $result['UnitPrice'];
+            //weergave//
+            print ($productFoto);
+            $rij++;
         }
     }
+
     mysqli_close($conn);
 
-    print("$output");
+
     print("<br>$count producten gevonden")
     ?>
 
