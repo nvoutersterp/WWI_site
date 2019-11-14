@@ -120,7 +120,6 @@
             $rij++;
         }
     }
-
     mysqli_close($conn);
 
 
