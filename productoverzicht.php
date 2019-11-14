@@ -36,13 +36,15 @@
 include "function.php";
 $dbname = "wideworldimporters";
 
+$productID = $_GET['productID'];
+
 $db ="mysql:host=localhost;dbname=cursus;port=3306";
 $user = "root";
 $pass = "";
 $pdo = new PDO($db, $user, $pass);
 
 dbconect();
-$stmt = $pdo->prepare("SELECT * FROM stockitems WHERE StockItemid=1");
+$stmt = $pdo->prepare("SELECT * FROM stockitems WHERE StockItemid=$productID");
 $stmt->execute();
 
 // loop langs alle rijen
