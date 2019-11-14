@@ -33,18 +33,26 @@
 </header>
 <?php
 include "function.php";
-if(isset($_POST['StockItemID'])){
-    dbconnect();
-    $stmt = $pdo->prepare("SELECT");
-    $stmt->execute();
-}
-else{
+$connect = dbconnect();
+$dbname = "wideworldimporters";
 
+dbconect();
+$stmt = $pdo->prepare("SELECT StockItemName FROM stockitems WHERE StockItemid=1");
+$stmt->execute();
+
+// loop langs alle rijen
+while ($row = $stmt->fetch()) {
+
+    // haal de kolom ‘naam’ op
+    $naam = $row["StockItemName"];
+    print($naam . "<br>");
 }
+
 ?>
+
 <br><br><br><br>
 <div id="productoverzicht">
-    <h1>naam product</h1>
+    <h1>naam</h1>
     <img src="images/wwi%20logo%20text.png">
     <p><select name="maat">
             <option value="s">S</option>
@@ -52,7 +60,7 @@ else{
             <option value="l">L</option>
             <option value="xl">XL</option>
         </select>maat</p>
-    <p>prijs</p>
+    <p>prijs></p>
     <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
