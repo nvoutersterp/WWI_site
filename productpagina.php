@@ -116,11 +116,15 @@
             $productFoto = $result['Photo'];
             $productPrijs = $result['UnitPrice'];
             //weergave//
-            print ($productFoto);
+            ?> <a href="productoverzicht.php?productID=<?php print ($productID);?>"> <?php echo '<img src="data:image/jpeg;base64, '.base64_encode($result['Photo']).'"/>';  ?><?php
+        print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
             $rij++;
+            print ('</a>');
         }
     }
+    ?>
 
+<?php
     mysqli_close($conn);
 
 
