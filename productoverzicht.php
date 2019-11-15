@@ -102,19 +102,11 @@ $afbeelding = $row["Photo"];
 
 ?>
 
-
-<br><br><br><br>
-<div id="productoverzicht">
+<div id="overzicht1">
     <h1><?php print($naam);?></h1>
     <img src="images/wwi%20logo%20text.png">
 </div>
-<div>
-    <p><select name="maat">
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-        </select>maat</p>
+<div id="overzicht2">
     <p>€<?php print($prijs);?></p>
     <p><input type="number" placeholder="1">aantal</p>
     <p><button>Toevoegen aan winkelwagen</button></p>
