@@ -11,9 +11,48 @@
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
+
 <header id="header02" class="flex-header">
-    <a href="#kleding">kleding</a>
+
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Clothing">
+        <input type="submit" name="submit" value="kleding">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Mugs">
+        <input type="submit" name="submit" value="Mokken">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="T-Shirts">
+        <input type="submit" name="submit" value="T-Shirts">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Airline Novelties">
+        <input type="submit" name="submit" value="Kheb geen idee">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Computing Novelties">
+        <input type="submit" name="submit" value="Nieuwe computer items">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="USB Novelties">
+        <input type="submit" name="submit" value="USB sticks">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Furry Footwear">
+        <input type="submit" name="submit" value="Zachte Sokken">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Toys">
+        <input type="submit" name="submit" value="Speelgoed">
+    </form>
+    <form action="productpagina.php" method="POST">
+        <input type="hidden" name="input" value="Packaging Materials">
+        <input type="submit" name="submit" value="Inpak Materiaal">
+    </form>
+
 </header>
+
 <!-- floading header with nav -->
 <header id="header01" class="flex-header">
     <div>
@@ -22,8 +61,12 @@
         </a>
     </div>
     <div>
-        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
-               autocomplete="off" spellcheck="false">
+        <form action="productpagina.php" method="POST">
+            <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
+                   autocomplete="off" spellcheck="false">
+            <input type="submit" name="submit" value=">>">
+        </form>
+
     </div>
     <div class="header-right">
         <a class="menu" href="#inloggen">/inloggen\</a>
@@ -31,6 +74,8 @@
         <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
+<main>
+    <br><br><br><br><br><br>
 
 <?php
 include "function.php";

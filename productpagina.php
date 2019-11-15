@@ -103,35 +103,37 @@
     if ($count == 0) {
         print ('Er zijn geen resultaten gevonden...');
     } else {
+    print ('<div>');
+    while ($row = mysqli_fetch_array($query1)) {
+    if ($rij % 3 == 1) {
         print ('<div>');
-        while ($row = mysqli_fetch_array($query1)) {
-            if ($rij % 3 == 1) {
-                print ('<div>');
-            }
-            //gegevens ophalen//
-            $productID = $row['StockItemID'];
-            $query2 = mysqli_query($conn, "select StockItemName, Photo, UnitPrice from stockitems where StockItemID = '$productID'");
-            $result = mysqli_fetch_array($query2);
-            $productNaam = $result['StockItemName'];
-            $productFoto = $result['Photo'];
-            $productPrijs = $result['UnitPrice'];
-            //weergave//
-            ?> <a href="productoverzicht.php?productID=<?php print ($productID);?>"> <?php echo '<img src="data:image/jpeg;base64, '.base64_encode($result['Photo']).'"/>';  ?><?php
-        print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
-            $rij++;
-            print ('</a>');
-        }
     }
+    //gegevens ophalen//
+    $productID = $row['StockItemID'];
+    $query2 = mysqli_query($conn, "select StockItemName, Photo, UnitPrice from stockitems where StockItemID = '$productID'");
+    $result = mysqli_fetch_array($query2);
+    $productNaam = $result['StockItemName'];
+    $productFoto = $result['Photo'];
+    $productPrijs = $result['UnitPrice'];
+    //weergave//
     ?>
+    <a href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img src="data:image/jpeg;base64, ' . base64_decode($result['Photo']) . '"/>'; ?><?php
+        print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
+print ($result['Photo']);
+        $rij++;
+        print ('</a>');
+        }
+        }
+        ?>
 
-<?php
-    mysqli_close($conn);
+        <?php
+        mysqli_close($conn);
 
 
-    print("<br>$count producten gevonden")
-    ?>
+        print("<br>$count producten gevonden")
+        ?>
 
-    <!--te komen-->
+        <!--te komen-->
 
 
 </main>
