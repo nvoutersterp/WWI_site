@@ -32,8 +32,8 @@
     background-color: #666;
     display: block;
 }
-#header :hover{
-background-color: #111;
+.tabjes:hover{
+background-color: #999;
 }
 #gratis {
 
