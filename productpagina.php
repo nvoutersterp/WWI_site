@@ -76,6 +76,8 @@
 </header>
 <main>
     <br><br><br><br><br><br>
+    <form action="productpagina.php" method="post">
+    </form>
 
     <?php
     include 'function.php';
@@ -90,11 +92,7 @@
     //verkrijgen
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT StockItemID
- FROM stockitems 
- WHERE stockitemname LIKE '%$searchq%'
- OR SearchDetails LIKE '%$searchq%'
- OR StockItemID LIKE '%$searchq%'") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, " SELECT StockItemID FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%' OR StockItemID LIKE '%$searchq%' limit 25") or die('Geen overeenkomst');
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $query1 = mysqli_query($conn, "select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq')") or die('Geen overeenkomst');
@@ -117,7 +115,7 @@
     $productPrijs = $result['UnitPrice'];
     //weergave//
     ?>
-    <a href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img src="data:image/jpeg;base64, ' . base64_decode($result['Photo']) . '"/>'; ?><?php
+    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto" src="data:image/jpeg;base64, ' . base64_decode($result['Photo']) . '"/>'; ?><?php
         print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
 print ($result['Photo']);
         $rij++;

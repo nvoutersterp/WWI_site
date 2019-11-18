@@ -122,3 +122,18 @@ a button img {
 }
 
 /*wat anders*/
+
+
+.section {
+    float: left;
+    width: 33.33%;
+}
+.section:hover{
+    background-color: darkblue;
+    color: white;
+}
+
+.productfoto {
+    width: 100px;
+    height: 100px;
+}
