@@ -112,6 +112,9 @@
 
 <footer>
     <!-- te komen -->
+    <div class="footer">
+
+    </div>
 </footer>
 </body>
 </html>
