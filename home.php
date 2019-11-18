@@ -14,41 +14,41 @@
 
 <header id="header02" class="flex-header">
 
-    <form action="productpagina.php" method="POST">
+    <form  action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Clothing">
-        <input type="submit" name="submit" value="kleding">
+        <input type="submit" name="submit" value="kleding" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Mugs">
-        <input type="submit" name="submit" value="Mokken">
+        <input type="submit" name="submit" value="Mokken" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="T-Shirts">
-        <input type="submit" name="submit" value="T-Shirts">
+        <input type="submit" name="submit" value="T-Shirts" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee">
+        <input type="submit" name="submit" value="Kheb geen idee" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
-        <input type="submit" name="submit" value="Nieuwe computer items">
+        <input type="submit" name="submit" value="Nieuwe computer items" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="USB Novelties">
-        <input type="submit" name="submit" value="USB sticks">
+        <input type="submit" name="submit" value="USB sticks" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Furry Footwear">
-        <input type="submit" name="submit" value="Zachte Sokken">
+        <input type="submit" name="submit" value="Zachte Sokken" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Toys">
-        <input type="submit" name="submit" value="Speelgoed">
+        <input type="submit" name="submit" value="Speelgoed" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Packaging Materials">
-        <input type="submit" name="submit" value="Inpak Materiaal">
+        <input type="submit" name="submit" value="Inpak Materiaal" class = "tabjes">
     </form>
 
 </header>
@@ -60,6 +60,11 @@
             <img src="images/wwi%20logo%20text.png" class="logo">
         </a>
     </div>
+    <div id ="gratis">
+        <img src="images/gratis%20verzending.PNG" class ="gratis1" >
+    </div>
+
+
     <div>
         <form action="productpagina.php" method="POST">
             <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"

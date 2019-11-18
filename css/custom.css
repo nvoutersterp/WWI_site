@@ -24,8 +24,27 @@
     position: absolute;
     width: 100%;
     top: 50px;
-}
 
+}
+.tabjes  {
+   width: 80%;
+    padding: 8px 10px;
+    background-color: #666;
+    display: block;
+}
+.tabjes:hover{
+background-color: #999;
+}
+#gratis {
+
+}
+.gratis1{
+    float: right;
+    height: 100%;
+    width: 60px;
+
+
+}
 .content {
     margin-top: 70px;
 }
