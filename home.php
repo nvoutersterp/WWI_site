@@ -50,7 +50,9 @@
         <input type="hidden" name="input" value="Packaging Materials">
         <input type="submit" name="submit" value="Inpak Materiaal" class = "tabjes">
     </form>
-
+    <div id ="gratis">
+        <img src="images/gratis%20verzending.PNG" class ="gratis1" >
+    </div>
 </header>
 
 <!-- floading header with nav -->
@@ -60,9 +62,7 @@
             <img src="images/wwi%20logo%20text.png" class="logo">
         </a>
     </div>
-    <div id ="gratis">
-        <img src="images/gratis%20verzending.PNG" class ="gratis1" >
-    </div>
+
 
 
     <div>
