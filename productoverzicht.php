@@ -91,14 +91,16 @@ $pdo = new PDO($db, $user, $pass);
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-$query1 = mysqli_query($conn, "SELECT StockItemName, UnitPrice, Photo FROM stockitems WHERE StockItemid='$productID'") or die('Geen overeenkomst');
+$query1 = mysqli_query($conn, "SELECT StockItemName, UnitPrice, Photo, QuantityOnHand, SearchDetails FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
 
 $row = mysqli_fetch_array($query1);
+
 
 $naam = $row['StockItemName'];
 $prijs = $row["UnitPrice"];
 $afbeelding = $row["Photo"];
-
+$vooraad = $row["QuantityOnHand"];
+$omschrijving = $row["SearchDetails"];
 
 ?>
 
@@ -108,7 +110,9 @@ $afbeelding = $row["Photo"];
 </div>
 <div id="overzicht2">
     <p>€<?php print($prijs);?></p>
-    <p><input type="number" placeholder="1">aantal</p>
+    <p>Omschrijving: <?php print($omschrijving);?></p>
+    <p><input type="number" placeholder="1"> aantal</p>
+    <p>Nog in vooraad: <?php print($vooraad);?></p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
 </body>
