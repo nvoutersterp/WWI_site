@@ -15,15 +15,11 @@ $conn = dbconect();
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-$query = mysqli_query($conn,"SELECT * FROM stockitems" );
+$blobimage = addslashes(file_get_contents($_FILES['files']['tmp_name'][$key]));
 
-while ($row = mysqli_fetch_array($query)) {
-    $result = $row;
-
-    print"<td>";?> <img src="<?php echo $row["Photo"]; ?> " height="100" width="100"> <?php echo "</td>";
+foreach ()
 
 
-    }
 ?>
 <!--//include "function.php";-->
 <!--//$dbname = "wideworldimporters";-->
