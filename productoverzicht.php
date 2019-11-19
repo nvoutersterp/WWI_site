@@ -75,7 +75,7 @@
     </div>
 </header>
 <main>
-    <br><br><br><br><br><br>
+    <br><br><br><br>
 
 <?php
 include "function.php";
@@ -103,8 +103,8 @@ $afbeelding = $row["Photo"];
 ?>
 
 <div id="overzicht1">
-    <h1><?php print($naam);?></h1>
-    <img src="images/wwi%20logo%20text.png">
+    <h2><?php print($naam);?></h2>
+    <img src="#images/wwi%20logo%20text.png">
 </div>
 <div id="overzicht2">
     <p>€<?php print($prijs);?></p>
@@ -113,4 +113,3 @@ $afbeelding = $row["Photo"];
 </div>
 </body>
 </html>
-//te komen//
