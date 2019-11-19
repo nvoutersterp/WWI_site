@@ -25,6 +25,22 @@ while ($row = mysqli_fetch_array($query)) {
 
     }
 ?>
+
+
+<?php
+if(isset($_GET['id']) && is_numeric($_GET['id'])) {
+    # Connect to DB
+    # SQL Statement
+    $sql = "SELECT `idimage` FROM `users` WHERE id=" . mysqli_real_escape_string($_GET['id']) . ";";
+    $result = mysqli_query("$sql") or die("Invalid query: " . mysqli_error());
+
+    # Set header
+    header("Content-type: image/png");
+    echo mysqli_result($result, 0);
+}
+else
+    echo 'Please check the ID!';
+?>
 <!--//include "function.php";-->
 <!--//$dbname = "wideworldimporters";-->
 <!--//$output = '';-->
