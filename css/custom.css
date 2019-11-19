@@ -59,7 +59,14 @@ header a.menu {
     line-height: 25px;
     border-radius: 4px;
 }
-
+.header-right-img{
+    float: right;
+    width: 10%;
+    height: 20%;
+}
+.menu1{
+    float: right;
+}
 header a img.logo {
     height: 35px;
 }
@@ -71,7 +78,8 @@ header a:hover {
 }
 
 .header-right {
-    float: right;
+float: right;
+
 }
 
 header input {

@@ -74,9 +74,17 @@
 
     </div>
     <div class="header-right">
-        <a class="menu" href="#inloggen">/inloggen\</a>
-        <a class="menu" href="#favo">/favo\</a>
-        <a class="menu" href="#mand">/mandje\</a>
+        <a class="menu1" href="#inloggen">
+            <img src="images/inloggen.png" class="header-right-img"
+        </a>
+
+        <a class="menu1" href="#favo">
+            <img src="images/verjanglijstje.png" class="header-right-img"
+        </a>
+
+        <a class="menu1" href="#mand">
+            <img src="images/winkelmandje.png" class="header-right-img"
+        </a>
     </div>
 </header>
 <br><br><br><br><br><br>
