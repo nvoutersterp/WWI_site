@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -28,7 +29,7 @@
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee" class = "tabjes">
+        <input type="submit" name="submit" value="Luchtvaart items" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
@@ -76,12 +77,15 @@
 </header>
 <main>
     <br><br><br><br><br><br>
+
+
     <form action="productpagina.php" method="post">
-        <select>
+        <select name="aantal">
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
+        <button type="submit">>></button>
     </form>
 
     <?php
@@ -97,7 +101,7 @@
     //verkrijgen
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%' limit 25") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%'") or die('Geen overeenkomst');
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $query1 = mysqli_query($conn, "select StockItemID, StockItemName, Photo, UnitPrice, CustomFields from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('Geen overeenkomst');
