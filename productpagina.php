@@ -93,7 +93,7 @@
 
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-    //verkrijgen
+    //verkrijgen //
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
         $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%' limit 25") or die('Geen overeenkomst');
@@ -127,7 +127,6 @@ print ($row['Photo']);
         }
     //Afsluiten Database//
         mysqli_close($conn);
-
 
         print("<br>$count producten gevonden")
         ?>
