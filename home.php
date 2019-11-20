@@ -28,7 +28,7 @@
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee" class = "tabjes">
+        <input type="submit" name="submit" value="Luchtvaart items" class = "tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
@@ -63,16 +63,14 @@
         </a>
     </div>
 
-
-
     <div>
         <form action="productpagina.php" method="POST">
             <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
                    autocomplete="off" spellcheck="false">
             <input type="submit" name="submit" value=">>">
         </form>
-
     </div>
+
     <div class="header-right">
         <a class="menu1" href="#inloggen">
             <img src="images/inloggen.png" class="header-right-img"
