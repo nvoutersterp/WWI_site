@@ -122,7 +122,7 @@ $omschrijving = $row["SearchDetails"];
 <div id="overzicht2">
     <p>€<?php print($prijs);?></p>
     <p>Omschrijving: <?php print($omschrijving);?></p>
-    <p><input type="number" placeholder="1"> aantal</p>
+    <p><input type="number" name="aantal" min="1" max="<?php print($vooraad)?>" placeholder="1"> aantal</p>
     <p>Nog in vooraad: <?php print($vooraad);?></p>
     <p><button>Toevoegen aan winkelwagen</button></p>
 </div>
