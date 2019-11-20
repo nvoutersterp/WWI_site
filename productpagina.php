@@ -37,7 +37,7 @@ $rij = 1;
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee" class="tabjes">
+        <input type="submit" name="submit" value="luchtvaart items" class="tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
@@ -169,7 +169,7 @@ $rij = 1;
     ?>
     <a class="section"
        href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto" src="data:image/jpeg;base64, ' . base64_decode($result['Photo']) . '"/>'; ?><?php
-        print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
+        print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
         print ($result['Photo']);
         $rij++;
         print ('</a>');

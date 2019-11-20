@@ -28,7 +28,7 @@
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee" class="tabjes">
+        <input type="submit" name="submit" value="Luchtvaart items" class="tabjes">
     </form>
     <form action="productpagina.php" method="POST">
         <input type="hidden" name="input" value="Computing Novelties">
