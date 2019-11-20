@@ -86,7 +86,6 @@
 
     <?php
     include 'function.php';
-    $dbname = "wideworldimporters";
     $output = '';
     $conn = dbconect();
     $output = "";

@@ -3,6 +3,11 @@
 //actieve gebruiker
 $currentUserData = array();
 
+//database naam//
+$dbname = "wideworldimporters";
+
+
+
 //start db conectie
 function dbconect() {
     $connection = new mysqli("127.0.0.1", "root", "", "wideworldimporters", "3306");
