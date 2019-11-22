@@ -98,11 +98,27 @@
     </script>
 </button>
 
-<footer>
-    <!-- te komen -->
-    <div class="footer">
+<footer class="site-footer custom-border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
 
+                <div class="col-md-6 col-lg-3">
+                    <div class="block-5 mb-5">
+                        <h3 class="footer-heading mb-4">Contact Info</h3>
+                        <ul class="list-unstyled">
+                            <li class="address">Windesheim</li>
+                            <li class="phone"><a href="tel://0623479034">0623479034</a></li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
     </div>
+</footer>
 </footer>
 </body>
 </html>
