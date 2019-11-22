@@ -30,8 +30,7 @@
             <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
             <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
         </form>
-    <?php } //Afsluiten Database//
-    mysqli_close($conn); ?>
+    <?php } ?>
 </header>
 
 <!-- floading header with nav -->
@@ -113,9 +112,8 @@
         print ('</a>');
         }
         }
-        //Afsluiten Database//
-        mysqli_close($conn);
 
+mysqli_close($conn);
         print("<br>$count producten gevonden")
         ?>
 
