@@ -16,7 +16,6 @@
 <header id="header02" class="flex-header">
     <?php
     include 'function.php';
-    $output = '';
     $conn = dbconect();
     $output = "";
     $rij = 1;
@@ -31,7 +30,8 @@
             <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
             <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
         </form>
-    <?php } ?>
+    <?php } //Afsluiten Database//
+    mysqli_close($conn); ?>
 </header>
 
 <!-- floading header with nav -->
@@ -41,21 +41,31 @@
             <img src="images/wwi%20logo%20text.png" class="logo">
         </a>
     </div>
+
     <div>
         <form action="productpagina.php" method="POST">
             <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
                    autocomplete="off" spellcheck="false">
             <input type="submit" name="submit" value=">>">
         </form>
-
     </div>
+
     <div class="header-right">
-        <a class="menu" href="#inloggen">/inloggen\</a>
-        <a class="menu" href="#favo">/favo\</a>
-        <a class="menu" href="#mand">/mandje\</a>
+        <a class="menu1" href="#inloggen">
+            <img src="images/inloggen.png" class="header-right-img">
+        </a>
+
+        <a class="menu1" href="#favo">
+            <img src="images/verjanglijstje.png" class="header-right-img">
+        </a>
+
+        <a class="menu1" href="#mand">
+            <img src="images/winkelmandje.png" class="header-right-img">
+        </a>
     </div>
 </header>
 <main>
+
     <br><br><br><br><br><br>
 
 

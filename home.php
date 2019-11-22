@@ -13,28 +13,24 @@
 <body>
 
 <header id="header02" class="flex-header">
-    <form action="productpagina.php" method="POST">
+    <?php
+    include'function.php';
+    $conn = dbconect();
+    $output = "";
+    $rij = 1;
 
-        <input type="hidden" name="input" value="Clothing">
-        <input type="submit" name="submit" value="kleding">
-        <input type="hidden" name="input" value="Mugs">
-        <input type="submit" name="submit" value="Mokken">
-        <input type="hidden" name="input" value="T-Shirts">
-        <input type="submit" name="submit" value="T-Shirts">
-        <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee">
-        <input type="hidden" name="input" value="Computing Novelties">
-        <input type="submit" name="submit" value="Nieuwe computer items">
-        <input type="hidden" name="input" value="USB Novelties">
-        <input type="submit" name="submit" value="USB sticks">
-        <input type="hidden" name="input" value="Furry Footwear">
-        <input type="submit" name="submit" value="Zachte Sokken">
-        <input type="hidden" name="input" value="Toys">
-        <input type="submit" name="submit" value="Speelgoed">
-        <input type="hidden" name="input" value="Packaging Materials">
-        <input type="submit" name="submit" value="Inpak Materiaal">
-        
+    mysqli_select_db($conn, $dbname) or die ("could not connect");
 
+    $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
+
+    while ($rowGroup = mysqli_fetch_array($query5)) {
+        ?>
+        <form action="productpagina.php" method="POST">
+            <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
+            <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
+        </form>
+    <?php } //Afsluiten Database//
+    mysqli_close($conn); ?>
 </header>
 
 <!-- floading header with nav -->
@@ -44,22 +40,31 @@
             <img src="images/wwi%20logo%20text.png" class="logo">
         </a>
     </div>
-    <div>
-        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
-               autocomplete="off" spellcheck="false">
-        <input type="submit" name="submit" value=">>">
 
+    <div>
+        <form action="productpagina.php" method="POST">
+            <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
+                   autocomplete="off" spellcheck="false">
+            <input type="submit" name="submit" value=">>">
+        </form>
     </div>
+
     <div class="header-right">
-        <a class="menu" href="#inloggen">/inloggen\</a>
-        <a class="menu" href="#favo">/favo\</a>
-        <a class="menu" href="#mand">/mandje\</a>
+        <a class="menu1" href="#inloggen">
+            <img src="images/inloggen.png" class="header-right-img">
+        </a>
+
+        <a class="menu1" href="#favo">
+            <img src="images/verjanglijstje.png" class="header-right-img">
+        </a>
+
+        <a class="menu1" href="#mand">
+            <img src="images/winkelmandje.png" class="header-right-img">
+        </a>
     </div>
 </header>
-<br><br><br>
-</form>
-<main class="content">
-
+<main>
+    <br><br><br><br><br><br>
 
     <!-- database doet het -->
     <?php
