@@ -15,6 +15,7 @@
     position: fixed;
     top: 0px;
     width: 100%;
+    z-index: 6;
 }
 
 #header02 {
@@ -24,6 +25,7 @@
     position: absolute;
     width: 100%;
     top: 50px;
+    z-index: 6
 
 }
 .tabjes  {
@@ -96,6 +98,7 @@ header input {
 .flex-header {
     display: flex;
     flex-flow: row nowrap;
+    z-index: 6;
 }
 
 @media screen and (max-width: 500px) {

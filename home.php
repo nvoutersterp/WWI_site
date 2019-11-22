@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -14,24 +13,28 @@
 <body>
 
 <header id="header02" class="flex-header">
-    <?php
-    include 'function.php';
-    $output = '';
-    $conn = dbconect();
-    $output = "";
-    $rij = 1;
+    <form action="productpagina.php" method="POST">
 
-    mysqli_select_db($conn, $dbname) or die ("could not connect");
+        <input type="hidden" name="input" value="Clothing">
+        <input type="submit" name="submit" value="kleding">
+        <input type="hidden" name="input" value="Mugs">
+        <input type="submit" name="submit" value="Mokken">
+        <input type="hidden" name="input" value="T-Shirts">
+        <input type="submit" name="submit" value="T-Shirts">
+        <input type="hidden" name="input" value="Airline Novelties">
+        <input type="submit" name="submit" value="Kheb geen idee">
+        <input type="hidden" name="input" value="Computing Novelties">
+        <input type="submit" name="submit" value="Nieuwe computer items">
+        <input type="hidden" name="input" value="USB Novelties">
+        <input type="submit" name="submit" value="USB sticks">
+        <input type="hidden" name="input" value="Furry Footwear">
+        <input type="submit" name="submit" value="Zachte Sokken">
+        <input type="hidden" name="input" value="Toys">
+        <input type="submit" name="submit" value="Speelgoed">
+        <input type="hidden" name="input" value="Packaging Materials">
+        <input type="submit" name="submit" value="Inpak Materiaal">
+        
 
-    $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
-
-    while ($rowGroup = mysqli_fetch_array($query5)) {
-        ?>
-        <form action="productpagina.php" method="POST">
-            <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
-            <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
-        </form>
-    <?php } ?>
 </header>
 
 <!-- floading header with nav -->
@@ -41,37 +44,57 @@
             <img src="images/wwi%20logo%20text.png" class="logo">
         </a>
     </div>
-
     <div>
-        <form action="productpagina.php" method="POST">
-            <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
-                   autocomplete="off" spellcheck="false">
-            <input type="submit" name="submit" value=">>">
-        </form>
-    </div>
+        <input size="30" type="search" name="search" placeholder="    Hoi, wat wil je kopen?" autocapitalize="off"
+               autocomplete="off" spellcheck="false">
+        <input type="submit" name="submit" value=">>">
 
+    </div>
     <div class="header-right">
-        <a class="menu1" href="#inloggen">
-            <img src="images/inloggen.png" class="header-right-img"
-            <div class="login-popup" id="popup1">
-                <form action="/inloggen.php" class="inlog-container">
-                    <button type="submit">send</button>
-                </form>
-            </div>
-        </a>
-        <a class="menu1" href="#favo">
-            <img src="images/verjanglijstje.png" class="header-right-img"
-        </a>
-        <a class="menu1" href="#mand">
-            <img src="images/winkelmandje.png" class="header-right-img"
-        </a>
+        <a class="menu" href="#inloggen">/inloggen\</a>
+        <a class="menu" href="#favo">/favo\</a>
+        <a class="menu" href="#mand">/mandje\</a>
     </div>
 </header>
-<br><br><br><br><br><br>
+<br><br><br>
+</form>
 <main class="content">
 
 
+    <!-- database doet het -->
+    <?php
+    include 'function.php';
+    $dbname = "wideworldimporters";
+    $output = "";
+    $conn = dbconect();
+
+    mysqli_select_db($conn, $dbname) or die ("could not connect");
+
+    //verkrijgen zoekopdracht
+    if(isset($_POST["search"])) {
+        $searchq = $_POST["search"];
+        $query1 = mysqli_query($conn, " SELECT *
+ FROM stockitems 
+ WHERE stockitemname LIKE '%$searchq%'
+ AND SearchDetails LIKE '%$searchq%'") or die('Kan niet zoeken');
+        $count = mysqli_num_rows($query1);
+        if ($count == 0) {
+            $output = 'Er zijn geen resultaten gevonden...';
+        } else {
+            while ($row = mysqli_fetch_array($query1)) {
+                $naamitem = $row['StockItemName'];
+                $output .= '<div>' . $naamitem;
+            }
+        }
+        mysqli_close($conn);
+    }
+    print("$output");
+    ?>
+
+
+
 </main>
+
 
 
 <button onclick="topFunction()" class="page_up_button" title="Go to top">
@@ -98,27 +121,8 @@
     </script>
 </button>
 
-<footer class="site-footer custom-border-top">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-
-                <div class="col-md-6 col-lg-3">
-                    <div class="block-5 mb-5">
-                        <h3 class="footer-heading mb-4">Contact Info</h3>
-                        <ul class="list-unstyled">
-                            <li class="address">Windesheim</li>
-                            <li class="phone"><a href="tel://0623479034">0623479034</a></li>
-                        </ul>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</footer>
+<footer>
+    <!-- te komen -->
 </footer>
 </body>
 </html>
