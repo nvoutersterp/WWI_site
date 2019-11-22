@@ -15,8 +15,7 @@
 
 <header id="header02" class="flex-header">
     <?php
-    include 'function.php';
-    $output = '';
+    include'function.php';
     $conn = dbconect();
     $output = "";
     $rij = 1;
@@ -31,7 +30,8 @@
             <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
             <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
         </form>
-    <?php } ?>
+    <?php } //Afsluiten Database//
+    mysqli_close($conn); ?>
 </header>
 
 <!-- floading header with nav -->
@@ -68,7 +68,6 @@
     <br><br><br><br><br><br><br>
 
 <?php
-include "function.php";
 $dbname = "wideworldimporters";
 $conn = dbconect();
 
@@ -89,7 +88,8 @@ $prijs = $row["UnitPrice"];
 $afbeelding = $row["Photo"];
 $vooraad = $row["QuantityOnHand"];
 $omschrijving = $row["SearchDetails"];
-
+//Afsluiten Database//
+mysqli_close($conn);
 ?>
 
 <div id="overzicht1">
