@@ -68,11 +68,6 @@
 
     <!-- database doet het -->
     <?php
-    include 'function.php';
-    $dbname = "wideworldimporters";
-    $output = "";
-    $conn = dbconect();
-
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
     //verkrijgen zoekopdracht
