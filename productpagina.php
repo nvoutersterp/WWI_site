@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,44 +14,24 @@
 <body>
 
 <header id="header02" class="flex-header">
+    <?php
+    include 'function.php';
+    $output = '';
+    $conn = dbconect();
+    $output = "";
+    $rij = 1;
 
-    <form  action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Clothing">
-        <input type="submit" name="submit" value="kleding" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Mugs">
-        <input type="submit" name="submit" value="Mokken" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="T-Shirts">
-        <input type="submit" name="submit" value="T-Shirts" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Kheb geen idee" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Computing Novelties">
-        <input type="submit" name="submit" value="Nieuwe computer items" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="USB Novelties">
-        <input type="submit" name="submit" value="USB sticks" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Furry Footwear">
-        <input type="submit" name="submit" value="Zachte Sokken" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Toys">
-        <input type="submit" name="submit" value="Speelgoed" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Packaging Materials">
-        <input type="submit" name="submit" value="Inpak Materiaal" class = "tabjes">
-    </form>
+    mysqli_select_db($conn, $dbname) or die ("could not connect");
 
+    $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
+
+    while ($rowGroup = mysqli_fetch_array($query5)) {
+        ?>
+        <form action="productpagina.php" method="POST">
+            <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
+            <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
+        </form>
+    <?php } ?>
 </header>
 
 <!-- floading header with nav -->
@@ -76,27 +57,23 @@
 </header>
 <main>
     <br><br><br><br><br><br>
+
+
     <form action="productpagina.php" method="post">
-        <select>
+        <select name="aantal">
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
+        <button type="submit">>></button>
     </form>
 
     <?php
-    include 'function.php';
-    $output = '';
-    $conn = dbconect();
-    $output = "";
-    $rij = 1;
-
-    mysqli_select_db($conn, $dbname) or die ("could not connect");
 
     //verkrijgen //
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%' limit 25") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%'") or die('Geen overeenkomst');
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $query1 = mysqli_query($conn, "select StockItemID, StockItemName, Photo, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('Geen overeenkomst');
@@ -118,14 +95,15 @@
 
     //weergave//
     ?>
-    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto" src="data:image/jpeg;base64, ' . base64_decode($row['Photo']) . '"/>'; ?><?php
+    <a class="section"
+       href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto" src="data:image/jpeg;base64, ' . base64_decode($row['Photo']) . '"/>'; ?><?php
         print ($productNaam . '&nbsp' . $productPrijs . '&nbsp');
-print ($row['Photo']);
+        print ($row['Photo']);
         $rij++;
         print ('</a>');
         }
         }
-    //Afsluiten Database//
+        //Afsluiten Database//
         mysqli_close($conn);
 
         print("<br>$count producten gevonden")

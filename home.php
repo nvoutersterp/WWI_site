@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,46 +14,24 @@
 <body>
 
 <header id="header02" class="flex-header">
+    <?php
+    include 'function.php';
+    $output = '';
+    $conn = dbconect();
+    $output = "";
+    $rij = 1;
 
-    <form  action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Clothing">
-        <input type="submit" name="submit" value="kleding" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Mugs">
-        <input type="submit" name="submit" value="Mokken" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="T-Shirts">
-        <input type="submit" name="submit" value="T-Shirts" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Airline Novelties">
-        <input type="submit" name="submit" value="Luchtvaart items" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Computing Novelties">
-        <input type="submit" name="submit" value="Nieuwe computer items" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="USB Novelties">
-        <input type="submit" name="submit" value="USB sticks" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Furry Footwear">
-        <input type="submit" name="submit" value="Zachte Sokken" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Toys">
-        <input type="submit" name="submit" value="Speelgoed" class = "tabjes">
-    </form>
-    <form action="productpagina.php" method="POST">
-        <input type="hidden" name="input" value="Packaging Materials">
-        <input type="submit" name="submit" value="Inpak Materiaal" class = "tabjes">
-    </form>
-    <div id ="gratis">
-        <img src="images/gratis%20verzending.PNG" class ="gratis1" >
-    </div>
+    mysqli_select_db($conn, $dbname) or die ("could not connect");
+
+    $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
+
+    while ($rowGroup = mysqli_fetch_array($query5)) {
+        ?>
+        <form action="productpagina.php" method="POST">
+            <input type="hidden" name="input" value="<?php print ($rowGroup['StockGroupName']); ?>">
+            <input type="submit" name="submit" value="<?php print ($rowGroup['DutchName']); ?>" class="tabjes">
+        </form>
+    <?php } ?>
 </header>
 
 <!-- floading header with nav -->
@@ -74,12 +53,15 @@
     <div class="header-right">
         <a class="menu1" href="#inloggen">
             <img src="images/inloggen.png" class="header-right-img"
+            <div class="login-popup" id="popup1">
+                <form action="/inloggen.php" class="inlog-container">
+                    <button type="submit">send</button>
+                </form>
+            </div>
         </a>
-
         <a class="menu1" href="#favo">
             <img src="images/verjanglijstje.png" class="header-right-img"
         </a>
-
         <a class="menu1" href="#mand">
             <img src="images/winkelmandje.png" class="header-right-img"
         </a>
