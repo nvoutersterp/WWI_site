@@ -69,24 +69,8 @@
     <?php
     mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-    //verkrijgen zoekopdracht
-    if(isset($_POST["search"])) {
-        $searchq = $_POST["search"];
-        $query1 = mysqli_query($conn, " SELECT *
- FROM stockitems 
- WHERE stockitemname LIKE '%$searchq%'
- AND SearchDetails LIKE '%$searchq%'") or die('Kan niet zoeken');
-        $count = mysqli_num_rows($query1);
-        if ($count == 0) {
-            $output = 'Er zijn geen resultaten gevonden...';
-        } else {
-            while ($row = mysqli_fetch_array($query1)) {
-                $naamitem = $row['StockItemName'];
-                $output .= '<div>' . $naamitem;
-            }
-        }
         mysqli_close($conn);
-    }
+
     print("$output");
     ?>
 
