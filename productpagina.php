@@ -110,20 +110,45 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     <form action="productpagina.php" method="post">
         <select name="aantal">
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="25" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '25'){ print ('selected') ; }} ?>>25</option>
+            <option value="50" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '50'){ print ('selected') ; }} ?>>50</option>
+            <option value="100" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '100'){ print ('selected') ; }} ?>>100</option>
         </select>
         <select name="orderBy">
-            <option value="abc_up">abc</option>
-            <option>hoi</option>
+            <option value="abc_up" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'abc_up'){ print ('selected') ; }} ?>>abc</option>
+            <option value="abc_down" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'abc_down'){ print ('selected') ; }} ?>>zyx</option>
+            <option value="price_up" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'price_up'){ print ('selected') ; }} ?>>123</option>
+            <option value="price_down" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'price_down'){ print ('selected') ; }} ?>>321</option>
         </select>
+        <?php if (isset($_POST['input'])){
+            $input = $_POST['input'];
+            print ("<input type='hidden' name='input' value='$input'>");
+        } else {
+
+        } ?>
         <button type="submit">>></button>
     </form>
 
     <?php
+    //sorteren op...
+    if (isset($_POST['orderBy'])) {                                     //nog implementieren in SQL
+        $pieces = explode('_', $_POST['orderBy']);
+        if ($pieces[0] == 'abc') {
+            $orderSoort = 'StockItemName';
+        } elseif ($pieces[0] == 'price') {
+            $orderSoort = 'UnitPrice';
+        }
+        if ($pieces[1] == 'up') {
+            $orderType = 'asc';
+        } else {
+            $orderType = 'desc';
+        }
+        $orderBy = 'order by '. $orderSoort.' '.$orderType;
+    } else {
+        $orderBy = '';
+    }
 
-    //verkrijgen //
+    //verkrijgen producten uit zoek resultaat
     $count = 0;
     if (isset($_POST['search'])) {
         $searchq = $_POST['search'];
