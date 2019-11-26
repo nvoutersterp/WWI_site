@@ -52,7 +52,13 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             <input type="submit" name="submit" value=">>">
         </form>
     </div>
-
+<?php
+//devinieren
+if (isset($_POST['productID'])){
+    $productID = $_POST['productID'];
+} else {
+    $productID = $_GET['productID'];
+} ?>
     <div class="header-right">
         <div class="menu1">
             <img src="images/inloggen.png" class="header-right-img" onclick="openLogin()">
@@ -64,6 +70,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     gebruikersnaam: <input type="text" style="background: gray; color: white" required><br>
                     wachtwoord: <input type="password" style="background: gray; color: white" required><br>
                     <a href="#nieuwAccount">nog geen account? klik hier!</a><br>
+                    <input type="hidden" name="productID" value="<?php print ($productID);?>">
                     <button type="submit">inloggen</button>
                 </form>
                 <script>
@@ -95,8 +102,6 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     <?php
     $dbname = "wideworldimporters";
-
-    $productID = $_GET['productID'];
 
     $db = "mysql:host=localhost;dbname=cursus;port=3306";
     $user = "root";

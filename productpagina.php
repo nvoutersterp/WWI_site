@@ -28,6 +28,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
         //andere fout
     }
+} elseif (!isset($_SESSION['isIngelogt'])){
+    $_SESSION['isIngelogt'] = false;
 }
 
 ?>
@@ -56,6 +58,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     <div>
         <div class="menu1">
             <img src="images/inloggen.png" class="header-right-img" onclick="openLogin()">
+            <?php if ($_SESSION['isIngelogt']) {
+                    printIsIngelogt($_SESSION['clientID']);
+                } else { ?>
             <div class="login-popup" id="myLogin">
                 <form action="productpagina.php" class="login-container">
                     inloggen
@@ -84,6 +89,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
                 </script>
             </div>
+            <?php } ?>
         </div>
         <a class="menu1" href="#favo">
             <img src="images/verjanglijstje.png" class="header-right-img">
@@ -107,6 +113,10 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             <option value="25">25</option>
             <option value="50">50</option>
             <option value="100">100</option>
+        </select>
+        <select name="orderBy">
+            <option value="abc_up">abc</option>
+            <option>hoi</option>
         </select>
         <button type="submit">>></button>
     </form>

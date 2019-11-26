@@ -36,7 +36,8 @@ function printHead()
 </head>');
 }
 
-function printcategorie($conn) {
+function printcategorie($conn)
+{
     print ('<header id="header02" class="flex-header">');
     $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
 
@@ -44,12 +45,34 @@ function printcategorie($conn) {
         $groupName = $rowGroup['StockGroupName'];
         $dutchName = $rowGroup['DutchName'];
         print ('<form action="productpagina.php" method="POST">
-            <input type="hidden" name="input" value="'.$groupName.'">
-            <input type="submit" name="submit" value="'.$dutchName.'" class="tabjes">
+            <input type="hidden" name="input" value="' . $groupName . '">
+            <input type="submit" name="submit" value="' . $dutchName . '" class="tabjes">
         </form>');
     }
     print ('</header>');
 }
+
+function printIsIngelogt($clientID)
+{
+    print ('<div class="login-popup" id="myLogin">
+                <form method="post" action="accountpagina.php" class="login-container">uw account
+                <input type="hidden" name="clientID" value="' . $clientID . '">
+                    <button type="button" onclick="closeLogin()">Close</button><br>
+                    <button type="button" onclick="">uitloggen</button><br>
+                    <button type="submit">naar account</button>
+                    </form>
+                <script>
+                    function openLogin() {
+                        document.getElementById("myLogin").style.display = "block";
+                    }
+
+                    function closeLogin() {
+                        document.getElementById("myLogin").style.display = "none";
+                    }
+                </script>
+            </div>');
+}
+
 
 //database naam//
 $dbname = "wideworldimporters";
