@@ -80,7 +80,7 @@ header a:hover {
 }
 
 .header-right {
-float: right;
+    float: right;
 
 }
 
@@ -168,4 +168,6 @@ a button img {
     width: 100px;
     height: 100px;
 }
+
+
 

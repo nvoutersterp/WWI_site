@@ -1,15 +1,62 @@
 <?php
+//print headers
+function printHead()
+{
+    print ('<head>
+    <meta charset="UTF-8   ">
+    <title>WWI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--links -->
+    <link rel="script" href="js/custom.js">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <style>
+        /*inloggen*/
+        {
+            box-sizing: border-box;
+        }
 
-//actieve gebruiker
-$currentUserData = array();
+        .login-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 30%;
+            border: 3px solid darkblue;
+            z-index: 9;
+        }
+
+        .login-container {
+            max-width: 350px;
+            padding: 10px;
+            background-color: white;
+        }
+
+    </style>
+</head>');
+}
+
+function printcategorie($conn) {
+    print ('<header id="header02" class="flex-header">');
+    $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
+
+    while ($rowGroup = mysqli_fetch_array($query5)) {
+        $groupName = $rowGroup['StockGroupName'];
+        $dutchName = $rowGroup['DutchName'];
+        print ('<form action="productpagina.php" method="POST">
+            <input type="hidden" name="input" value="'.$groupName.'">
+            <input type="submit" name="submit" value="'.$dutchName.'" class="tabjes">
+        </form>');
+    }
+    print ('</header>');
+}
 
 //database naam//
 $dbname = "wideworldimporters";
 
-
-
 //start db conectie
-function dbconect() {
+function dbconect()
+{
     $connection = new mysqli("127.0.0.1", "root", "", "wideworldimporters", "3306");
     if ($connection->connect_error) {
         die("Connection failed: " . $connection->connect_error);
@@ -20,15 +67,17 @@ function dbconect() {
 
 //account//
 //password//
-function insertPassword(string $username, string $password){
+function insertPassword(string $username, string $password)
+{
     $conn = dbconect();
     $hash = password_hash($password, 1);
-    $sql = "update people set HashedPassword='$hash' where LogonName = '$username'";
+    $sql = "update client set hashedPassword='$hash' where eMail = '$username'";
     $conn->query($sql);
     $conn->close();
 }
 
-function verifyPassword(string $password, string $hash) {
+function verifyPassword(string $password, $hash)
+{
     if (password_verify($password, $hash)) {
         return true;
     } else {
@@ -36,7 +85,8 @@ function verifyPassword(string $password, string $hash) {
     }
 }
 
-function setCurrentUser(string $username) {
+function setCurrentUser(string $username)
+{
     $conn = dbconect();
     $sql = "select PersonID,firstName,middelName,lastName,LogonName,IsSalesperson,PhoneNumber,postalCode,street,city from people where LogonName = '$username'";
     $result = $conn->query($sql);
@@ -44,40 +94,34 @@ function setCurrentUser(string $username) {
     return $result; //verwerken resultaat
 }
 
-function accountLogin($password, $username) {
+function accountLogin($password, $username)
+{
     $conn = dbconect();
-    $sql = "SELECT hashedpassword FROM people WHERE LogonName='$username'";
-    $result = $conn->query($sql);
+    $sql = "SELECT hashedPassword FROM client WHERE eMail='$username'";
+    $opgehaald = $conn->query($sql);
+    $result = $opgehaald->fetch_assoc();
     $conn->close();
 
-    if ($result->num_rows > 0) {
-        if (verifyPassword($password,$sql)) {
-            $data = setCurrentUser($username);
-            return true; //mag inloggen
+    if ($opgehaald->num_rows == 1) {
+        if (verifyPassword($password, $result['hashedPassword'])) {
+            return 1; //mag inloggen
         } else {
-            return false; //wachtwoord klopt niet
+            return 3; //wachtwoord klopt niet
         }
     } else {
-        return false; //mail/naam klopt niet
+        return 2; //mail/naam klopt niet
     }
 }
 
 //username//
-function checkUsername(string $username) {
+function checkUsername(string $username)
+{
     $conn = dbconect();
-    $sql = "SELECT logonname From people where LogonName='$username'";
+    $sql = "SELECT eMail From client where eMail='$username'";
     $result = $conn->query($sql);
-    $niewID = 0;
 
     if ($result->num_rows == 0) {
-        $sql3 = "select max(personID) from people";
-        $result2 = $conn->query($sql3); //zoek hoogste sleutel/id
-        $maxID = $result2->fetch_assoc();
-        foreach ($maxID as $getal) {
-            $niewID = $getal;
-        }
-        $niewID++;
-        $sql2 = "insert into people (PersonID,LogonName) value ('$niewID[0]','$username')";
+        $sql2 = "insert into client (eMail) value ('$username')";
         $conn->query($sql2);
         $conn->close();
         return true;
@@ -87,7 +131,8 @@ function checkUsername(string $username) {
     $conn->close();
 }
 
-function createAccount(string $username, string $wachtwoord) {
+function createAccount(string $username, string $wachtwoord)
+{
     if (checkUsername($username)) {
         insertPassword($username, $wachtwoord);
         return true;
@@ -96,7 +141,8 @@ function createAccount(string $username, string $wachtwoord) {
     }
 }
 
-function insertAccountData(array $info, string $username) {
+function insertAccountData(array $info, string $username)
+{
     $conn = dbconect();
     $sql = "update people set firstName='$info[voornaam]',middelName='$info[tussenvoegsel]',lastName='$info[achternaam]',PhoneNumber='$info[phonenummer]', EmailAddress='$username',postalCode='$info[postcode]',street='$info[straat]',city='$info[stad]' where LogonName='$username'";
     $conn->query($sql);
@@ -104,11 +150,3 @@ function insertAccountData(array $info, string $username) {
 }
 
 
-if (createAccount('test05','test05')){
-    print ("gelukt");
-} else {
-   // print ("niet zo gelukt");
-}
-
-
-//zoeken producten
