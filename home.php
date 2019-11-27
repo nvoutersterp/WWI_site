@@ -32,7 +32,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 if (isset($_POST['uitloggen'])){
     session_destroy();
-    header("refresh: 0;");
+    header("refresh: 0;");   //geeft nog een foutcode
 }
 
 ?>

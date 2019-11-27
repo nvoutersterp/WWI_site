@@ -76,3 +76,5 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
 </header>
 <main>
     <br><br><br><br><br><br>
+
+    <?php print (time()); ?>
