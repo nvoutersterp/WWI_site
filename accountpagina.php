@@ -115,100 +115,71 @@ $werktHet = '';
                             <hr>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
                             <form>
                                 <div class="form-group row">
                                     <label for="name" class="col-4 col-form-label">Voornaam</label>
                                     <div class="col-8">
-                                        <input id="name" name="voornaam" placeholder="<?php print("$voornaam");?>"
-                                               class="form-control here" type="text">
+                                        <input id="name" name="voornaam" placeholder="<?php print("$voornaam");?>" class="form-control here" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="tussenvoegsels" class="col-4 col-form-label">Tussenvoegsels</label>
                                     <div class="col-8">
-                                        <input id="name" name="Tussenvoegsels" placeholder="Tussenvoegsels" class="form-control here" type="text">
+                                        <input id="name" name="Tussenvoegsels" placeholder="<?php print("$tussenvoegsel");?>" class="form-control here" type="text">
                                     </div>
-                                    >>>>>>> Stashed changes
                                 </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="lastname" class="col-4 col-form-label">Achternaam</label>
-                            <div class="col-8">
-                                <input id="lastname" name="achternaam" placeholder="Achternaam"
-                                       class="form-control here" type="text">
+                                <div class="form-group row">
+                                    <label for="lastname" class="col-4 col-form-label">Achternaam</label>
+                                    <div class="col-8">
+                                        <input id="lastname" name="achternaam" placeholder="<?php print("$achternaam");?>" class="form-control here" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email" class="col-4 col-form-label">Email*</label>
+                                    <div class="col-8">
+                                        <input id="email" name="email" placeholder="<?php print("$email");?>" class="form-control here" required="required" type="text">
+                                    </div>
+                                </div>
+                            <div class="form-group row">
+                                <label for="adres" class="col-4 col-form-label">Adres</label>
+                                <div class="col-8">
+                                    <input id="adres" name="adres" placeholder="<?php print("$adres");?>" class="form-control here" type="text">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-4 col-form-label">Email*</label>
-                            <div class="col-8">
-                                <input id="email" name="email" placeholder="Email" class="form-control here"
-                                       required="required" type="text">
-                            </div>
-                            <<<<<<< Updated upstream
-                        </div>
-                        <div class="form-group row">
-                            <label for="adres" class="col-4 col-form-label">Adres</label>
-                            <div class="col-8">
-                                <input id="adres" name="adres" placeholder="Adres" class="form-control here"
-                                       type="text">
-                                =======
                                 <div class="form-group row">
                                     <label for="telefoonnummer" class="col-4 col-form-label">Telefoonnummer</label>
                                     <div class="col-8">
-                                        <input id="name" name="telefoonmummer" placeholder="Telefoonnummer" class="form-control here" type="text">
+                                        <input id="name" name="telefoonmummer" placeholder="<?php print("$telefoonnummer");?>" class="form-control here" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="adres" class="col-4 col-form-label">Adres</label>
+                                    <label for="postcode" class="col-4 col-form-label">Postcode</label>
                                     <div class="col-8">
-                                        <input id="adres" name="adres" placeholder="Adres" class="form-control here"
-                                               type="text">
+                                        <input id="postcode" name="postcode" placeholder="<?php print("$postcode");?>" class="form-control here" type="text">
                                     </div>
-                                    >>>>>>> Stashed changes
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="postcode" class="col-4 col-form-label">Postcode</label>
-                                <div class="col-8">
-                                    <input id="postcode" name="postcode" placeholder="Postcode"
-                                           class="form-control here" type="text">
+                                <div class="form-group row">
+                                    <label for="plaats" class="col-4 col-form-label">WoonPlaats</label>
+                                            <div class="col-8">
+                                                <input id="name" name="plaats" placeholder="<?php print("$woonplaats");?>" class="form-control here" type="text">
+                                            </div>
                                 </div>
-                                <<<<<<< Updated upstream
-                            </div>
-                            <div class="form-group row">
-                                <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
-                                <div class="col-8">
-                                    <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
-                                           class="form-control here" type="text">
-                                    =======
-                                    <div class="form-group row">
-                                        <label for="plaats" class="col-4 col-form-label">Plaats</label>
-                                        <div class="col-8">
-                                            <input id="name" name="plaats" placeholder="Plaats" class="form-control here" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
-                                        <div class="col-8">
-                                            <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
-                                                   class="form-control here" type="text">
-                                        </div>
-                                        >>>>>>> Stashed changes
+                                <div class="form-group row">
+                                    <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
+                                    <div class="col-8">
+                                        <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord" class="form-control here" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="offset-4 col-8">
-                                        <button name="submit" type="submit" class="btn btn-primary">Update mijn
-                                            profiel
+                                        <button name="submit" type="submit" class="btn btn-primary">Update mijn profiel
                                         </button>
+                                        </div>
                                     </div>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
                         </div>
                     </div>
-                </div>
         </body>
     </html>
