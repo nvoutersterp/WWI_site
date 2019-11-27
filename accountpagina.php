@@ -37,7 +37,7 @@ $werktHet = '';
         <div class="menu1">
             <img src="images/inloggen.png" class="header-right-img" onclick="openLogin()">
             <?php if ($_SESSION['isIngelogt']) {
-                printIsIngelogt($_SESSION['clientID']);
+                printIsIngelogt();
             } else { ?>
                 <div class="login-popup" id="myLogin">
                     <form action="productpagina.php" class="login-container">
@@ -46,7 +46,7 @@ $werktHet = '';
                         <br>
                         gebruikersnaam: <input type="text" style="background: gray; color: white" required><br>
                         wachtwoord: <input type="password" style="background: gray ; color: white" required><br>
-                        <a href="#nieuwAccount">nog geen account? klik hier!</a><br>
+                        <a href="#nieuwAccount">nog geen account? maak er nu een aan!</a><br>
                         <input type="hidden"<?php if (isset($_POST['search'])) {
                             $search = $_POST['search'];
                             print ('naam="search" value="' . $search . '"');

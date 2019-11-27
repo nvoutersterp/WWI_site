@@ -52,7 +52,7 @@ function printcategorie($conn)
     print ('</header>');
 }
 
-function printIsIngelogt($clientID)
+function printIsIngelogt()
 {
     print ('<div class="login-popup" id="myLogin">
                 <form method="post" action="home.php" id="uitloggen">
