@@ -30,6 +30,11 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     }
 }
 
+if (isset($_POST['uitloggen'])){
+    session_destroy();
+    header("refresh: 0;");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -56,6 +61,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     <div class="header-right">
         <div class="menu1">
             <img src="images/inloggen.png" class="header-right-img" onclick="openLogin()">
+            <?php if ($_SESSION['isIngelogt']) {
+                printIsIngelogt($_SESSION['clientID']);
+            } else { ?>
             <div class="login-popup" id="myLogin">
                 <form action="home.php" method="post" class="login-container">
                     inloggen
@@ -78,6 +86,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
                 </script>
             </div>
+            <?php } ?>
         </div>
         <a class="menu1" href="#favo">
             <img src="images/verjanglijstje.png" class="header-right-img">
@@ -88,7 +97,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         </a>
         <?php if (isset($_SESSION['firstName'])) {
             print ('welkom, ' . $_SESSION['firstName']);
-        } ?>
+        } else {
+            print ('hoi, iemand');
+        }?>
     </div>
 </header>
 <main>

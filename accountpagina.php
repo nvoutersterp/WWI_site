@@ -49,10 +49,10 @@ $werktHet = '';
                         <a href="#nieuwAccount">nog geen account? klik hier!</a><br>
                         <input type="hidden"<?php if (isset($_POST['search'])) {
                             $search = $_POST['search'];
-                            print ('naam="search" value="'.$search.'"');
+                            print ('naam="search" value="' . $search . '"');
                         } elseif (isset($_POST['input'])) {
                             $input = $_POST['input'];
-                            print ('naam="input" value="'.$input.'""');
+                            print ('naam="input" value="' . $input . '""');
                         } ?> >
                         <button type="submit">inloggen</button>
                     </form>
@@ -84,5 +84,17 @@ $werktHet = '';
 <main>
 
     <br><br><br><br><br><br>
+    <?php if (isset($_SESSION['clientID'])) {
+        $clientID = $_SESSION['clientID'];
+        $query10 = mysqli_query($conn, "select * from client where clientID = '$clientID'");
 
-    <?print ($_POST['clientID']); ?>
+        while ($row = mysqli_fetch_array($query10)) {
+            $firstName = $row['firstName'];
+            $middelName = $row['middelName'];
+            $lastName = $row['lastName'];
+        }
+        print ("goedemiddag, ".$firstName." ".$middelName." ".$lastName);
+    } else {
+        print ('sorry, we konden niks ophalen');
+    } ?>
+

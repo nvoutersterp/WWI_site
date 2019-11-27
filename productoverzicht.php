@@ -62,6 +62,9 @@ if (isset($_POST['productID'])){
     <div class="header-right">
         <div class="menu1">
             <img src="images/inloggen.png" class="header-right-img" onclick="openLogin()">
+            <?php if ($_SESSION['isIngelogt']) {
+                printIsIngelogt($_SESSION['clientID']);
+            } else { ?>
             <div class="login-popup" id="myLogin">
                 <form action="productoverzicht.php" class="login-container">
                     inloggen
@@ -84,6 +87,7 @@ if (isset($_POST['productID'])){
 
                 </script>
             </div>
+            <?php } ?>
         </div>
         <a class="menu1" href="#favo">
             <img src="images/verjanglijstje.png" class="header-right-img">

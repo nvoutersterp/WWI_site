@@ -55,12 +55,14 @@ function printcategorie($conn)
 function printIsIngelogt($clientID)
 {
     print ('<div class="login-popup" id="myLogin">
+                <form method="post" action="home.php" id="uitloggen">
+                    <input type="hidden" name="uitloggen" value="true">
+                </form>
                 <form method="post" action="accountpagina.php" class="login-container">uw account
-                <input type="hidden" name="clientID" value="' . $clientID . '">
                     <button type="button" onclick="closeLogin()">Close</button><br>
-                    <button type="button" onclick="">uitloggen</button><br>
+                    <button type="submit" form="uitloggen">uitloggen</button><br>
                     <button type="submit">naar account</button>
-                    </form>
+                </form>
                 <script>
                     function openLogin() {
                         document.getElementById("myLogin").style.display = "block";
