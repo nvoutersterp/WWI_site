@@ -72,7 +72,7 @@ if (isset($_POST['uitloggen'])){
                     gebruikersnaam: <input type="text" name="username" style="background: gray; color: white"
                                            required><br>
                     wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
-                    <a href="#nieuwAccount">nog geen account? maak er nu een aan!</a><br>
+                    <a href="nieuwaccount.php">nog geen account? maak er nu een aan!</a><br>
                     <button type="submit">inloggen</button>
                 </form>
                 <script>

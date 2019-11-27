@@ -72,7 +72,7 @@ if (isset($_POST['productID'])){
                     <br>
                     gebruikersnaam: <input type="text" style="background: gray; color: white" required><br>
                     wachtwoord: <input type="password" style="background: gray; color: white" required><br>
-                    <a href="#nieuwAccount">nog geen account? maak er nu een aan!</a><br>
+                    <a href="nieuwaccount.php">nog geen account? maak er nu een aan!</a><br>
                     <input type="hidden" name="productID" value="<?php print ($productID);?>">
                     <button type="submit">inloggen</button>
                 </form>
