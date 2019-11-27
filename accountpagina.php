@@ -130,21 +130,30 @@ $werktHet = '';
                                     <div class="col-8">
                                         <input id="name" name="Tussenvoegsels" placeholder="Tussenvoegsels" class="form-control here" type="text">
                                     </div>
+                                    >>>>>>> Stashed changes
                                 </div>
-                                <div class="form-group row">
-                                    <label for="lastname" class="col-4 col-form-label">Achternaam</label>
-                                    <div class="col-8">
-                                        <input id="lastname" name="achternaam" placeholder="Achternaam"
-                                               class="form-control here" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="email" class="col-4 col-form-label">Email*</label>
-                                    <div class="col-8">
-                                        <input id="email" name="email" placeholder="Email" class="form-control here"
-                                               required="required" type="text">
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lastname" class="col-4 col-form-label">Achternaam</label>
+                            <div class="col-8">
+                                <input id="lastname" name="achternaam" placeholder="Achternaam"
+                                       class="form-control here" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-4 col-form-label">Email*</label>
+                            <div class="col-8">
+                                <input id="email" name="email" placeholder="Email" class="form-control here"
+                                       required="required" type="text">
+                            </div>
+                            <<<<<<< Updated upstream
+                        </div>
+                        <div class="form-group row">
+                            <label for="adres" class="col-4 col-form-label">Adres</label>
+                            <div class="col-8">
+                                <input id="adres" name="adres" placeholder="Adres" class="form-control here"
+                                       type="text">
+                                =======
                                 <div class="form-group row">
                                     <label for="telefoonnummer" class="col-4 col-form-label">Telefoonnummer</label>
                                     <div class="col-8">
@@ -157,25 +166,36 @@ $werktHet = '';
                                         <input id="adres" name="adres" placeholder="Adres" class="form-control here"
                                                type="text">
                                     </div>
+                                    >>>>>>> Stashed changes
                                 </div>
-                                <div class="form-group row">
-                                    <label for="postcode" class="col-4 col-form-label">Postcode</label>
-                                    <div class="col-8">
-                                        <input id="postcode" name="postcode" placeholder="Postcode"
-                                               class="form-control here" type="text">
+                            </div>
+                            <div class="form-group row">
+                                <label for="postcode" class="col-4 col-form-label">Postcode</label>
+                                <div class="col-8">
+                                    <input id="postcode" name="postcode" placeholder="Postcode"
+                                           class="form-control here" type="text">
+                                </div>
+                                <<<<<<< Updated upstream
+                            </div>
+                            <div class="form-group row">
+                                <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
+                                <div class="col-8">
+                                    <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
+                                           class="form-control here" type="text">
+                                    =======
+                                    <div class="form-group row">
+                                        <label for="plaats" class="col-4 col-form-label">Plaats</label>
+                                        <div class="col-8">
+                                            <input id="name" name="plaats" placeholder="Plaats" class="form-control here" type="text">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="plaats" class="col-4 col-form-label">Plaats</label>
-                                    <div class="col-8">
-                                        <input id="name" name="plaats" placeholder="Plaats" class="form-control here" type="text">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
-                                    <div class="col-8">
-                                        <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
-                                               class="form-control here" type="text">
+                                    <div class="form-group row">
+                                        <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
+                                        <div class="col-8">
+                                            <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
+                                                   class="form-control here" type="text">
+                                        </div>
+                                        >>>>>>> Stashed changes
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -185,12 +205,10 @@ $werktHet = '';
                                         </button>
                                     </div>
                                 </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-        </div>
-    </body>
+        </body>
     </html>
