@@ -95,11 +95,23 @@ if (isset($_POST['uitloggen'])){
         <a class="menu1" href="#mand">
             <img src="images/winkelmandje.png" class="header-right-img">
         </a>
-        <?php if (isset($_SESSION['firstName'])) {
-            print ('welkom, ' . $_SESSION['firstName']);
+        <?php
+        if (date('G') < 12) {
+            $moment = 'goedemorgen ';
+        } elseif (date('G') > 18) {
+            $moment = 'goedeavond ';
         } else {
-            print ('hoi, iemand');
-        }?>
+            $moment = 'goedemiddag ';
+        }
+
+        if (isset($_SESSION['firstName'])) {
+            $name =  $_SESSION['firstName'];
+        } else {
+            $name = '';
+        }
+
+        print ($moment . $name);
+        ?>
     </div>
 </header>
 <main>

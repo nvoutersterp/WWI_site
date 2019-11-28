@@ -69,23 +69,21 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
             <a class="menu1" href="#mand">
                 <img src="images/winkelmandje.png" class="header-right-img">
             </a>
-            <?php if (isset($_SESSION['firstName'])) {
-                print ('welkom, ' . $_SESSION['firstName']);
-            } else {
-                print ('hoi, iemand');
-            } ?>
         </div>
     </header>
     <main>
         <br><br><br><br><br><br>
+        <h1>maak nu uw account aan</h1>
+        <form method="post">
+            geslacht: <input type="radio" name="gender" value="male"> man &nbsp; <input type="radio" name="gender" value="female"> vrouw &nbsp; <input type="radio" name="gender" value="other"> anders<br>
+            voornaam: <input type="text" name="fisrtName" placeholder="Henk" autofocus required><br>
+            tussenvoegel: <input type="text" name="middelName" placeholder="van" autofocus><br>
+            achternaam: <input type="text" name="lastName" placeholder="Dreesden" autofocus required><br>
+            geboortedag: <input type="date" name="birtday" autofocus required><br>
+            mail: <input type="email" name="eMail" placeholder="h.vandreesen@gmail.com" autofocus required><br>
+            telefoonnummer: <input type="tel" name="phoneNumber" placeholder="0612345678"><br>
 
-<?php if (time() < 12) {
-    print ("goedemorgen");
-} elseif (time() > 18) {
-    print ("goedeavond");
-} else {
-    print ("goedemiddag");
-}
+        </form>
+<?php
 
-print (date('d-m-y h:i:s'));
 ?>

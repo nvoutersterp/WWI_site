@@ -175,6 +175,5 @@ function insertAccountData(array $info, string $username)
 }
 
 
-createAccount("test" , "test");
 
 
