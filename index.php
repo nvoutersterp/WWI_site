@@ -47,7 +47,6 @@ if (isset($_POST['uitloggen'])){
     <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="js/effecten.js"></script>
-    <link rel="stylesheet"  href="css/bootstrap.css"
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -112,7 +111,7 @@ if (isset($_POST['uitloggen'])){
 
     </div>
     <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-    <div class="navbar navbar-dark bg-primary" id="nav">
+    <div class="nav" id="nav">
         <?php printcategorie($conn); ?>
     </div>
 
