@@ -19,6 +19,7 @@ $werktHet = '';
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </header>
@@ -152,6 +153,7 @@ $werktHet = '';
         }
     }
     ?>
+
     <div class="col-md-9" id="profiel">
         <div class="card">
             <div class="card-body">
