@@ -76,6 +76,15 @@ function printIsIngelogt()
             </div>');
 }
 
+function printFooter(){
+    print('<footer>
+<div class="footer">
+    <img alt src="images/gratis%20verzending.PNG" width="5%" height="5%"> <br>
+    <p> Wide World Importers® </p>
+</div>
+</footer>');
+}
+
 
 //database naam//
 $dbname = "wideworldimporters";

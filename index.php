@@ -30,25 +30,23 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     }
 }
 
-$_SESSION['isIngelogt'] = false;
-
 if (isset($_POST['uitloggen'])){
     session_destroy();
     header("refresh: 0;");   //geeft nog een foutcode
 }
 
-
-
-
 ?>
-
 <!DOCTYPE HTML>
+<head>
+    <title>WWI</title>
+</head>
 <HTML lang="EN">
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/effecten.js"></script>
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -123,25 +121,11 @@ if (isset($_POST['uitloggen'])){
 <!--test voor de juistheid text-->
 <?php
 
-$text = "Hallo";
-for ($i = 1; 1000 >= $i; $i++) {
-    print($text . $i);
-    ?> <br> <?php
-}
 ?>
 <!--link naar javascript voor sticky effect-->
-<script src="js/effecten.js"></script>
 
 
-
-<footer>
-<div class="footer">
-    <img alt src="images/gratis%20verzending.PNG" width="5%" height="5%"> <br>
-    <p> Wide World Importers® </p>
-</div>
-</footer>
+<?php printFooter(); ?>
 </body>
-
-
 </HTML>
 
