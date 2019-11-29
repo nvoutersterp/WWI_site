@@ -3,7 +3,7 @@
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
@@ -58,7 +58,7 @@ for ($i = 1; 1000 >= $i; $i++) {
 }
 ?>
 <!--link naar javascript voor sticky effect-->
-<script src="CSS/effecten.js"></script>
+<script src="css/effecten.js"></script>
 
 </body>
 
