@@ -101,7 +101,7 @@ form.example input[type=text] {
     width: 30%;
     background: white;
     left: 20px;
-    margin: auto;
+    margin: 0 auto;
 
 }
 
@@ -115,6 +115,7 @@ form.example button {
     border: 1px solid grey;
     border-left: none; /* Prevent double borders */
     cursor: pointer;
+
 }
 
 form.example button:hover {

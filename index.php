@@ -60,7 +60,7 @@ for ($i = 1; 1000 >= $i; $i++) {
 <!--link naar javascript voor sticky effect-->
 <script src="css/effecten.js"></script>
 
-</body>
+
 
 <footer>
 <div class="footer">
@@ -68,7 +68,7 @@ for ($i = 1; 1000 >= $i; $i++) {
     <p> Wide World Importers® </p>
 </div>
 </footer>
-
+</body>
 
 
 </HTML>
