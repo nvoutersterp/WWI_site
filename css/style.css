@@ -172,3 +172,9 @@ position: page;
     padding: 10px;
     background-color: white;
 }
+
+.productfoto {
+    margin-left: 0%;
+    width: 100px;
+    height: 100px;
+}
