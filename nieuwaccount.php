@@ -69,21 +69,83 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
             <a class="menu1" href="#mand">
                 <img src="images/winkelmandje.png" class="header-right-img">
             </a>
+            <?php if (date('G') < 12) {
+                print ('goedemorgen');
+            } elseif (date('G') > 18) {
+                print ('goedeavond');
+            } else {
+                print ('goedemiddag');
+            } ?>
         </div>
     </header>
-    <main>
-        <br><br><br><br><br><br>
-        <h1>maak nu uw account aan</h1>
-        <form method="post">
-            geslacht: <input type="radio" name="gender" value="male"> man &nbsp; <input type="radio" name="gender" value="female"> vrouw &nbsp; <input type="radio" name="gender" value="other"> anders<br>
-            voornaam: <input type="text" name="fisrtName" placeholder="Henk" autofocus required><br>
-            tussenvoegel: <input type="text" name="middelName" placeholder="van" autofocus><br>
-            achternaam: <input type="text" name="lastName" placeholder="Dreesden" autofocus required><br>
-            geboortedag: <input type="date" name="birtday" autofocus required><br>
-            mail: <input type="email" name="eMail" placeholder="h.vandreesen@gmail.com" autofocus required><br>
-            telefoonnummer: <input type="tel" name="phoneNumber" placeholder="0612345678"><br>
-
-        </form>
+<main>
+    <br><br><br><br><br><br>
+    <h1>maak nu uw account aan</h1>
+    <form method="post" action="nieuwaccount.php">
+        geslacht: <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'male') { print ('checked'); } ?>> man &nbsp;
+        <input type="radio"  name="gender" value="female" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'female') { print ('checked'); } ?>> vrouw &nbsp;
+        <input type="radio" name="gender" value="other" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'other') { print ('checked'); } ?>> anders<br>
+        voornaam: <input type="text" name="firstName" placeholder="Henk" value="<?php if (isset($_POST['firstName'])) {print ($_POST['firstName']);} ?>" autofocus required><br>
+        tussenvoegel: <input type="text" name="middelName" placeholder="van" value="<?php if (isset($_POST['middelName'])) {print ($_POST['middelName']);} ?>" autofocus><br>
+        achternaam: <input type="text" name="lastName" placeholder="Dreesden" value="<?php if (isset($_POST['lastName'])) {print ($_POST['lastName']);} ?>" autofocus required><br>
+        geboortedag: <input type="date" name="birtday" value="<?php if (isset($_POST['birtday'])) {print ($_POST['birtday']);} ?>" autofocus><br>
+        mail: <input type="email" name="eMail" placeholder="h.vandreesen@gmail.com" value="<?php if (isset($_POST['eMail'])) {print ($_POST['eMail']);} ?>" autofocus><br>
+        controlle mail: <input type="email" name="eMailControlle" placeholder="h.vandreesen$gmail.com" value="<?php if (isset($_POST['eMailControlle'])) {print ($_POST['eMailControlle']);} ?>" autofocus><br>
+        telefoonnummer: <input type="tel" name="phoneNumber" placeholder="0612345678" value="<?php if (isset($_POST['tel'])) {print ($_POST['tel']);} ?>" autofocus><br>
+        adres: <input type="text" name="adres" placeholder="hendriklaan 1" value="<?php if (isset($_POST['adres'])) {print ($_POST['adres']);} ?>" autofocus><br>
+        postcode: <input type="text" name="postcode" placeholder="1234AB" value="<?php if (isset($_POST['postcode'])) { print ($_POST['postcode']); } ?>" autofocus>
+        plaats: <input type="text" name="plaats" placeholder="Zwolle" value="<?php if (isset($_POST['plaats'])) { print ($_POST['plaats']); } ?>" autofocus><br><br>
+        wachtwoord: <input type="password" name="password" value="<?php if (isset($_POST['password'])) { print ($_POST['password']); } ?>" autofocus><br>
+        wachtwoord: <input type="password" name="passwordControlle" value="<?php if (isset($_POST['passwordControlle'])) { print ($_POST['passwordControlle']); } ?>" autofocus><br>
+        <button type="submit">verder</button>
+    </form>
 <?php
+if (isset($_POST['gender']) and $_POST['gender'] != '') {
+    $gender = $_POST['gender'];
+} else {
+    $gender = '';
+}
+
+if (isset($_POST['firstName']) and $_POST['firstName'] != '') {
+    $firstName = $_POST['firstName'];
+} else {
+    $firstName = '';
+}
+
+if (isset($_POST['middelName']) and $_POST['middelName'] != '') {
+    $middelName = $_POST['middelName'];
+} else {
+    $middelName = '';
+}
+
+if (isset($_POST['lastName']) and $_POST['lastName'] != '') {
+    $lastName = $_POST['lastName'];
+} else {
+    $lastName = '';
+}
+
+if (isset($_POST['birtday']) and $_POST['birtday'] != '') {
+    $gender = $_POST['birtday'];
+} else {
+    $gender = '';
+}
+
+if (isset($_POST['tel']) and $_POST['tel'] != '') {
+    $telefoonnummer = $_POST['tel'];
+} else {
+    $telefoonnummer = '';
+}
+
+if (isset($_POST['adres']) and $_POST['adres'] != '') {
+    $gender = $_POST['adres'];
+} else {
+    $gender = '';
+}
+
+
+
+$querySubmitUser = mysqli_query($conn, "") or die('Geen overeenkomst');
+
+$row = mysqli_fetch_array($querySubmitUser);
 
 ?>
