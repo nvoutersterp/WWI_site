@@ -108,6 +108,7 @@ $werktHet = '';
     $adres = $row['adres'];
     $postcode = $row['postcode'];
     $woonplaats = $row['plaats'];
+
     ?>
 
     <?php
@@ -116,37 +117,37 @@ $werktHet = '';
     if(isset($_POST['submitProfiel'])){
         if(!empty($_POST['email'])){
             $nieuweEmail = $_POST['email'];
-            $queryemail = "UPDATE client SET eMail='$nieuweEmail' WHERE clientID='$clientid'";
+            $queryemail = mysqli_query($conn,"UPDATE client SET eMail='$nieuweEmail' WHERE clientID='$clientid'");
             print("Email is gewijzigd naar: $nieuweEmail"); print('</br>');
         }
         if(!empty($_POST['voornaam'])){
             $nieuweVoornaam = $_POST['voornaam'];
-            $queryvoornaam = "UPDATE client SET firstName='$nieuweVoornaam' WHERE clientID='$clientid' ";
+            $queryvoornaam = mysqli_query($conn,"UPDATE client SET firstName='$nieuweVoornaam' WHERE clientID='$clientid'");
             print("Voornaam is gewijzigd naar: $nieuweVoornaam"); print('</br>');
         }
         if(!empty($_POST['tussenvoegsels'])) {
             $nieuweTussenvoegsels = $_POST['tussenvoegsels'];
-            $querytussenvoegsels = "UPDATE client SET middelName='$nieuweTussenvoegsels' WHERE clientID='$clientid' ";
+            $querytussenvoegsels = mysqli_query($conn,"UPDATE client SET middelName='$nieuweTussenvoegsels' WHERE clientID='$clientid'");
             print("Tussenvoegsels is gewijzigd naar: $nieuweTussenvoegsels"); print('</br>');
         }
         if(!empty($_POST['achternaam'])) {
             $nieuweAchternaam = $_POST['achternaam'];
-            $queryachetrnaam = "UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid' ";
+            $queryachetrnaam = mysqli_query($conn,"UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid'");
             print("Achternaam is gewijzigd naar: $nieuweAchternaam"); print('</br>');
         }
         if(!empty($_POST['telefoonnummer'])) {
             $nieuwtelefoonnummer = $_POST['telefoonnummer'];
-            $querytelefoonnummer = "UPDATE client SET phoneNumber='$nieuwtelefoonnummer' WHERE clientID='$clientid' ";
+            $querytelefoonnummer = mysqli_query($conn,"UPDATE client SET phoneNumber='$nieuwtelefoonnummer' WHERE clientID='$clientid'");
             print("Telefoonnummer is gewijzigd naar: $nieuwtelefoonnummer"); print('</br>');
         }
         if(!empty($_POST['postcode'])){
             $nieuwePostcode = $_POST['postcode'];
-            $querypostcode = "UPDATE client SET postcode='$nieuwePostcode' WHERE clientID='$clientid'";
+            $querypostcode = mysqli_query($conn,"UPDATE client SET postcode='$nieuwePostcode' WHERE clientID='$clientid'");
             print("Postcode is gewijzigd naar: $nieuwePostcode"); print('</br>');
         }
         if(!empty($_POST['plaats'])){
             $nieuweWoonplaats = $_POST['plaats'];
-            $querywoonplaats = "UPDATE client SET plaats='$nieuweWoonplaats' WHERE clientID='$clientid'";
+            $querywoonplaats = mysqli_query($conn,"UPDATE client SET plaats='$nieuweWoonplaats' WHERE clientID='$clientid'");
             print("Woonplaats is gewijzigd naar: $nieuweWoonplaats"); print('</br>');
         }
     }
