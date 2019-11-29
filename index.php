@@ -112,7 +112,7 @@ if (isset($_POST['uitloggen'])){
 
     </div>
     <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-    <div class="nav" id="nav">
+    <div class="navbar navbar-dark bg-primary" id="nav">
         <?php printcategorie($conn); ?>
     </div>
 
