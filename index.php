@@ -10,7 +10,7 @@
 <div class=header1 id="header1">
     <div class="top-container" id="top-container" >
 <!--        Laat logo zien met de juiste afmetingen-->
-        <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px </a>
+        <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
 <!--        snelkoppelingen naar de accountinformatie's-->
         <div class="top-container-right">
             <a href="google.com">
