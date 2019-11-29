@@ -75,7 +75,7 @@ if (isset($_POST['uitloggen'])){
                         printIsIngelogt();
                     } else { ?>
                         <div class="login-popup" id="myLogin">
-                                <form action="home.php" method="post" class="login-container">
+                                <form action="index.php" method="post" class="login-container">
                                     inloggen
                                     <button type="button" onclick="closeLogin()">Close</button><br>
                                     gebruikersnaam: <input type="text" name="username" style="background: gray; color: white" required><br>
@@ -130,7 +130,7 @@ for ($i = 1; 1000 >= $i; $i++) {
 }
 ?>
 <!--link naar javascript voor sticky effect-->
-<script src="css/effecten.js"></script>
+<script src="js/effecten.js"></script>
 
 
 

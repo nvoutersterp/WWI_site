@@ -72,6 +72,7 @@
 .nav {
     overflow: hidden;
     background-color: #333;
+    cursor: pointer;
 }
 
 .nav a {
@@ -91,6 +92,16 @@
 .nav a.active {
     background-color: #5050ff;
     color: white;
+}
+
+.nav input{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font: inherit;
+    outline: inherit;
 }
 
 /* Style the search field */

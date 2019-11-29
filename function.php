@@ -9,8 +9,8 @@ function printHead()
     <!--links -->
     <link rel="script" href="js/custom.js">
     <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    <link rel="stylesheet" href="css/style.css">
     <style>
         /*inloggen*/
         {
@@ -33,29 +33,30 @@ function printHead()
         }
 
     </style>
+    <script src="js/effecten.js"></script>
 </head>');
 }
 
 function printcategorie($conn)
 {
-    print ('<header id="header02" class="flex-header">');
+    print ('<div id="nav" class="nav">');
     $query5 = mysqli_query($conn, "select StockGroupName, DutchName from stockgroups");
 
     while ($rowGroup = mysqli_fetch_array($query5)) {
         $groupName = $rowGroup['StockGroupName'];
         $dutchName = $rowGroup['DutchName'];
-        print ('<form action="productpagina.php" method="POST">
+        print ('<a><form action="productpagina.php" method="POST">
             <input type="hidden" name="input" value="' . $groupName . '">
-            <input type="submit" name="submit" value="' . $dutchName . '" class="tabjes">
-        </form>');
+            <input type="submit" name="submit" value="' . $dutchName . '">
+        </form></a>');
     }
-    print ('</header>');
+    print ('</div>');
 }
 
 function printIsIngelogt()
 {
     print ('<div class="login-popup" id="myLogin">
-                <form method="post" action="home.php" id="uitloggen">
+                <form method="post" action="index.php" id="uitloggen">
                     <input type="hidden" name="uitloggen" value="true">
                 </form>
                 <form method="post" action="accountpagina.php" class="login-container">uw account

@@ -137,11 +137,28 @@ if (isset($_POST['tel']) and $_POST['tel'] != '') {
 }
 
 if (isset($_POST['adres']) and $_POST['adres'] != '') {
-    $gender = $_POST['adres'];
+    $adres = $_POST['adres'];
 } else {
-    $gender = '';
+    $adres = '';
 }
 
+if (isset($_POST['adres']) and $_POST['adres'] != '') {
+    $adres = $_POST['adres'];
+} else {
+    $adres = '';
+}
+
+if (isset($_POST['postcode']) and $_POST['postcode'] != '') {
+    $postcode = $_POST['postcode'];
+} else {
+    $postcode = '';
+}
+
+if (isset($_POST['plaats']) and $_POST['plaats'] != '') {
+    $adres = $_POST['adres'];
+} else {
+    $adres = '';
+}
 
 
 $querySubmitUser = mysqli_query($conn, "") or die('Geen overeenkomst');
