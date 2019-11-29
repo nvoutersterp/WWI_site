@@ -101,8 +101,8 @@ form.example input[type=text] {
     width: 30%;
     background: white;
     left: 20px;
-    margin: 0 auto;
-
+    margin-left: 40px;
+    min-width: 20px;
 }
 
 /* Style the submit button */
@@ -139,4 +139,24 @@ position: page;
     text-align: center;
     margin: auto;
     text-decoration-color: black;
+}
+
+/*inloggen*/
+{
+    box-sizing: border-box;
+}
+
+.login-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 30%;
+    border: 3px solid darkblue;
+    z-index: 9;
+}
+
+.login-container {
+    max-width: 350px;
+    padding: 10px;
+    background-color: white;
 }

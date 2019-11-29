@@ -109,13 +109,13 @@ if (isset($_POST['uitloggen'])){
         } else {
             $name = '';
         }
+groet($name);
 
         print ($moment . $name);
         ?>
     </div>
 </header>
 <main>
-    <br><br><br><br><br><br>
 
     <!-- database doet het -->
     <?php

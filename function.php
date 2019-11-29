@@ -174,6 +174,17 @@ function insertAccountData(array $info, string $username)
     $conn->close();
 }
 
+function groet($name){
+    if (date('G') < 12) {
+        $moment = 'Goedemorgen ';
+    } elseif (date('G') > 18) {
+        $moment = 'Goedeavond ';
+    } else {
+        $moment = 'Goedemiddag ';
+    }
+
+    print ($moment . $name);
+}
 
 
 
