@@ -75,7 +75,7 @@
     cursor: pointer;
 }
 
-.nav a {
+.nav input {
     float: left;
     color: #f2f2f2;
     text-align: center;
