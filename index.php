@@ -112,7 +112,6 @@ if (isset($_POST['uitloggen'])){
     </div>
     <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
     <div class="nav" id="nav">
-        <a class="active" href="#home">USB</a>
         <a href="#news">Rocket</a>
         <a href="#contact">T-shirt</a>
         <a href="#about">Hoodie's</a>
