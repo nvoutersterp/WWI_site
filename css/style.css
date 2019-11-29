@@ -3,8 +3,8 @@
 /* Style the header with a grey background and some padding */
 .top-container {
     overflow: hidden;
-    background-color: #f2f2f2;
-    padding: 0.5px 10px;
+    background-color: #f1f1f1;
+    padding: 15px 10px;
 
 }
 
@@ -41,7 +41,6 @@
 /* Float the link section to the right */
 .top-container-right {
     float: right;
-    font-size: 20px;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
@@ -73,11 +72,9 @@
 .nav {
     overflow: hidden;
     background-color: #333;
-    cursor: pointer;
-    padding:10px;
 }
 
-.nav input {
+.nav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
@@ -96,16 +93,6 @@
     color: white;
 }
 
-.nav input{
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font: inherit;
-    outline: inherit;
-}
-
 /* Style the search field */
 form.example input[type=text] {
     padding: 10px;
@@ -114,8 +101,8 @@ form.example input[type=text] {
     width: 30%;
     background: white;
     left: 20px;
-    margin-left: 40px;
-    min-width: 20px;
+    margin: auto;
+
 }
 
 /* Style the submit button */
@@ -128,7 +115,6 @@ form.example button {
     border: 1px solid grey;
     border-left: none; /* Prevent double borders */
     cursor: pointer;
-
 }
 
 form.example button:hover {
@@ -142,7 +128,7 @@ form.example::after {
     display: table;
 }
 .body {
-position: page;
+    position: page;
 }
 .footer {
     float: left;
