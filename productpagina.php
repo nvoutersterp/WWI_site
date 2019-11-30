@@ -201,8 +201,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     //weergave//
     ?>
-    <a class="section"
-       href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto" src="data:image/jpeg;base64, ' . base64_decode($row['Photo']) . '"/>'; ?><?php
+    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto">';
         print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
         print ($row['Photo']);
         $rij++;
@@ -216,8 +215,6 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
         <!--te komen-->
 
-
-</main>
         <?php printFooter(); ?>
 </body>
 </html>

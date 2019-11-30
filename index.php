@@ -28,11 +28,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
         //andere fout
     }
-}
-
-if (isset($_POST['uitloggen'])){
+} elseif (isset($_POST['uitloggen'])){
     session_destroy();
-    header("refresh: 0;");   //geeft nog een foutcode
+    header("refresh: 0;");
 }
 
 ?>
@@ -44,7 +42,7 @@ if (isset($_POST['uitloggen'])){
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="css/style.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="js/effecten.js"></script>
 </header>
@@ -69,7 +67,7 @@ if (isset($_POST['uitloggen'])){
                     <i class="fa fa-sign-in" aria-hidden="true" onclick="openLogin()"></i>
                 </div>
             </a>
-                    <?php if ($_SESSION['isIngelogt']) {
+                    <?php if (isset($_SESSION['isIngelogt']) and $_SESSION['isIngelogt']) {
                         printIsIngelogt();
                     } else { ?>
                         <div class="login-popup" id="myLogin">
@@ -108,16 +106,9 @@ if (isset($_POST['uitloggen'])){
                 <input class="searchbox" type="text" placeholder="Zoek hier naar producten" name="search">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
-
     </div>
     <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-    <div class="nav" id="nav">
-        <a href="#news">Rocket</a>
-        <a href="#contact">T-shirt</a>
-        <a href="#about">Hoodie's</a>
-    </div>
-<!--        --><?php //printcategorie($conn); ?>
-    </div>
+        <?php printcategorie($conn); ?>
 
 </div>
 

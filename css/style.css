@@ -76,7 +76,7 @@
 
 .nav a {
     float: left;
-    color: #f2f2f2;
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -160,8 +160,28 @@ form.example::after {
     background-color: white;
 }
 
+/*producten tonen*/
+.section {
+    float: left;
+    width: 33.33%;
+}
+.section:hover{
+    background-color: darkblue;
+    color: white;
+}
+
 .productfoto {
     margin-left: 0%;
     width: 100px;
     height: 100px;
+}
+
+
+.accountResultForm button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
 }
