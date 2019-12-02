@@ -102,8 +102,7 @@ form.example input[type=text] {
     border: 1px solid grey;
     width: 30%;
     background: white;
-    left: 20px;
-    margin: auto;
+    margin-left: 50%;
 
 }
 
