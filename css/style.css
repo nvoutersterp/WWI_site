@@ -3,7 +3,7 @@
 /* Style the header with a grey background and some padding */
 .top-container {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-image: url("image/header-background-blue.png");
     padding: 15px 10px;
 
 }
@@ -22,7 +22,7 @@
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .top-container a.logo {
-    font-size: 10px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -71,27 +71,24 @@
 
 .nav {
     overflow: hidden;
-    background-color: #333;
+    background: dodgerblue;
 }
 
 .nav a {
     float: left;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 2px 3px;
     text-decoration: none;
     font-size: 17px;
 }
 
 .nav a:hover {
     background-color: #ddd;
-    color: black;
-}
-
-.nav a.active {
-    background-color: #5050ff;
     color: white;
 }
+
+
 
 
 
@@ -102,17 +99,17 @@ form.example input[type=text] {
     border: 1px solid grey;
     width: 30%;
     background: white;
-    margin-left: 50%;
+    margin-left: 15%;
 
 }
 
 /* Style the submit button */
 form.example button {
-    width: 5%;
-    padding: 11.5px;
+    width: 60px;
+    padding: 10px;
     background: #2196F3;
     color: white;
-    font-size: 17px;
+    font-size: 20px;
     border: 1px solid grey;
     border-left: none; /* Prevent double borders */
     cursor: pointer;
@@ -191,4 +188,13 @@ form.example::after {
 /* voor responsifnes*/
 @media screen and (max-width: 600px) {
 
+}
+
+input[type=submit] {
+    padding:20px 20px;
+    background-color: #f1f1f1;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }

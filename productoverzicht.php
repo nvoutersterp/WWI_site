@@ -148,7 +148,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     <div id="overzicht1">
         <h2><?php print($naam); ?></h2>
-        <img src="#images/wwi%20logo%20text.png">
+        <img src="images/wwi%20logo%20text.png">
     </div>
     <div id="overzicht2">
         <p>€<?php print($prijs); ?></p>
