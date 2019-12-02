@@ -93,6 +93,8 @@
     color: white;
 }
 
+
+
 /* Style the search field */
 form.example input[type=text] {
     padding: 10px;
@@ -184,4 +186,10 @@ form.example::after {
     padding: 0;
     font: inherit;
     outline: inherit;
+}
+
+
+/* voor responsifnes*/
+@media screen and (max-width: 600px) {
+
 }

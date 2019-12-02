@@ -12,6 +12,7 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
 <HTML lang="EN">
 <head>
     <title>WWI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
@@ -114,17 +115,30 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                         $adres = $_POST['adres'];
                         $postcode = $_POST['postcode'];
                         $plaats = $_POST['plaats'];
+                        $date = date('Y-m-d');
 
                         $queryCollectNieuwID = mysqli_query($conn, "select clientID from client where eMail = '$eMail'") or die('Geen overeenkomst');
 
                         $rowClientID = mysqli_fetch_array($queryCollectNieuwID);
                         $clientID = $rowClientID['clientID'];
 
-                        $querySubmitNieuwClient = mysqli_query($conn, "update client set gender = '$gender', firstName = '$firstName', middelName = '$middelName', lastName = '$lastName', birthday = '$birtday', phoneNumber = '$telefoonnummer', postcode = '$postcode', plaats = '$plaats', adres = '$adres', isHos = 0 where clientID = '$clientID'") or die('Geen overeenkomst');
+                        $querySubmitNieuwClient = mysqli_query($conn, "update client set gender = '$gender', firstName = '$firstName', middelName = '$middelName', lastName = '$lastName', birthday = '$birtday', phoneNumber = '$telefoonnummer', postcode = '$postcode', plaats = '$plaats', adres = '$adres', created = '$date' where clientID = '$clientID'") or die('Geen overeenkomst');
 
                         $vervolg = 1;
                     } else {
-                        print ('U staat al geregistreerd, log a.u.b. in');
+                        $login = mysqli_query($conn, "select isActive from client where eMail = '$eMail'") or die('Geen overeenkomst');
+                        $rowlogin = mysqli_fetch_array($login);
+
+                        if ($rowlogin['isActive'] == 1) {
+                            print ('<h1 style="cursor: pointer;" onclick="openLogin()">U staat al geregistreerd, log a.u.b. in</h1>');
+                            $vervolg = 0;
+                        } elseif ($login == 0) {
+                            print ('het ziet er naar uit dat u al bij ons bekent bent, echter staat uw account wel op nonactief. <br> Wilt u dat ongedaan maken? neem dan contact op met de helpdesk.');
+                            $vervolg = 0;
+                        } else {
+                            print ('er is een fout opgetreden, sorry!');
+                            $vervolg = 0;
+                        }
                     }
                 } else {
                     print ('wachtword komt niet overeen');
@@ -148,7 +162,7 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
 
 
 if ($vervolg == 0) { ?>
-    <h1>maak nu uw account aan</h1>
+    <h1 class="text">maak nu uw account aan</h1>
     <form method="post" action="nieuwaccount.php">
         geslacht: <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'male') {print ('checked');} ?> required> man &nbsp;
         <input type="radio" name="gender" value="female" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'female') {print ('checked');} ?>> vrouw &nbsp;

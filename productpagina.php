@@ -4,7 +4,7 @@
 include 'function.php';
 $conn = dbconect();
 $output = "";
-$rij = 1;
+
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
@@ -164,9 +164,12 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     //verkrijgen producten uit zoek resultaat
     $count = 0;
     if (isset($_POST['search'])) {
-        $searchq = $_POST['search'];
-        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$searchq%' OR SearchDetails LIKE '%$searchq%' or Tags like '%$searchq%'") or die('Geen overeenkomst');
-        $count = mysqli_num_rows($query1);
+        $searchInput = $_POST['search'];
+        $searchq = explode(' ', $searchInput);
+        foreach ($searchq as $value => $item) {
+            $query1[$value] = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$item%' OR SearchDetails LIKE '%$item%' or Tags like '%$item%'") or die('Geen overeenkomst');
+            $count += mysqli_num_rows($query1[$value]);
+        }
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $query1 = mysqli_query($conn, "select StockItemID, StockItemName, Photo, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('Geen overeenkomst');
@@ -177,44 +180,24 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         print ('sorry, we konden geen producten ophalen');
     } else {
     //gegevens ophalen//
-    print ('<div>');
-    while ($row = mysqli_fetch_array($query1)) {
-    if ($rij % 3 == 1) {
-        print ('<div>');
+         print ('<div>');
+
+         if (isset($_POST['search'])) {
+             foreach ($query1 as $value) {
+                 printProducten($value, $count);
+             }
+
+         } elseif ($_POST['input']) {
+             printProducten($query1, $count);
+         }
+         print ("<div> $count producten gevonden </div>");
     }
 
-    // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
-    $productID = $row['StockItemID'];
-    $productNaam = $row['StockItemName'];
-    $productFoto = $row['Photo'];
-    $productPrijs = $row['UnitPrice'] * 0.9;
-
-    //extra info
-    //    $maatArray = array('3XS', 'XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', '5XL', '6XL', '7XL');
-    //    $vervang = '';
-    //    $pieces = explode(' ', $productNaam);
-    //    $lastWord = array_pop($pieces);
-    //    if ($lastWord == '3XS' OR 'XXS' OR 'XS' or 'S' or 'M' or 'L' or 'XL' or 'XXL' or '3XL' or '4XL' or '5XL' or '6XL' or '7XL') {
-    //        str_replace($maatArray, $vervang, $productNaam);
-    //    }
-
-
-    //weergave//
+    mysqli_close($conn);
     ?>
-    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto">';
-        print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
-        print ($row['Photo']);
-        $rij++;
-        print ('</a>');
-        }
-        }
-
-        mysqli_close($conn);
-        print("<br>$count producten gevonden")
-        ?>
 
         <!--te komen-->
 
-        <?php printFooter(); ?>
+    <?php printFooter(); ?>
 </body>
 </html>

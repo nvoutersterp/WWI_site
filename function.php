@@ -86,6 +86,29 @@ function printFooter(){
 </footer>');
 }
 
+function printProducten($query1, $count){
+    $rij = 1;
+    while ($row = mysqli_fetch_array($query1)) {
+        if ($rij % 3 == 1) {
+            print ('<div>');
+        }
+
+        // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
+        $productID = $row['StockItemID'];
+        $productNaam = $row['StockItemName'];
+        $productFoto = $row['Photo'];
+        $productPrijs = $row['UnitPrice'] * 0.9;
+
+        //weergave//
+        ?>
+    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto">';
+        print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
+        print ($row['Photo']);
+        $rij++;
+        print ("</a>");
+    }
+}
+
 
 //database naam//
 $dbname = "wideworldimporters";
@@ -136,15 +159,20 @@ function accountLogin($password, $username)
     $sql = "SELECT hashedPassword FROM client WHERE eMail='$username'";
     $opgehaald = $conn->query($sql);
     $result = $opgehaald->fetch_assoc();
-    $conn->close();
 
     if ($opgehaald->num_rows == 1) {
         if (verifyPassword($password, $result['hashedPassword'])) {
+            $date = date('Y-m-d');
+            $sql = "update client set lastVisit = '$date' where eMail = '$username'";
+            $conn->query($sql);
+            $conn->close();
             return 1; //mag inloggen
         } else {
+            $conn->close();
             return 3; //wachtwoord klopt niet
         }
     } else {
+        $conn->close();
         return 2; //mail/naam klopt niet
     }
 }
@@ -196,6 +224,5 @@ function groet($name){
 
     print ($moment . $name);
 }
-
 
 
