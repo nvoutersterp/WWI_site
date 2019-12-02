@@ -86,7 +86,7 @@ function printFooter(){
 </footer>');
 }
 
-function printProducten($query1, $count){
+function printProducten($query1){
     $rij = 1;
     while ($row = mysqli_fetch_array($query1)) {
         if ($rij % 3 == 1) {
@@ -97,7 +97,7 @@ function printProducten($query1, $count){
         $productID = $row['StockItemID'];
         $productNaam = $row['StockItemName'];
         $productFoto = $row['Photo'];
-        $productPrijs = $row['UnitPrice'] * 0.9;
+        $productPrijs = str_replace('.', ',', $row['UnitPrice'] * 0.9);
 
         //weergave//
         ?>

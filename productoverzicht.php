@@ -98,7 +98,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                 </div>
             <?php } ?>
 
-            <a href="#mand">
+            <a href="winkelmand.php">
                 <div class="icon">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </div>

@@ -4,12 +4,9 @@
 include 'function.php';
 $conn = dbconect();
 $output = "";
-$rij = 1;
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-//verder....
-$werktHet = '';
 ?>
     <!DOCTYPE HTML>
     <head>
@@ -66,197 +63,186 @@ $werktHet = '';
                     </div>
                 <?php } ?>
 
-                <a href="#mand">
-                    <div class="icon">
-                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-                    </div>
-                </a>
-                <a href="#verlanglijst">
-                    <div class="icon">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                    </div>
-                </a>
-            </div>
-            <!--            Het zoeken naar producten-->
-            <form class="example" action="productpagina.php" method="POST">
-                <input class="searchbox" type="text" placeholder="Zoek hier naar producten" name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-
-        </div>
-        <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-        <div class="nav" id="nav">
-            <?php printcategorie($conn); ?>
-        </div>
-
-    </div>
-
-
-    <?php
-    $dbname = "wideworldimporters";
-    $clientid = $_SESSION['clientID'];
-
-    $query1 = mysqli_query($conn, "SELECT * FROM client WHERE clientID='$clientid'");
-
-    $row = mysqli_fetch_array($query1);
-
-    $email = $row['eMail'];
-    $voornaam = $row['firstName'];
-    $tussenvoegsel = $row['middelName'];
-    $achternaam = $row['lastName'];
-    $telefoonnummer = $row['phoneNumber'];
-    $adres = $row['adres'];
-    $postcode = $row['postcode'];
-    $woonplaats = $row['plaats'];
-
-    ?>
-
-    <?php
-
-    //wijzigprofiel
-    if(isset($_POST['submitProfiel'])){
-        if(!empty($_POST['email'])){
-            $nieuweEmail = $_POST['email'];
-            $queryemail = mysqli_query($conn,"UPDATE client SET eMail='$nieuweEmail' WHERE clientID='$clientid'");
-            print("Email is gewijzigd naar: $nieuweEmail"); print('</br>');
-        }
-        if(!empty($_POST['voornaam'])){
-            $nieuweVoornaam = $_POST['voornaam'];
-            $queryvoornaam = mysqli_query($conn,"UPDATE client SET firstName='$nieuweVoornaam' WHERE clientID='$clientid'");
-            print("Voornaam is gewijzigd naar: $nieuweVoornaam"); print('</br>');
-        }
-        if(!empty($_POST['tussenvoegsels'])) {
-            $nieuweTussenvoegsels = $_POST['tussenvoegsels'];
-            $querytussenvoegsels = mysqli_query($conn,"UPDATE client SET middelName='$nieuweTussenvoegsels' WHERE clientID='$clientid'");
-            print("Tussenvoegsels is gewijzigd naar: $nieuweTussenvoegsels"); print('</br>');
-        }
-        if(!empty($_POST['achternaam'])) {
-            $nieuweAchternaam = $_POST['achternaam'];
-            $queryachetrnaam = mysqli_query($conn,"UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid'");
-            print("Achternaam is gewijzigd naar: $nieuweAchternaam"); print('</br>');
-        }
-        if(!empty($_POST['telefoonnummer'])) {
-            $nieuwtelefoonnummer = $_POST['telefoonnummer'];
-            $querytelefoonnummer = mysqli_query($conn,"UPDATE client SET phoneNumber='$nieuwtelefoonnummer' WHERE clientID='$clientid'");
-            print("Telefoonnummer is gewijzigd naar: $nieuwtelefoonnummer"); print('</br>');
-        }
-        if(!empty($_POST['postcode'])){
-            $nieuwePostcode = $_POST['postcode'];
-            $querypostcode = mysqli_query($conn,"UPDATE client SET postcode='$nieuwePostcode' WHERE clientID='$clientid'");
-            print("Postcode is gewijzigd naar: $nieuwePostcode"); print('</br>');
-        }
-        if(!empty($_POST['plaats'])){
-            $nieuweWoonplaats = $_POST['plaats'];
-            $querywoonplaats = mysqli_query($conn,"UPDATE client SET plaats='$nieuweWoonplaats' WHERE clientID='$clientid'");
-            print("Woonplaats is gewijzigd naar: $nieuweWoonplaats"); print('</br>');
-        }
-    }
-    ?>
-    <div class="col-md-9" id="profiel">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h4>Jouw Profiel</h4>
-                        <hr>
-                    </div>
+            <a href="winkelmand.php">
+                <div class="icon">
+                    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </div>
-                <form method="post" action="accountpagina.php">
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Voornaam</label>
-                        <div class="col-8">
-                            <input id="name" name="voornaam" placeholder="<?php print("$voornaam"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Tussenvoegsel(s)</label>
-                        <div class="col-8">
-                            <input id="name" name="Tussenvoegsels" placeholder="<?php print("$tussenvoegsel"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Achternaam</label>
-                        <div class="col-8">
-                            <input id="lastname" name="achternaam" placeholder="<?php print("$achternaam"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Email</label>
-                        <div class="col-8">
-                            <input id="email" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Adres</label>
-                        <div class="col-8">
-                            <input id="adres" name="adres" placeholder="<?php print("$adres"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Telefoonnummer</label>
-                        <div class="col-8">
-                            <input id="name" name="telefoonmummer" placeholder="<?php print("$telefoonnummer"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Postcode</label>
-                        <div class="col-8">
-                            <input id="postcode" name="postcode" placeholder="<?php print("$postcode"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Woonplaats</label>
-                        <div class="col-8">
-                            <input id="name" name="plaats" placeholder="<?php print("$woonplaats"); ?>" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-4 col-8">
-                            <button name="submitProfiel" type="submit" class="btn btn-primary">Update mijn profiel</button>
-                        </div>
-                    </div>
-                </form>
-                <form method="post" action="accountpagina.php">
-                    <hr>
-                    <h5>Wachtwoord wijzigen</h5>
-                    <hr>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Nieuw wachtwoord</label>
-                        <div class="col-8">
-                            <input id="newpass" name="nieuwwachtwoord" placeholder="Voer nieuw wachtwoord in" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-4 col-form-label">Bevestig nieuwe wachtwoord</label>
-                        <div class="col-8">
-                            <input id="newpass2" name="nieuwwachtwoord2" placeholder="voer nieuwe wachtwoord nogmaals in" class="form-control here" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="offset-4 col-8">
-                            <button name="submitnieuwWW" type="submit" class="btn btn-primary">Wachtwoord wijzigen</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            </a>
+            <a href="#verlanglijst">
+                <div class="icon">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                </div>
+            </a>
         </div>
+        <!--            Het zoeken naar producten-->
+        <form class="example" action="productpagina.php" method="POST">
+            <input class="searchbox" type="text" placeholder="Zoek hier naar producten" name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+
     </div>
+    <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
+    <div class="nav" id="nav">
+        <?php printcategorie($conn); ?>
     </div>
-    </main>
-    <?php printFooter(); ?>
-    </body>
-    </html>
+
+</div>
+
 
 <?php
-//wijzig wachtwoord
-if(isset($_POST['submitnieuwWW'])){
-    if($_POST['nieuwwachtwoord'] != $_POST['nieuwwachtwoord2'] ){
-        Print("De ingevoerde wachtwoorden zijn niet gelijk");
-    }
-    else{
+$dbname = "wideworldimporters";
+$clientid = $_SESSION['clientID'];
 
-    }
+$query1 = mysqli_query($conn, "SELECT * FROM client WHERE clientID='$clientid'");
 
+$row = mysqli_fetch_array($query1);
+
+$email = $row['eMail'];
+$wachtwoord = $row[''];
+$nieuwwachtwoord = $row[''];
+$voornaam = $row['firstName'];
+$tussenvoegsel = $row['middelName'];
+$achternaam = $row['lastName'];
+$telefoonnummer = $row['phoneNumber'];
+$adres = $row['adres'];
+$postcode = $row['postcode'];
+$woonplaats = $row['plaats'];
+
+    ?>
+
+    <?php
+
+//wijzigprofiel
+if (isset($_POST['submitProfiel'])) {
+    if (!empty($_POST['email'])) {
+        $nieuweEmail = $_POST['email'];
+        $queryemail = mysqli_query($conn, "UPDATE client SET eMail='$nieuweEmail' WHERE clientID='$clientid'");
+        print("Email is gewijzigd naar: $nieuweEmail");
+        print('</br>');
+    }
+    if (!empty($_POST['voornaam'])) {
+        $nieuweVoornaam = $_POST['voornaam'];
+        $queryvoornaam = mysqli_query($conn, "UPDATE client SET firstName='$nieuweVoornaam' WHERE clientID='$clientid'");
+        print("Voornaam is gewijzigd naar: $nieuweVoornaam");
+        print('</br>');
+    }
+    if (!empty($_POST['tussenvoegsels'])) {
+        $nieuweTussenvoegsels = $_POST['tussenvoegsels'];
+        $querytussenvoegsels = mysqli_query($conn, "UPDATE client SET middelName='$nieuweTussenvoegsels' WHERE clientID='$clientid'");
+        print("Tussenvoegsels is gewijzigd naar: $nieuweTussenvoegsels");
+        print('</br>');
+    }
+    if (!empty($_POST['achternaam'])) {
+        $nieuweAchternaam = $_POST['achternaam'];
+        $queryachetrnaam = mysqli_query($conn, "UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid'");
+        print("Achternaam is gewijzigd naar: $nieuweAchternaam");
+        print('</br>');
+    }
+    if (!empty($_POST['telefoonnummer'])) {
+        $nieuwtelefoonnummer = $_POST['telefoonnummer'];
+        $querytelefoonnummer = mysqli_query($conn, "UPDATE client SET phoneNumber='$nieuwtelefoonnummer' WHERE clientID='$clientid'");
+        print("Telefoonnummer is gewijzigd naar: $nieuwtelefoonnummer");
+        print('</br>');
+    }
+    if (!empty($_POST['postcode'])) {
+        $nieuwePostcode = $_POST['postcode'];
+        $querypostcode = mysqli_query($conn, "UPDATE client SET postcode='$nieuwePostcode' WHERE clientID='$clientid'");
+        print("Postcode is gewijzigd naar: $nieuwePostcode");
+        print('</br>');
+    }
+    if (!empty($_POST['plaats'])) {
+        $nieuweWoonplaats = $_POST['plaats'];
+        $querywoonplaats = mysqli_query($conn, "UPDATE client SET plaats='$nieuweWoonplaats' WHERE clientID='$clientid'");
+        print("Woonplaats is gewijzigd naar: $nieuweWoonplaats");
+        print('</br>');
+    }
 }
-mysqli_close($conn);
 ?>
+
+<div class="col-md-9">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Your Profile</h4>
+                    <hr>
+                </div>
+            </div>
+            <form>
+                <div class="form-group row">
+                    <label for="name" class="col-4 col-form-label">Voornaam</label>
+                    <div class="col-8">
+                        <input id="name" name="voornaam" placeholder="<?php print("$voornaam"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tussenvoegsels" class="col-4 col-form-label">Tussenvoegsels</label>
+                    <div class="col-8">
+                        <input id="name" name="Tussenvoegsels" placeholder="<?php print("$tussenvoegsel"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lastname" class="col-4 col-form-label">Achternaam</label>
+                    <div class="col-8">
+                        <input id="lastname" name="achternaam" placeholder="<?php print("$achternaam"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Email*</label>
+                    <div class="col-8">
+                        <input id="email" name="email" placeholder="<?php print("$email"); ?>"
+                               class="form-control here" required="required" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="adres" class="col-4 col-form-label">Adres</label>
+                    <div class="col-8">
+                        <input id="adres" name="adres" placeholder="<?php print("$adres"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="telefoonnummer" class="col-4 col-form-label">Telefoonnummer</label>
+                    <div class="col-8">
+                        <input id="name" name="telefoonmummer" placeholder="<?php print("$telefoonnummer"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="postcode" class="col-4 col-form-label">Postcode</label>
+                    <div class="col-8">
+                        <input id="postcode" name="postcode" placeholder="<?php print("$postcode"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="plaats" class="col-4 col-form-label">WoonPlaats</label>
+                    <div class="col-8">
+                        <input id="name" name="plaats" placeholder="<?php print("$woonplaats"); ?>"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="newpass" class="col-4 col-form-label">Nieuw wachtwoord</label>
+                    <div class="col-8">
+                        <input id="newpass" name="nieuwwachtwoord" placeholder="Nieuw wachtwoord"
+                               class="form-control here" type="text">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-4 col-8">
+                        <button name="submit" type="submit" class="btn btn-primary">Update mijn profiel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</main>
+<?php printFooter(); ?>
+</body>
+</html>

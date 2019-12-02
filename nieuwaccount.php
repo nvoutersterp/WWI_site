@@ -99,22 +99,22 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                     if (createAccount($eMail, $pasword)) {
 
                         $gender = $_POST['gender'];
-                        $firstName = $_POST['firstName'];
+                        $firstName = ucfirst($_POST['firstName']);
                         if (isset($_POST['middelName'])) {
                             $middelName = $_POST['middelName'];
                         } else {
                             $middelName = NULL;
                         }
-                        $lastName = $_POST['lastName'];
+                        $lastName = ucfirst($_POST['lastName']);
                         $birtday = $_POST['birtday'];
                         if (isset($_POST['phoneNumber'])) {
                             $telefoonnummer = $_POST['phoneNumber'];
                         } else {
                             $telefoonnummer = NULL;
                         }
-                        $adres = $_POST['adres'];
+                        $adres = ucfirst($_POST['adres']);
                         $postcode = $_POST['postcode'];
-                        $plaats = $_POST['plaats'];
+                        $plaats = ucfirst($_POST['plaats']);
                         $date = date('Y-m-d');
 
                         $queryCollectNieuwID = mysqli_query($conn, "select clientID from client where eMail = '$eMail'") or die('Geen overeenkomst');
