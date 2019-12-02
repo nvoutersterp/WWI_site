@@ -25,6 +25,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         //gebruikersnaam klopt niet
     } elseif ($ant == 3) {
         //wachtwoord klopt niet
+    } elseif ($ant == 4) {
+        //is inactief
     } else {
         //andere fout
     }
@@ -79,7 +81,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     <form action="index.php" method="post" class="login-container">
                         inloggen
                         <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="text" name="username" style="background: gray; color: white" required><br>
+                        gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
                         wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                         <input type="hidden" name="productID" value="<?php print ($productID);?>">

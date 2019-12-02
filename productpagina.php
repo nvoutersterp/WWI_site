@@ -25,6 +25,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         //gebruikersnaam klopt niet
     } elseif ($ant == 3) {
         //wachtwoord klopt niet
+    } elseif ($ant == 4) {
+        //is inactief
     } else {
         //andere fout
     }
@@ -72,7 +74,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     <form action="index.php" method="post" class="login-container">
                         inloggen
                         <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="text" name="username" style="background: gray; color: white" required><br>
+                        gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
                         wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                         <input type="hidden"<?php if (isset($_POST['search'])) {
@@ -167,9 +169,10 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         $searchInput = $_POST['search'];
         $searchq = explode(' ', $searchInput);
         foreach ($searchq as $value => $item) {
-            $query1[$value] = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$item%' OR SearchDetails LIKE '%$item%' or Tags like '%$item%'") or die('Geen overeenkomst');
-            $count += mysqli_num_rows($query1[$value]);
+
         }
+        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$item%' OR SearchDetails LIKE '%$item%' or Tags like '%$item%'") or die('Geen overeenkomst');
+        $count = mysqli_num_rows($query1);
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
         $query1 = mysqli_query($conn, "select StockItemID, StockItemName, Photo, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('Geen overeenkomst');
@@ -181,15 +184,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
     //gegevens ophalen//
          print ('<div>');
-
-         if (isset($_POST['search'])) {
-             foreach ($query1 as $value) {
-                 printProducten($value, $count);
-             }
-
-         } elseif ($_POST['input']) {
-             printProducten($query1, $count);
-         }
+         printProducten($query1, $count);
          print ("<div> $count producten gevonden </div>");
     }
 

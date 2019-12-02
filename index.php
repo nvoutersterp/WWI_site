@@ -13,6 +13,7 @@ $werktHet = '';
 
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $eMail = $_POST['username'];
+
     $ant = accountLogin($_POST['password'], $eMail);
     if ($ant == 1) {
         $queryInloggen = mysqli_query($conn, "select * from client where eMail='$eMail'");
@@ -25,6 +26,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         //gebruikersnaam klopt niet
     } elseif ($ant == 3) {
         //wachtwoord klopt niet
+    } elseif ($ant == 4) {
+        //is inactief
     } else {
         //andere fout
     }
@@ -75,7 +78,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                                 <form action="index.php" method="post" class="login-container">
                                     inloggen
                                     <button type="button" onclick="closeLogin()">Close</button><br>
-                                    gebruikersnaam: <input type="text" name="username" style="background: gray; color: white" required><br>
+                                    gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
                                     wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
                                     <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                                     <button type="submit">inloggen</button>

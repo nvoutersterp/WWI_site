@@ -156,20 +156,24 @@ function setCurrentUser(string $username)
 function accountLogin($password, $username)
 {
     $conn = dbconect();
-    $sql = "SELECT hashedPassword FROM client WHERE eMail='$username'";
+    $sql = "SELECT hashedPassword, isActive FROM client WHERE eMail='$username'";
     $opgehaald = $conn->query($sql);
     $result = $opgehaald->fetch_assoc();
 
     if ($opgehaald->num_rows == 1) {
-        if (verifyPassword($password, $result['hashedPassword'])) {
-            $date = date('Y-m-d');
-            $sql = "update client set lastVisit = '$date' where eMail = '$username'";
-            $conn->query($sql);
-            $conn->close();
-            return 1; //mag inloggen
+        if ($result['isActive'] == 1) {
+            if (verifyPassword($password, $result['hashedPassword'])) {
+                $date = date('Y-m-d');
+                $sql = "update client set lastVisit = '$date' where eMail = '$username'";
+                $conn->query($sql);
+                $conn->close();
+                return 1; //mag inloggen
+            } else {
+                $conn->close();
+                return 3; //wachtwoord klopt niet
+            }
         } else {
-            $conn->close();
-            return 3; //wachtwoord klopt niet
+            return 4; //inactief
         }
     } else {
         $conn->close();
