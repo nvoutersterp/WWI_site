@@ -9,10 +9,3 @@ foreach ($pieces as $index => $valeu) {
     $sql .= " " . $valeu;
 }
 
-$sqlTijdelijk = 'hoi hier staat tekst';
-
-$sql = substr_replace($sqlTijdelijk, '', -3);
-
-print ($sql);
-
-

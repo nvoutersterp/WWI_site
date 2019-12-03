@@ -43,8 +43,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -74,7 +74,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     <form action="index.php" method="post" class="login-container">
                         inloggen
                         <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
+                        gebruikersnaam: <input type="email" name="username" placeholder="email" style="background: gray; color: white" required><br>
                         wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                         <input type="hidden"<?php if (isset($_POST['search'])) {
@@ -186,7 +186,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
     //gegevens ophalen//
          print ('<div>');
-         printProducten($query1);
+         printProducten($query1, $conn);
          print ("<div> $count producten gevonden </div>");
     }
 

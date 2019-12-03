@@ -67,7 +67,7 @@ $werktHet = '';
                     </div>
                 <?php } ?>
 
-                <a href="#mand">
+                <a href="winkelmand.php">
                     <div class="icon">
                         <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                     </div>
@@ -178,25 +178,25 @@ $werktHet = '';
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Voornaam</label>
                         <div class="col-8">
-                            <input id="name" name="voornaam" placeholder="<?php print("$voornaam"); ?>" class="form-control here" type="text">
+                            <input id="name" name="voornaam" placeholder="<?php print("$voornaam"); ?>" class="form-control here" type="text" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Tussenvoegsel(s)</label>
                         <div class="col-8">
-                            <input id="name" name="Tussenvoegsels" placeholder="<?php print("$tussenvoegsel"); ?>" class="form-control here" type="text">
+                            <input id="name" name="Tussenvoegsels" placeholder="<?php print("$tussenvoegsel"); ?>" class="form-control here" type="text" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Achternaam</label>
                         <div class="col-8">
-                            <input id="lastname" name="achternaam" placeholder="<?php print("$achternaam"); ?>" class="form-control here" type="text">
+                            <input id="lastname" name="achternaam" placeholder="<?php print("$achternaam"); ?>" class="form-control here" type="text" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Geslacht</label>
                         <div class="col-8">
-                            <input type="radio" name="gender" value="man" <?php if(isset($gender) and $gender == 'man'){print ('checked');} ?> required> Man
+                            <input type="radio" name="gender" value="man" <?php if(isset($gender) and $gender == 'man'){print ('checked');} ?> readonly> Man
                             <input type="radio" name="gender" value="female" <?php if(isset($gender) and $gender == 'female'){print ('checked');} ?>> vrouw
                             <input type="radio" name="gender" value="other" <?php if(isset($gender) and $gender == 'other'){print ('checked');} ?>> Anders<br>
                         </div>
@@ -205,7 +205,7 @@ $werktHet = '';
             <div class="form-group row">
                 <label class="col-4 col-form-label">Geboortedatum</label>
                 <div class="col-8">
-                    <input type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" autofocus required>
+                    <input type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" readonly>
                 </div>
             </div>
             <div class="form-group row">

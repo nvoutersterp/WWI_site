@@ -7,6 +7,22 @@ $output = "";
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
+if (isset($_POST['quantity']) and isset($_POST['stockItemID'])) {
+    $_SESSION['winkelmand'][0] = 0;
+    if (array_key_exists($_POST['stockItemID'], $_SESSION['winkelmand'])){
+        $_SESSION['winkelmand'][$_POST['stockItemID']] += $_POST['quantity'];
+    } else {
+        $_SESSION['winkelmand'][$_POST['stockItemID']] = $_POST['quantity'];
+    }
+    unset($_SESSION['winkelmand'][0]);
+}
+
+if (isset($_POST['clearBukket'])) {
+    if ($_POST['clearBukket']) {
+        unset($_SESSION['winkelmand']);
+    }
+}
+
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -41,7 +57,7 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
                     <i class="fa fa-sign-in" aria-hidden="true" onclick="openLogin()"></i>
                 </div>
             </a>
-            <?php if ($_SESSION['isIngelogt']) {
+            <?php if (isset($_SESSION['isIngelogt']) and $_SESSION['isIngelogt']) {
                 printIsIngelogt();
             } else { ?>
                 <div class="login-popup" id="myLogin">
@@ -95,13 +111,20 @@ mysqli_select_db($conn, $dbname) or die ("could not connect");
 
 <?php
 if (isset($_SESSION['winkelmand'])){
-
+    foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
+        print("u koopt $quantity keer $productID <br>");
+    }
 } else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
 
 
 ?>
+
+<form action="winkelmand.php" method="post">
+    <input type="hidden" name="clearBukket" value="true">
+    <button type="submit">leeg winkelmand</button>
+</form>
 
 </main>
 <?php printFooter(); ?>

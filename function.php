@@ -86,7 +86,7 @@ function printFooter(){
 </footer>');
 }
 
-function printProducten($query1){
+function printProducten($query1, $conn){
     $rij = 1;
     while ($row = mysqli_fetch_array($query1)) {
         if ($rij % 3 == 1) {
@@ -96,14 +96,23 @@ function printProducten($query1){
         // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
         $productID = $row['StockItemID'];
         $productNaam = $row['StockItemName'];
-        $productFoto = $row['Photo'];
+
+        $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+        $issetPhoto = mysqli_num_rows($photoRow);
+        $Photo = mysqli_fetch_array($photoRow);
+        if ($issetPhoto != 0){
+            $productFoto = $Photo['photo'];
+        } else {
+            $productFoto = 'images/archixl-logo.png';
+        }
+
         $productPrijs = str_replace('.', ',', $row['UnitPrice'] * 0.9);
 
         //weergave//
         ?>
-    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <?php echo '<img class="productfoto">';
+    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <img src="<?php print ($productFoto);?>" width="20%" height="20%">
+        <?php
         print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
-        print ($row['Photo']);
         $rij++;
         print ("</a>");
     }

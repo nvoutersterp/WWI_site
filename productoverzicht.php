@@ -4,12 +4,8 @@
 include 'function.php';
 $conn = dbconect();
 $output = "";
-$rij = 1;
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
-
-//verder....
-$werktHet = '';
 
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $eMail = $_POST['username'];
@@ -81,7 +77,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     <form action="index.php" method="post" class="login-container">
                         inloggen
                         <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
+                        gebruikersnaam: <input type="email" name="username" placeholder="email" style="background: gray; color: white" required><br>
                         wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                         <input type="hidden" name="productID" value="<?php print ($productID);?>">
@@ -142,10 +138,12 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     $afbeelding = $row["Photo"];
     $vooraad = $row["QuantityOnHand"];
     $omschrijving = $row["SearchDetails"];
+    $i = 1;
+
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-
+<form action="winkelmand.php" method="post">
     <div id="overzicht1">
         <h2><?php print($naam); ?></h2>
         <img src="images/wwi%20logo%20text.png">
@@ -153,15 +151,29 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     <div id="overzicht2">
         <p>€<?php print($prijs); ?></p>
         <p>Omschrijving: <?php print($omschrijving); ?></p>
-        <p><input type="number" name="aantal" min="1" max="<?php print($vooraad) ?>" placeholder="1"> aantal</p>
+        <p><select name="quantity">
+        <?php
+        if ($vooraad > 10){
+            $verkoopbaar = 10;
+        } else {
+            $verkoopbaar  = $vooraad;
+        }
+
+        while ($i<=$verkoopbaar){
+            print ('<option value="'.$i.'">'.$i.'</option>');
+            $i++;
+        } ?>
+        </select></p>
         <!-- nog te komen:
         leverancier, exl. btw, aantal per pakket en pakket type
          kleur en maat selecteerbaar-->
         <p>Nog in vooraad: <?php print($vooraad); ?></p>
         <p>
-            <button>Toevoegen aan winkelwagen</button>
+            <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
+            <button type="submit">Toevoegen aan winkelwagen</button>
         </p>
     </div>
+</form>
 <?php printFooter(); ?>
 </body>
 </html>
