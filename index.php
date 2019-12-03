@@ -4,12 +4,8 @@
 include 'function.php';
 $conn = dbconect();
 $output = "";
-$rij = 1;
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
-
-//verder....
-$werktHet = '';
 
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $eMail = $_POST['username'];
@@ -94,7 +90,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                         </div>
                     <?php } ?>
 
-            <a href="#mand">
+            <a href="winkelmand.php">
                 <div class="icon">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </div>
