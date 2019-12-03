@@ -97,7 +97,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                 </div>
             <?php } ?>
 
-            <a href="#mand">
+            <a href="winkelmand.php">
                 <div class="icon">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </div>
@@ -165,13 +165,15 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     //verkrijgen producten uit zoek resultaat
     $count = 0;
+    $sqlTijdelijk = "select StockItemName, StockItemID, Photo, UnitPrice from stockitems where";
     if (isset($_POST['search'])) {
         $searchInput = $_POST['search'];
         $searchq = explode(' ', $searchInput);
         foreach ($searchq as $value => $item) {
-
+            $sqlTijdelijk .= " (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%') and";
         }
-        $query1 = mysqli_query($conn, " SELECT StockItemID, StockItemName, Photo, UnitPrice FROM stockitems WHERE stockitemname LIKE '%$item%' OR SearchDetails LIKE '%$item%' or Tags like '%$item%'") or die('Geen overeenkomst');
+        $sql = substr_replace($sqlTijdelijk, '', -3);
+        $query1 = mysqli_query($conn, $sql) or die('Geen overeenkomst');
         $count = mysqli_num_rows($query1);
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
@@ -184,7 +186,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
     //gegevens ophalen//
          print ('<div>');
-         printProducten($query1, $count);
+         printProducten($query1);
          print ("<div> $count producten gevonden </div>");
     }
 
