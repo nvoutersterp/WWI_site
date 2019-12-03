@@ -71,7 +71,7 @@
 
 .nav {
     overflow: hidden;
-    background: dodgerblue;
+    background: darkgrey;
 }
 
 .nav a {
@@ -191,8 +191,8 @@ form.example::after {
 }
 
 input[type=submit] {
-    padding:20px 20px;
-    background-color: #f1f1f1;
+    padding:20px 22px;
+    background-color: darkgrey;
     border:0 none;
     cursor:pointer;
     -webkit-border-radius: 5px;
