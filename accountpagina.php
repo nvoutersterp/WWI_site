@@ -20,6 +20,7 @@ $werktHet = '';
     <!--link met de bootstraps en stylesheets-->
     <header>
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     </header>
     <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
@@ -100,10 +101,12 @@ $werktHet = '';
 
     $row = mysqli_fetch_array($query1);
 
+    $gender = $row['gender'];
     $email = $row['eMail'];
     $voornaam = $row['firstName'];
     $tussenvoegsel = $row['middelName'];
     $achternaam = $row['lastName'];
+    $geboortedatum = $row['birthday'];
     $telefoonnummer = $row['phoneNumber'];
     $adres = $row['adres'];
     $postcode = $row['postcode'];
@@ -134,6 +137,16 @@ $werktHet = '';
             $nieuweAchternaam = $_POST['achternaam'];
             $queryachetrnaam = mysqli_query($conn,"UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid'");
             print("Achternaam is gewijzigd naar: $nieuweAchternaam"); print('</br>');
+        }
+        if(!empty($_POST['gender'])) {
+            $nieuwGeslacht = $_POST['gender'];
+            $querygeslacht = mysqli_query($conn,"UPDATE client SET gender='$nieuwGeslacht' WHERE clientID='$clientid'");
+            print("Geslacht is gewijzigd naar: $nieuwGeslacht"); print('</br>');
+        }
+        if(!empty($_POST['geboortedatum'])) {
+            $nieuweGeboortedatum = $_POST['geboortedatum'];
+            $querygeboortedatum = mysqli_query($conn,"UPDATE client SET birthday='$nieuweGeboortedatum' WHERE clientID='$clientid'");
+            print("Geboortedatum is gewijzigd naar: $nieuweGeboortedatum"); print('</br>');
         }
         if(!empty($_POST['telefoonnummer'])) {
             $nieuwtelefoonnummer = $_POST['telefoonnummer'];
@@ -181,7 +194,22 @@ $werktHet = '';
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-4 col-form-label">Email</label>
+                        <label class="col-4 col-form-label">Geslacht</label>
+                        <div class="col-8">
+                            <input type="radio" name="gender" value="man" <?php if(isset($gender) and $gender == 'man'){print ('checked');} ?> required> Man
+                            <input type="radio" name="gender" value="female" <?php if(isset($gender) and $gender == 'female'){print ('checked');} ?>> vrouw
+                            <input type="radio" name="gender" value="other" <?php if(isset($gender) and $gender == 'other'){print ('checked');} ?>> Anders<br>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Geboortedatum</label>
+                        <div class="col-8">
+                            <input type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" autofocus required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label">Email/Gebruikersnaam</label>
                         <div class="col-8">
                             <input id="email" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text">
                         </div>
