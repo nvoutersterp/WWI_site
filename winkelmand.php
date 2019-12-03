@@ -84,12 +84,12 @@ if (isset($_POST['clearBukket'])) {
                 </div>
             <?php } ?>
 
-            <a href="#mand">
+            <a href="winkelmand.php">
                 <div class="icon">
                     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                 </div>
             </a>
-            <a href="#verlanglijst">
+            <a href="favorieten.php">
                 <div class="icon">
                     <i class="fa fa-heart" aria-hidden="true"></i>
                 </div>
@@ -111,9 +111,22 @@ if (isset($_POST['clearBukket'])) {
 
 <?php
 if (isset($_SESSION['winkelmand'])){
+    $totPrice = 0;
     foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
-        print("u koopt $quantity keer $productID <br>");
+        $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
+        $productInfo = mysqli_fetch_array($productInfoQuery);
+
+        $stockItemName = $productInfo['StockItemName'];
+        $unitPrice = $productInfo['UnitPrice']*0.9;
+        $unitPriceCorrect = str_replace('.', ',', $unitPrice);
+        $productprijs = $unitPrice*$quantity;
+        $productprijsCorrect = str_replace('.', ',', $productprijs);
+        $totPrice += $productprijs;
+        $totPriceCorrect = str_replace('.', ',', $totPrice);
+
+        print("u koopt $quantity keer $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect. <br>");
     }
+    print ("in totaal kost het €$totPriceCorrect");
 } else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }

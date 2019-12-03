@@ -165,7 +165,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     //verkrijgen producten uit zoek resultaat
     $count = 0;
-    $sqlTijdelijk = "select StockItemName, StockItemID, Photo, UnitPrice from stockitems where";
+    $sqlTijdelijk = "select StockItemName, StockItemID, UnitPrice from stockitems where";
     if (isset($_POST['search'])) {
         $searchInput = $_POST['search'];
         $searchq = explode(' ', $searchInput);
@@ -177,7 +177,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         $count = mysqli_num_rows($query1);
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
-        $query1 = mysqli_query($conn, "select StockItemID, StockItemName, Photo, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');
         $count = mysqli_num_rows($query1);
     }
 

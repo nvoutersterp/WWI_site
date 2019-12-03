@@ -42,14 +42,14 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
-    <div class="top-container" id="top-container" >
+    <div class="top-container" id="top-container">
         <!--        Laat logo zien met de juiste afmetingen-->
         <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
         <!--        snelkoppelingen naar de accountinformatie's-->
         <div class="top-container-right">
             <div> <?php
                 if (isset($_SESSION['firstName'])) {
-                    $name =  $_SESSION['firstName'];
+                    $name = $_SESSION['firstName'];
                 } else {
                     $name = '';
                 }
@@ -76,17 +76,21 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                 <div class="login-popup" id="myLogin">
                     <form action="index.php" method="post" class="login-container">
                         inloggen
-                        <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="email" name="username" placeholder="email" style="background: gray; color: white" required><br>
-                        wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
+                        <button type="button" onclick="closeLogin()">Close</button>
+                        <br>
+                        gebruikersnaam: <input type="email" name="username" placeholder="email"
+                                               style="background: gray; color: white" required><br>
+                        wachtwoord: <input type="password" name="password" style="background: gray ; color: white"
+                                           required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
-                        <input type="hidden" name="productID" value="<?php print ($productID);?>">
+                        <input type="hidden" name="productID" value="<?php print ($productID); ?>">
                         <button type="submit">inloggen</button>
                     </form>
                     <script>
                         function openLogin() {
                             document.getElementById("myLogin").style.display = "block";
                         }
+
                         function closeLogin() {
                             document.getElementById("myLogin").style.display = "none";
                         }
@@ -120,60 +124,76 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 </div>
 
 
-    <?php
-    $dbname = "wideworldimporters";
+<?php
+$dbname = "wideworldimporters";
 
-    $db = "mysql:host=localhost;dbname=cursus;port=3306";
-    $user = "root";
-    $pass = "";
-    $pdo = new PDO($db, $user, $pass);
+$db = "mysql:host=localhost;dbname=cursus;port=3306";
+$user = "root";
+$pass = "";
+$pdo = new PDO($db, $user, $pass);
 
-    $query1 = mysqli_query($conn, "SELECT StockItemName, UnitPrice, Photo, QuantityOnHand, SearchDetails FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
+$query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
 
-    $row = mysqli_fetch_array($query1);
+$row = mysqli_fetch_array($query1);
 
 
-    $naam = $row['StockItemName'];
-    $prijs = $row["UnitPrice"] * 0.9;
-    $afbeelding = $row["Photo"];
-    $vooraad = $row["QuantityOnHand"];
-    $omschrijving = $row["SearchDetails"];
-    $i = 1;
+$naam = $row['StockItemName'];
+$prijs = str_replace('.', ',', $row['UnitPrice'] * 0.9);
+$vooraad = $row["QuantityOnHand"];
+$omschrijving = $row["SearchDetails"];
+$i = 1;
+
+?>
+
+<div id="overzicht1">
+    <h2><?php print($naam); ?></h2> <?php
+
+    $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+    $issetPhoto = mysqli_num_rows($photoRow);
+    if ($issetPhoto != 0) {
+        while ($photo = mysqli_fetch_array($photoRow)) {
+            $link = $photo['photo'];
+            print ("<img src='$link'><br>");
+        }
+    } else {
+        print ("<img src='images/archixl-logo.png'>");
+    }
 
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-<form action="winkelmand.php" method="post">
-    <div id="overzicht1">
-        <h2><?php print($naam); ?></h2>
-        <img src="images/wwi%20logo%20text.png">
-    </div>
-    <div id="overzicht2">
-        <p>€<?php print($prijs); ?></p>
-        <p>Omschrijving: <?php print($omschrijving); ?></p>
+</div>
+<div id="overzicht2">
+    <p>€<?php print($prijs); ?></p>
+    <p>Omschrijving: <?php print($omschrijving); ?></p>
+    <form action="winkelmand.php" method="post">
         <p><select name="quantity">
-        <?php
-        if ($vooraad > 10){
-            $verkoopbaar = 10;
-        } else {
-            $verkoopbaar  = $vooraad;
-        }
+                <?php
+                if ($vooraad > 10) {
+                    $verkoopbaar = 10;
+                } else {
+                    $verkoopbaar = $vooraad;
+                }
 
-        while ($i<=$verkoopbaar){
-            print ('<option value="'.$i.'">'.$i.'</option>');
-            $i++;
-        } ?>
-        </select></p>
+                while ($i <= $verkoopbaar) {
+                    print ('<option value="' . $i . '">' . $i . '</option>');
+                    $i++;
+                } ?>
+            </select></p>
         <!-- nog te komen:
-        leverancier, exl. btw, aantal per pakket en pakket type
+        leverancier, exl. btw, aantal per pakket en pakket type;
          kleur en maat selecteerbaar-->
         <p>Nog in vooraad: <?php print($vooraad); ?></p>
         <p>
             <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
             <button type="submit">Toevoegen aan winkelwagen</button>
-        </p>
-    </div>
-</form>
+    </form>
+    <form action="favorieten.php" method="post">
+        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
+        <button type="submit">toevoegen aan favorieten</button>
+    </form>
+    </p>
+</div>
 <?php printFooter(); ?>
 </body>
 </html>

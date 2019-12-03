@@ -110,9 +110,9 @@ function printProducten($query1, $conn){
 
         //weergave//
         ?>
-    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>"> <img src="<?php print ($productFoto);?>" width="20%" height="20%">
-        <?php
-        print ($productNaam . '&nbsp €' . $productPrijs . '&nbsp');
+    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>">
+        <img src="<?php print ($productFoto);?>" width="20%" height="20%"> <?php
+        print ('<div>'. $productNaam . '<br> €' . $productPrijs . '</div>');
         $rij++;
         print ("</a>");
     }
