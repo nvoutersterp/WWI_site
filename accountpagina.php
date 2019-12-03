@@ -276,13 +276,20 @@ $werktHet = '';
     </html>
 
 <?php
+    $hashedpassword = $row['hashedPassword'];
+
 //wijzig wachtwoord
 if(isset($_POST['submitnieuwWW'])){
-    if($_POST['nieuwwachtwoord'] != $_POST['nieuwwachtwoord2'] ){
+    if($_POST['nieuwwachtwoord'] != $_POST['nieuwwachtwoord2'] ) {
         Print("De ingevoerde wachtwoorden zijn niet gelijk");
     }
     else{
+        $newhashedpassword = password_hash($_POST['nieuwwachtwoord'], 1);
 
+        if(!empty($_POST['nieuwwachtwoord'])) {
+            $querywachtwoord = mysqli_query($conn,"UPDATE client SET hashedPassword='$newhashedpassword' WHERE clientID='$clientid'");
+            print("Wachtwoord is gewijzigd"); print('</br>');
+        }
     }
 
 }
