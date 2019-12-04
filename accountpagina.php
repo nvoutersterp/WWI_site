@@ -204,13 +204,13 @@ $werktHet = '';
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Geboortedatum</label>
                     <div class="col-8">
-                        <input id="name" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" readonly>
+                        <input id="birthday" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" readonly>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Email/Gebruikersnaam</label>
                     <div class="col-8">
-                        <input id="name" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text">
+                        <input id="email" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text">
                     </div>
                 </div>
                 <div class="form-group row">
