@@ -164,12 +164,12 @@ $i = 1;
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-</div>
-<div class="col-md-7"><h2><?php print(' '); print($naam); ?></h2>
-    <p>€<?php print($prijs); ?></p>
-    <p>Omschrijving: <?php print($omschrijving); ?></p>
+</div><br>
+<div class="col-md-15"><h2><?php print(' '); print($naam); ?></h2>
+    <p class="prijs">€<?php print($prijs); ?></p>
+    <h2 class="omschrijving-1"> Omschrijving: </h2> <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
     <form action="winkelmand.php" method="post">
-        <p><select name="quantity">
+        <p><select name="quantity"  class="form-control">
                 <?php
                 if ($vooraad > 10) {
                     $verkoopbaar = 10;
@@ -185,7 +185,12 @@ $i = 1;
         <!-- nog te komen:
         leverancier, exl. btw, aantal per pakket en pakket type;
          kleur en maat selecteerbaar-->
-        <p>Nog in vooraad: <?php print($vooraad); ?></p>
+        <?php
+        if ($vooraad > 10) {
+            print("<p>Nog in vooraad: $vooraad </p>");
+        }
+        ?>
+
         <p>
             <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
             <button type="submit">Toevoegen aan winkelwagen</button>

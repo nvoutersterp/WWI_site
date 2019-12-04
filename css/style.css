@@ -234,3 +234,19 @@ input[type=submit] {
     -webkit-border-radius: 5px;
     border-radius: 5px;
 }
+.prijs {
+    color: #1e7e34;
+    font-weight:bolder;
+    font-size: 26px;
+    padding-top: 20px;
+
+}
+.omschrijving-1 {
+    color: #5a6268;
+    font-weight: bold;
+    font-size: 17px;
+}
+.omschrijving-2 {
+    color: #5a6268;
+    font-weight: normal;
+}
