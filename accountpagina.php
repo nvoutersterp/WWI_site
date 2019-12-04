@@ -204,13 +204,13 @@ $werktHet = '';
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Geboortedatum</label>
                     <div class="col-8">
-                        <input id="name" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" readonly>
+                        <input id="birthday" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Email/Gebruikersnaam</label>
                     <div class="col-8">
-                        <input id="name" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text">
+                        <input id="email" name="email" placeholder="<?php print("$email"); ?>" class="form-control here"  type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Geef a.u.b. een geldige email op">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -222,13 +222,13 @@ $werktHet = '';
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Telefoonnummer</label>
                     <div class="col-8">
-                        <input id="name" name="telefoonmummer" placeholder="<?php print("$telefoonnummer"); ?>" class="form-control here" type="text">
+                        <input id="name" name="telefoonmummer" placeholder="<?php print("$telefoonnummer"); ?>" class="form-control here" type="text" pattern="[0-9.+]{,12}" title="geef een geldig telefoonnummer op (zonder '-').">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Postcode</label>
                     <div class="col-8">
-                        <input id="postcode" name="postcode" placeholder="<?php print("$postcode"); ?>" class="form-control here" type="text">
+                        <input id="postcode" name="postcode" placeholder="<?php print("$postcode"); ?>" class="form-control here" type="text" pattern="[0-9]{4}[A-Z]{2}$" title="geef een geldig postcode op in de vorm: 1234AB">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -250,13 +250,13 @@ $werktHet = '';
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Nieuw wachtwoord</label>
                         <div class="col-8">
-                            <input id="newpass" name="nieuwwachtwoord" placeholder="Voer nieuw wachtwoord in" class="form-control here" type="text">
+                            <input id="newpass" name="nieuwwachtwoord" placeholder="Voer nieuw wachtwoord in" class="form-control here" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Gebruik minimaal een cijfer, een hoofdletter en een kleine letter. Ook moet het wachtwoord minimaal acht karakters hebben">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-4 col-form-label">Bevestig nieuwe wachtwoord</label>
                         <div class="col-8">
-                            <input id="newpass2" name="nieuwwachtwoord2" placeholder="voer nieuwe wachtwoord nogmaals in" class="form-control here" type="text">
+                            <input id="newpass2" name="nieuwwachtwoord2" placeholder="voer nieuwe wachtwoord nogmaals in" class="form-control here" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                         </div>
                     </div>
                     <div class="form-group row">
