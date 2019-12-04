@@ -204,7 +204,7 @@ $werktHet = '';
                 <div class="form-group row">
                     <label class="col-4 col-form-label">Geboortedatum</label>
                     <div class="col-8">
-                        <input id="birthday" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>" readonly>
+                        <input id="birthday" type="date" name="geboortedatum" value="<?php print("$geboortedatum") ?>">
                     </div>
                 </div>
                 <div class="form-group row">
