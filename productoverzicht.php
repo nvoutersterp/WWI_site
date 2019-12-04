@@ -138,7 +138,7 @@ $row = mysqli_fetch_array($query1);
 
 
 $naam = $row['StockItemName'];
-$prijs = str_replace('.', ',', $row['UnitPrice'] * 0.9);
+$prijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
 $vooraad = $row["QuantityOnHand"];
 $omschrijving = $row["SearchDetails"];
 $i = 1;
