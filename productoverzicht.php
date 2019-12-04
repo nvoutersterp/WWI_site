@@ -164,11 +164,30 @@ $i = 1;
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-</div><br>
+</div><br><form action="#favorieten.php" method="post" style="margin-left: 0px">
 <div class="col-md-15"><h2><?php print(' '); print($naam); ?></h2>
+
+        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
+        <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
+    </form>
+
+
+
+
     <p class="prijs">€<?php print($prijs); ?></p>
     <h2 class="omschrijving-1"> Omschrijving: </h2> <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
     <form action="winkelmand.php" method="post">
+
+        <!-- nog te komen:
+        leverancier, exl. btw, aantal per pakket en pakket type;
+         kleur en maat selecteerbaar-->
+        <?php
+        if ($vooraad > 10) {
+            print("<p>Nog in vooraad: $vooraad </p>");
+        } else {
+            print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
+        }
+        ?>
         <p><select name="quantity"  class="form-control">
                 <?php
                 if ($vooraad > 10) {
@@ -182,25 +201,10 @@ $i = 1;
                     $i++;
                 } ?>
             </select></p>
-        <!-- nog te komen:
-        leverancier, exl. btw, aantal per pakket en pakket type;
-         kleur en maat selecteerbaar-->
-        <?php
-        if ($vooraad > 10) {
-            print("<p>Nog in vooraad: $vooraad </p>");
-        }
-        ?>
 
-        <p>
             <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
-            <button type="submit">Toevoegen aan winkelwagen</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
     </form>
-    <form action="favorieten.php" method="post">
-        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
-        <button type="submit">toevoegen aan favorieten</button>
-    </form>
-    </p>
-</div>
 <?php printFooter(); ?>
 
 <script src="js/effecten.js"></script>
