@@ -195,5 +195,8 @@ $i = 1;
     </p>
 </div>
 <?php printFooter(); ?>
+
+<script src="js/effecten.js"></script>
+
 </body>
 </html>

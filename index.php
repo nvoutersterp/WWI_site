@@ -44,7 +44,6 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <header>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/effecten.js"></script>
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -121,6 +120,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 
 <?php printFooter(); ?>
+<script src="js/effecten.js"></script>
 </body>
 </HTML>
 

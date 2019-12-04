@@ -196,5 +196,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         <!--te komen-->
 
     <?php printFooter(); ?>
+
+<!--sticky effect-->
+<script src="js/effecten.js"></script>
 </body>
 </html>
