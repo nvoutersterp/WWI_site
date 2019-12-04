@@ -106,7 +106,7 @@ function printProducten($query1, $conn){
             $productFoto = 'images/archixl-logo.png';
         }
 
-        $productPrijs = str_replace('.', ',', $row['UnitPrice'] * 0.9);
+        $productPrijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
 
         //weergave//
         ?>
