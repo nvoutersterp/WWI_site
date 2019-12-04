@@ -250,3 +250,7 @@ input[type=submit] {
     color: #5a6268;
     font-weight: normal;
 }
+.productplaatjesruimte {
+    width: 90%;
+    border: 1px solid black;
+}

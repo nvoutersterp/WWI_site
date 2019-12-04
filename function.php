@@ -77,7 +77,8 @@ function printIsIngelogt()
             </div>');
 }
 
-function printFooter(){
+function printFooter()
+{
     print('<footer>
 <div class="footer">
     <img alt src="images/gratis%20verzending.PNG" width="5%" height="5%"> <br>
@@ -86,12 +87,11 @@ function printFooter(){
 </footer>');
 }
 
-function printProducten($query1, $conn){
+function printProducten($query1, $conn)
+{
     $rij = 1;
+    ?> <div class="row"> <?php
     while ($row = mysqli_fetch_array($query1)) {
-        if ($rij % 3 == 1) {
-            print ('<div>');
-        }
 
         // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
         $productID = $row['StockItemID'];
@@ -100,7 +100,7 @@ function printProducten($query1, $conn){
         $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
         $issetPhoto = mysqli_num_rows($photoRow);
         $Photo = mysqli_fetch_array($photoRow);
-        if ($issetPhoto != 0){
+        if ($issetPhoto != 0) {
             $productFoto = $Photo['photo'];
         } else {
             $productFoto = 'images/archixl-logo.png';
@@ -110,12 +110,18 @@ function printProducten($query1, $conn){
 
         //weergave//
         ?>
-    <a class="section" href="productoverzicht.php?productID=<?php print ($productID); ?>">
-        <img src="<?php print ($productFoto);?>" width="20%" height="20%"> <?php
-        print ('<div>'. $productNaam . '<br> €' . $productPrijs . '</div>');
+        <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+        <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><?php print $productNaam ?> </h5>
+            <p class="card-text"> Moet nog omschrijving komen. </p>
+            <a href="productoverzicht.php?productID=<?php print ($productID); ?>" class="btn btn-primary">Naar het
+                product</a>
+        </div>
+        </div><?php
         $rij++;
-        print ("</a>");
     }
+?> <div> <?php
 }
 
 
@@ -226,7 +232,8 @@ function insertAccountData(array $info, string $username)
     $conn->close();
 }
 
-function groet($name){
+function groet($name)
+{
     if (date('G') < 12) {
         $moment = 'Goedemorgen ';
     } elseif (date('G') > 18) {
