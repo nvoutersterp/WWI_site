@@ -63,7 +63,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             </div>
             <a>
                 <div class="icon">
-                    <i class="fa fa-sign-in" aria-hidden="true" onclick="openLogin()"></i>
+                    <i class="fa fa-user" aria-hidden="true" onclick="openLogin()"></i>
                 </div>
             </a>
                     <?php if (isset($_SESSION['isIngelogt']) and $_SESSION['isIngelogt']) {
@@ -71,11 +71,11 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                     } else { ?>
                         <div class="login-popup" id="myLogin">
                                 <form action="index.php" method="post" class="login-container">
-                                    inloggen
+                                    Inloggen
                                     <button type="button" onclick="closeLogin()">Close</button><br>
-                                    gebruikersnaam: <input type="text" name="username" placeholder="email" style="background: gray; color: white" required><br>
-                                    wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
-                                    <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
+                                    Gebruikersnaam: <input type="text" name="username" placeholder="e-mail"><br>
+                                    Wachtwoord: <input type="password" name="password" ><br>
+                                    <a href="nieuwaccount.php">Nog geen account? Maak er nu een aan!</a><br>
                                     <button type="submit">inloggen</button>
                                 </form>
                                 <script>

@@ -64,7 +64,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             </div>
             <a>
                 <div class="icon">
-                    <i class="fa fa-sign-in" aria-hidden="true" onclick="openLogin()"></i>
+                    <i class="fa fa-user" aria-hidden="true" onclick="openLogin()"></i>
                 </div>
             </a>
             <?php if ($_SESSION['isIngelogt']) {

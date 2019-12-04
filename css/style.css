@@ -11,7 +11,7 @@
 /* Style the header links */
 .top-container a {
     float: left;
-    color: black;
+    color: white;
     text-align: center;
     padding: 12px;
     text-decoration: none;
@@ -41,6 +41,7 @@
 /* Float the link section to the right */
 .top-container-right {
     float: right;
+    color: white;
 }
 
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
@@ -127,6 +128,7 @@ form.example::after {
 }
 .body {
     position: page;
+    background-image: url("image/Background.jpg");
 }
 .footer {
     float: left;
@@ -146,16 +148,20 @@ form.example::after {
 .login-popup {
     display: none;
     position: fixed;
-    top: 0;
-    right: 30%;
+    top: 10%;
+    right: 0%;
     border: 3px solid darkblue;
     z-index: 9;
+    color: black;
 }
 
 .login-container {
     max-width: 350px;
     padding: 10px;
     background-color: white;
+}
+.login-container a {
+    color: black;
 }
 
 /*producten tonen*/
