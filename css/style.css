@@ -89,7 +89,7 @@
 }
 
 .nav a:hover {
-    background-color: #ddd;
+    background-color: darkgrey;
     color: white;
 }
 
@@ -233,6 +233,10 @@ input[type=submit] {
     cursor:pointer;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+}
+
+input[type=submit]:hover {
+    background-color: lightgrey;
 }
 .prijs {
     color: #1e7e34;

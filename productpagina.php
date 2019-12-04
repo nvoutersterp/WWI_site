@@ -195,9 +195,10 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     ?>
 
         <!--te komen-->
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="position-absolute">
     <?php printFooter(); ?>
-
+</div>
 <!--sticky effect-->
 <script src="js/effecten.js"></script>
 </body>
