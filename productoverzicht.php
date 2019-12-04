@@ -39,6 +39,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <header>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -146,7 +147,8 @@ $i = 1;
 ?>
 
 <div id="overzicht1">
-    <h2><?php print($naam); ?></h2> <?php
+    <br>
+    <?php
 
     $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
     $issetPhoto = mysqli_num_rows($photoRow);
@@ -163,7 +165,7 @@ $i = 1;
     mysqli_close($conn);
     ?>
 </div>
-<div id="overzicht2">
+<div class="col-md-7"><h2><?php print(' '); print($naam); ?></h2>
     <p>€<?php print($prijs); ?></p>
     <p>Omschrijving: <?php print($omschrijving); ?></p>
     <form action="winkelmand.php" method="post">
