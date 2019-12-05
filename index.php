@@ -48,7 +48,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     <link href="css/style.css" rel="stylesheet">
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
-<div class=header1 id="header1" >
+<div class=header1 id="header1" style="z-index: 100">
     <div class="top-container" id="top-container" >
 <!--        Laat logo zien met de juiste afmetingen-->
         <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
