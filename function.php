@@ -140,10 +140,11 @@ function printProducten($query1, $conn)
     ?>
     <div class="row"> <?php
     while ($row = mysqli_fetch_array($query1)) {
-        if ($rij <24) {
+        if ($rij < 24) {
             // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
             $productID = $row['StockItemID'];
             $productNaam = $row['StockItemName'];
+            $productOmschrijving = $row['SearchDetails'];
 
 
             $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
@@ -162,8 +163,9 @@ function printProducten($query1, $conn)
             <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
             <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title"><?php print $productNaam ?> </h5>
-                <p class="card-text"> Moet nog omschrijving komen. </p>
+                <h5 class="card-title"><?php print($productNaam); ?> </h5>
+                <p class="card-text"><?php print($productOmschrijving); ?> </p>
+                <p class="card-text">€<?php print($productPrijs) ?></p>
                 <a href="productoverzicht.php?productID=<?php print ($productID); ?>" class="btn btn-primary">Naar het
                     product</a>
             </div>
@@ -171,8 +173,7 @@ function printProducten($query1, $conn)
         }
         $rij++;
     }
-    ?>
-    <div> <?php
+?> <div> <?php
 }
 
 
