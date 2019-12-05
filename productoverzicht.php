@@ -192,63 +192,64 @@ $q = 0;
             print ("<img src='images/archixl-logo.png'>");
         }
 
-    //Afsluiten Database//
-    mysqli_close($conn);
-    ?>
-    </div><form action="#favorieten.php" method="post" style="margin-left: 0px">
-        <div class="details-rechts"><h2><?php print(' '); print($naam); ?></h2>
-
-            <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
-            <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
-    </form>
-
-
-
-
-    <p class="prijs">€<?php print($prijs); ?></p>
-    <h2 class="omschrijving-1"> Omschrijving: </h2> <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
-    <form action="winkelmand.php" method="post">
-
-        <!-- nog te komen:
-        leverancier, exl. btw, aantal per pakket en pakket type;
-         kleur en maat selecteerbaar-->
-        <?php
-        if ($vooraad > 10) {
-            print("<p>Nog in vooraad: $vooraad </p>");
-        } else {
-            print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
-        }
+        //Afsluiten Database//
+        mysqli_close($conn);
         ?>
-        <p><select name="quantity"  class="form-control">
-                <?php
-                if ($vooraad > 10) {
-                    $verkoopbaar = 10;
-                } else {
-                    $verkoopbaar = $vooraad;
-                }
+        <form action="#favorieten.php" method="post" style="margin-left: 0px">
+            <div class="details-rechts"><h2><?php print(' ');
+                    print($naam); ?></h2>
 
-                while ($i <= $verkoopbaar) {
-                    print ('<option value="' . $i . '">' . $i . '</option>');
-                    $i++;
-                } ?>
-            </select></p>
+                <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
+                <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
+        </form>
 
-        <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
-        <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
+
+        <p class="prijs">€<?php print($prijs); ?></p>
+        <h2 class="omschrijving-1"> Omschrijving: </h2>
+        <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
+        <form action="winkelmand.php" method="post">
+
+            <!-- nog te komen:
+            leverancier, exl. btw, aantal per pakket en pakket type;
+             kleur en maat selecteerbaar-->
+            <?php
+            if ($vooraad > 10) {
+                print("<p>Nog in vooraad: $vooraad </p>");
+            } else {
+                print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
+            }
+            ?>
+            <p><select name="quantity" class="form-control">
+                    <?php
+                    if ($vooraad > 10) {
+                        $verkoopbaar = 10;
+                    } else {
+                        $verkoopbaar = $vooraad;
+                    }
+
+                    while ($i <= $verkoopbaar) {
+                        print ('<option value="' . $i . '">' . $i . '</option>');
+                        $i++;
+                    } ?>
+                </select></p>
+
+            <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
+            <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
     </div>
+</div>
     </form>
-<!--    --><?php //printFooter(); ?>
+    <!--    --><?php //printFooter(); ?>
 
     <script src="js/effecten.js"></script>
 
-<link href="css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="js/bootstrap.js" rel="script"></script>
-<script src="js/effecten.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="js/bootstrap.js" rel="script"></script>
+    <script src="js/effecten.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -250,14 +250,11 @@ input[type=submit]:hover {
     color: #5a6268;
     font-weight: bold;
     font-size: 17px;
+    max-width: 20px;
 }
 .omschrijving-2 {
     color: #5a6268;
     font-weight: normal;
-}
-.productplaatjesruimte {
-    width: 90%;
-    border: 1px solid black;
 }
 
 .carousel {
