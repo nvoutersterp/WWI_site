@@ -153,7 +153,6 @@ $q = 0;
 
 <div id="overzicht1">
     <div class="container">
-        <h2><?php print($naam); ?></h2>
         <?php if ($issetPhoto != 0) { ?>
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
@@ -196,8 +195,8 @@ $q = 0;
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-    </div><br><form action="#favorieten.php" method="post" style="margin-left: 0px">
-        <div class="col-md-15"><h2><?php print(' '); print($naam); ?></h2>
+    </div><form action="#favorieten.php" method="post" style="margin-left: 0px">
+        <div class="details-rechts"><h2><?php print(' '); print($naam); ?></h2>
 
             <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
             <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
@@ -236,8 +235,9 @@ $q = 0;
 
         <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
         <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
+    </div>
     </form>
-    <?php printFooter(); ?>
+<!--    --><?php //printFooter(); ?>
 
     <script src="js/effecten.js"></script>
 
