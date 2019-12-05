@@ -43,6 +43,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </header>
