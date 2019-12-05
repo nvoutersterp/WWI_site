@@ -45,6 +45,10 @@ if (isset($_POST['toDelete'])) {
     unset($_SESSION['winkelmand'][$deleteID]);
 }
 
+if (isset($_POST['alterQuantity']) and isset($_POST['alterQuantityID'])) {
+    $_SESSION['winkelmand'][$_POST['alterQuantityID']] = $_POST['alterQuantity'];
+}
+
 if (isset($_POST['clearBukket'])) {
     if ($_POST['clearBukket']) {
         unset($_SESSION['winkelmand']);
@@ -162,12 +166,12 @@ if (isset($_SESSION['winkelmand'])) {
                     $i++;
                 } ?>
 </select>
-<input type='hidden' name='alterQuantityID' value='$productID'>
+<input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
 <button type='submit'>>></button>
 </form>
 
 <form action='winkelmand.php' method='post'>
-<input type='hidden' name='toDelete' value='$productID'> 
+<input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
 <button type='submit'>X</button>
 </form>
 </body>

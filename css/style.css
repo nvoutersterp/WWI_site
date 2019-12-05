@@ -218,7 +218,6 @@ form.example::after {
 
 #overzicht2{
     float: left;
-    margin-top: 50px;
 }
 
 
@@ -261,8 +260,4 @@ input[type=submit]:hover {
     width: 400px;
     height: 400px;
     max-width:400px;
-}
-.details-rechts {
-    text-align: right;
-    float: right;
 }
