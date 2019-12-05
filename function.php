@@ -136,39 +136,43 @@ function printFooter()
 
 function printProducten($query1, $conn)
 {
-    $rij = 1;
-    ?> <div class="row"> <?php
+    $rij = 0;
+    ?>
+    <div class="row"> <?php
     while ($row = mysqli_fetch_array($query1)) {
+        if ($rij <24) {
+            // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
+            $productID = $row['StockItemID'];
+            $productNaam = $row['StockItemName'];
 
-        // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
-        $productID = $row['StockItemID'];
-        $productNaam = $row['StockItemName'];
 
-        $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
-        $issetPhoto = mysqli_num_rows($photoRow);
-        $Photo = mysqli_fetch_array($photoRow);
-        if ($issetPhoto != 0) {
-            $productFoto = $Photo['photo'];
-        } else {
-            $productFoto = 'images/archixl-logo.png';
+            $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+            $issetPhoto = mysqli_num_rows($photoRow);
+            $Photo = mysqli_fetch_array($photoRow);
+            if ($issetPhoto != 0) {
+                $productFoto = $Photo['photo'];
+            } else {
+                $productFoto = 'images/archixl-logo.png';
+            }
+
+            $productPrijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
+
+            //weergave//
+            ?>
+            <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+            <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"><?php print $productNaam ?> </h5>
+                <p class="card-text"> Moet nog omschrijving komen. </p>
+                <a href="productoverzicht.php?productID=<?php print ($productID); ?>" class="btn btn-primary">Naar het
+                    product</a>
+            </div>
+            </div><?php
         }
-
-        $productPrijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
-
-        //weergave//
-        ?>
-        <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-        <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title"><?php print $productNaam ?> </h5>
-            <p class="card-text"> Moet nog omschrijving komen. </p>
-            <a href="productoverzicht.php?productID=<?php print ($productID); ?>" class="btn btn-primary">Naar het
-                product</a>
-        </div>
-        </div><?php
         $rij++;
     }
-?> <div> <?php
+    ?>
+    <div> <?php
 }
 
 

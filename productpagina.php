@@ -124,7 +124,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 </div>
 
-
+<!-- werkt niet voor demo
     <form action="productpagina.php" method="post">
         <select name="aantal">
             <option value="25" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '25'){ print ('selected') ; }} ?>>25</option>
@@ -145,6 +145,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         } ?>
         <button type="submit">>></button>
     </form>
+    -->
 
     <?php
     //sorteren op...
@@ -179,7 +180,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         $count = mysqli_num_rows($query1);
     } elseif (isset($_POST['input'])) {
         $inputq = $_POST['input'];
-        $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');
+        $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice, SearchDetails from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');
         $count = mysqli_num_rows($query1);
     }
 
