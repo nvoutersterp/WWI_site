@@ -39,6 +39,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <HTML lang="EN">
 <head>
     <title>WWI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="body">
 <!--link met de bootstraps en stylesheets-->

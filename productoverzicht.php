@@ -33,13 +33,12 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <HTML lang="EN">
 <head>
     <title>WWI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="body">
 <!--link met de bootstraps en stylesheets-->
 <header>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.css">
+
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1">
@@ -144,51 +143,67 @@ $vooraad = $row["QuantityOnHand"];
 $omschrijving = $row["SearchDetails"];
 $i = 1;
 
+//voor de foto's
+$photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+$issetPhoto = mysqli_num_rows($photoRow);
+$p = 0;
+$q = 0;
+
 ?>
 
 <div id="overzicht1">
-    <br>
-    <?php
+    <div class="container">
+        <h2><?php print($naam); ?></h2>
+        <?php if ($issetPhoto != 0) { ?>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <?php while ($q < $issetPhoto) { ?>
+                        <li data-target="#myCarousel" data-slide-to="1" class="<?php if ($q == 0) {
+                            print ('active ');
+                        } ?>btn-dark border-dark"></li>
+                        <?php $q++;
+                    } ?>
+                </ol>
 
-    $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
-    $issetPhoto = mysqli_num_rows($photoRow);
-    if ($issetPhoto != 0) {
-        while ($photo = mysqli_fetch_array($photoRow)) {
-            $link = $photo['photo'];
-            print ("<img src='$link'><br>");
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <?php while ($photo = mysqli_fetch_array($photoRow)) { ?>
+                        <div class="item <?php if ($p == 0) {
+                            print ('active');
+                        } ?>">
+                            <img src="<?php print ($photo['photo']); ?>">
+                            <div class="carousel-caption"></div>
+                        </div>
+                        <?php $p++;
+                    } ?>
+
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        <?php } else {
+            print ("<img src='images/archixl-logo.png'>");
         }
-    } else {
-        print ("<img src='images/archixl-logo.png'>");
-    }
 
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-</div><br><form action="#favorieten.php" method="post" style="margin-left: 0px">
-<div class="col-md-15"><h2><?php print(' '); print($naam); ?></h2>
+</div>
+</div>
 
-        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
-        <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
-    </form>
-
-
-
-
-    <p class="prijs">€<?php print($prijs); ?></p>
-    <h2 class="omschrijving-1"> Omschrijving: </h2> <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
+<div id="overzicht2">
+    <p>€<?php print($prijs); ?></p>
+    <p>Omschrijving: <?php print($omschrijving); ?></p>
     <form action="winkelmand.php" method="post">
-
-        <!-- nog te komen:
-        leverancier, exl. btw, aantal per pakket en pakket type;
-         kleur en maat selecteerbaar-->
-        <?php
-        if ($vooraad > 10) {
-            print("<p>Nog in vooraad: $vooraad </p>");
-        } else {
-            print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
-        }
-        ?>
-        <p><select name="quantity"  class="form-control">
+        <p><select name="quantity">
                 <?php
                 if ($vooraad > 10) {
                     $verkoopbaar = 10;
@@ -201,13 +216,30 @@ $i = 1;
                     $i++;
                 } ?>
             </select></p>
-
+        <!-- nog te komen:
+        leverancier, exl. btw, aantal per pakket en pakket type;
+         kleur en maat selecteerbaar-->
+        <p>Nog in vooraad: <?php print($vooraad); ?></p>
+        <p>
             <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
-        <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
+            <button type="submit">Toevoegen aan winkelwagen</button>
     </form>
+    <form action="#favorieten.php" method="post">
+        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
+        <button type="submit">toevoegen aan favorieten</button>
+    </form>
+    </p>
+</div>
 <?php printFooter(); ?>
 
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="js/bootstrap.js" rel="script"></script>
 <script src="js/effecten.js"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>

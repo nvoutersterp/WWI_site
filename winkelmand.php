@@ -7,14 +7,42 @@ $output = "";
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
+
+if (isset($_POST['username']) and isset($_POST['password'])) {
+    $eMail = $_POST['username'];
+
+    $ant = accountLogin($_POST['password'], $eMail);
+    if ($ant == 1) {
+        $queryInloggen = mysqli_query($conn, "select * from client where eMail='$eMail'");
+        $rowInloggen = mysqli_fetch_array($queryInloggen);
+        $_SESSION['clientID'] = $rowInloggen['clientID'];
+        $_SESSION['isHoS'] = $rowInloggen['isHos'];
+        $_SESSION['isIngelogt'] = true;
+        $_SESSION['firstName'] = $rowInloggen['firstName'];
+    } elseif ($ant == 2) {
+        //gebruikersnaam klopt niet
+    } elseif ($ant == 3) {
+        //wachtwoord klopt niet
+    } elseif ($ant == 4) {
+        //is inactief
+    } else {
+        //andere fout
+    }
+}
+
 if (isset($_POST['quantity']) and isset($_POST['stockItemID'])) {
     $_SESSION['winkelmand'][0] = 0;
-    if (array_key_exists($_POST['stockItemID'], $_SESSION['winkelmand'])){
+    if (array_key_exists($_POST['stockItemID'], $_SESSION['winkelmand'])) {
         $_SESSION['winkelmand'][$_POST['stockItemID']] += $_POST['quantity'];
     } else {
         $_SESSION['winkelmand'][$_POST['stockItemID']] = $_POST['quantity'];
     }
     unset($_SESSION['winkelmand'][0]);
+}
+
+if (isset($_POST['toDelete'])) {
+    $deleteID = $_POST['toDelete'];
+    unset($_SESSION['winkelmand'][$deleteID]);
 }
 
 if (isset($_POST['clearBukket'])) {
@@ -27,6 +55,7 @@ if (isset($_POST['clearBukket'])) {
 <!DOCTYPE HTML>
 <head>
     <title>WWI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <HTML lang="EN">
 <body class="body">
@@ -61,7 +90,7 @@ if (isset($_POST['clearBukket'])) {
                 printIsIngelogt();
             } else { ?>
                 <div class="login-popup" id="myLogin">
-                    <form action="index.php" method="post" class="login-container">
+                    <form action="winkelmand.php" method="post" class="login-container">
                         inloggen
                         <button type="button" onclick="closeLogin()">Close</button>
                         <br>
@@ -110,22 +139,39 @@ if (isset($_POST['clearBukket'])) {
 </div>
 
 <?php
-if (isset($_SESSION['winkelmand'])){
+if (isset($_SESSION['winkelmand'])) {
     $totPrice = 0;
     foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
         $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
         $productInfo = mysqli_fetch_array($productInfoQuery);
 
         $stockItemName = $productInfo['StockItemName'];
-        $unitPrice = $productInfo['UnitPrice']*0.9;
+        $unitPrice = $productInfo['UnitPrice'] * 0.9;
         $unitPriceCorrect = str_replace('.', ',', $unitPrice);
-        $productprijs = $unitPrice*$quantity;
+        $productprijs = $unitPrice * $quantity;
         $productprijsCorrect = str_replace('.', ',', $productprijs);
         $totPrice += $productprijs;
         $totPriceCorrect = str_replace('.', ',', $totPrice);
 
-        print("u koopt $quantity keer $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect. <br>");
-    }
+        print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect"); ?>
+<form action='winkelmand.php' method='post'>
+<select name='alterQuantity'>
+ <?php unset($i);
+ while ($i <= 10) {
+                    print ('<option value=\"' . $i . '\">' . $i . '</option>');
+                    $i++;
+                } ?>
+</select>
+<input type='hidden' name='alterQuantityID' value='$productID'>
+<button type='submit'>>></button>
+</form>
+
+<form action='winkelmand.php' method='post'>
+<input type='hidden' name='toDelete' value='$productID'> 
+<button type='submit'>X</button>
+</form>
+</body>
+<?php }
     print ("in totaal kost het €$totPriceCorrect");
 } else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');

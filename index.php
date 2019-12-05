@@ -28,8 +28,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         //andere fout
     }
 } elseif (isset($_POST['uitloggen'])){
-    session_destroy();
-    header("refresh: 0;");
+    unset($_SESSION['clientID'], $_SESSION['isHoS'], $_SESSION['firstName']);
+    $_SESSION['isIngelogt'] = false;
+
 }
 
 ?>
