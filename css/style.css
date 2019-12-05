@@ -259,3 +259,8 @@ input[type=submit]:hover {
     width: 90%;
     border: 1px solid black;
 }
+
+.carousel {
+    width: 400px;
+    height: 400px;
+}
