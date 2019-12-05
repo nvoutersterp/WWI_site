@@ -134,6 +134,7 @@ form.example::after {
 .body {
     position: page;
     background-image: url("image/Background.jpg");
+    z-index: 1;
 }
 .footer {
     float: left;

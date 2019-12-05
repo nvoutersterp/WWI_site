@@ -41,7 +41,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
-<div class=header1 id="header1">
+<div class=header1 id="header1" style="z-index: 100">
     <div class="top-container" id="top-container">
         <!--        Laat logo zien met de juiste afmetingen-->
         <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
@@ -196,14 +196,31 @@ $q = 0;
     //Afsluiten Database//
     mysqli_close($conn);
     ?>
-</div>
-</div>
+    </div><br><form action="#favorieten.php" method="post" style="margin-left: 0px">
+        <div class="col-md-15"><h2><?php print(' '); print($naam); ?></h2>
 
-<div id="overzicht2">
-    <p>€<?php print($prijs); ?></p>
-    <p>Omschrijving: <?php print($omschrijving); ?></p>
+            <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
+            <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
+    </form>
+
+
+
+
+    <p class="prijs">€<?php print($prijs); ?></p>
+    <h2 class="omschrijving-1"> Omschrijving: </h2> <p class="omschrijving-2"> <?php print($omschrijving); ?></p>
     <form action="winkelmand.php" method="post">
-        <p><select name="quantity">
+
+        <!-- nog te komen:
+        leverancier, exl. btw, aantal per pakket en pakket type;
+         kleur en maat selecteerbaar-->
+        <?php
+        if ($vooraad > 10) {
+            print("<p>Nog in vooraad: $vooraad </p>");
+        } else {
+            print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
+        }
+        ?>
+        <p><select name="quantity"  class="form-control">
                 <?php
                 if ($vooraad > 10) {
                     $verkoopbaar = 10;
@@ -216,21 +233,13 @@ $q = 0;
                     $i++;
                 } ?>
             </select></p>
-        <!-- nog te komen:
-        leverancier, exl. btw, aantal per pakket en pakket type;
-         kleur en maat selecteerbaar-->
-        <p>Nog in vooraad: <?php print($vooraad); ?></p>
-        <p>
-            <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
-            <button type="submit">Toevoegen aan winkelwagen</button>
+
+        <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
+        <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
     </form>
-    <form action="#favorieten.php" method="post">
-        <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
-        <button type="submit">toevoegen aan favorieten</button>
-    </form>
-    </p>
-</div>
-<?php printFooter(); ?>
+    <?php printFooter(); ?>
+
+    <script src="js/effecten.js"></script>
 
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
