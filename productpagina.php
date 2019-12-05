@@ -168,7 +168,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
     //verkrijgen producten uit zoek resultaat
     $count = 0;
-    $sqlTijdelijk = "select StockItemName, StockItemID, UnitPrice from stockitems where";
+    $sqlTijdelijk = "select StockItemName, StockItemID, UnitPrice, SearchDetails from stockitems where";
     if (isset($_POST['search'])) {
         $searchInput = $_POST['search'];
         $searchq = explode(' ', $searchInput);

@@ -144,8 +144,13 @@ function printProducten($query1, $conn)
             // data opslaan in variabelen, in: gegevens uit data base, uit: toonbare variabeln
             $productID = $row['StockItemID'];
             $productNaam = $row['StockItemName'];
-            $productOmschrijving = $row['SearchDetails'];
-
+            $poLength = strlen($row['SearchDetails']);
+            if ($poLength < 30) {
+                $productOmschrijving = $row['SearchDetails'];
+            } else {
+                $maxLength = 30 - $poLength;
+                $productOmschrijving = substr_replace($row['SearchDetails'], '...', $maxLength);
+            }
 
             $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
             $issetPhoto = mysqli_num_rows($photoRow);
@@ -161,19 +166,26 @@ function printProducten($query1, $conn)
             //weergave//
             ?>
             <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-            <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><?php print($productNaam); ?> </h5>
-                <p class="card-text"><?php print($productOmschrijving); ?> </p>
-                <p class="card-text">€<?php print($productPrijs) ?></p>
-                <a href="productoverzicht.php?productID=<?php print ($productID); ?>" class="btn btn-primary">Naar het
-                    product</a>
-            </div>
+            <a href="productoverzicht.php?productID=<?php print ($productID); ?>" style="text-decoration: none; color: black">
+                <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><?php print($productNaam); ?> </h5>
+                    <p class="card-text"><?php print($productOmschrijving); ?> </p>
+                    <p class="card-text">€<?php print($productPrijs) ?></p>
+                    <a href="#favorieten.php" class="btn btn-primary fa fa-heart" style="float: left"></a>
+                    <form action="winkelmand.php" method="post">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="hidden" name="stockItemID" value="<?php print($productID); ?>">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
+                    </form>
+                </div>
+            </a>
             </div><?php
         }
         $rij++;
     }
-?> <div> <?php
+    ?>
+    <div> <?php
 }
 
 

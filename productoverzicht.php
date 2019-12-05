@@ -202,7 +202,7 @@ $q = 0;
             <div class="col-md-15"><h2><?php print(' ');
                     print($naam); ?></h2>
                 <input type="hidden" name="stockItemID" value="<?php print ($productID); ?>">
-                <button type="submit" class="btn btn-light"><i class="fa fa-star-o"></i></button>
+                <button type="submit" class="btn btn-light"><i class="fa fa-heart"></i></button>
         </form>
 
 
