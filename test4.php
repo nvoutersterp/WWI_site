@@ -112,6 +112,12 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 </div>
 
+<div>
+    <?php
+        $query1 = mysqli_query($conn, "SELECT purchaseorderlines.StockItemID, COUNT(purchaseorderlines.StockItemID), StockItemName, UnitPrice FROM wideworldimporters.purchaseorderlines JOIN stockitems ON purchaseorderlines.StockItemID = stockitems.StockItemID GROUP BY StockItemID ORDER BY StockItemID desc LIMIT 6;");
+        printProducten($query1, $conn);
+    ?>
+</div>
 
 <!--test voor de juistheid text-->
 <?php
