@@ -144,39 +144,47 @@ if (isset($_POST['clearBukket'])) {
 
 <?php
 if (isset($_SESSION['winkelmand'])) {
-    $totPrice = 0;
-    foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
-        $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
-        $productInfo = mysqli_fetch_array($productInfoQuery);
+$totPrice = 0;
+foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
+    $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
+    $productInfo = mysqli_fetch_array($productInfoQuery);
 
-        $stockItemName = $productInfo['StockItemName'];
-        $unitPrice = $productInfo['UnitPrice'] * 0.9;
-        $unitPriceCorrect = str_replace('.', ',', $unitPrice);
-        $productprijs = $unitPrice * $quantity;
-        $productprijsCorrect = str_replace('.', ',', $productprijs);
-        $totPrice += $productprijs;
-        $totPriceCorrect = str_replace('.', ',', $totPrice);
+    $stockItemName = $productInfo['StockItemName'];
+    $unitPrice = $productInfo['UnitPrice'] * 0.9;
+    $unitPriceCorrect = str_replace('.', ',', $unitPrice);
+    $productprijs = $unitPrice * $quantity;
+    $productprijsCorrect = str_replace('.', ',', $productprijs);
+    $totPrice += $productprijs;
+$totPriceCorrect = str_replace('.', ',', $totPrice);
 
-        print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect"); ?>
+print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect"); ?>
 <form action='winkelmand.php' method='post'>
-<select name='alterQuantity'>
- <?php unset($i);
- while ($i <= 10) {
-                    print ('<option value=\"' . $i . '\">' . $i . '</option>');
-                    $i++;
-                } ?>
-</select>
-<input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
-<button type='submit'>>></button>
+    <select name='alterQuantity'>
+        <?php unset($i);
+
+
+        while ($i <= 10) {
+            if ($quantity == $i) {
+                $selected = 'selected';
+            } else {
+                $selected = '';
+            }
+
+            print ("<option value='$i' $selected>$i</option>");
+            $i++;
+        } ?>
+    </select>
+    <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
+    <button type='submit'>>></button>
 </form>
 
 <form action='winkelmand.php' method='post'>
-<input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
-<button type='submit'>X</button>
+    <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
+    <button type='submit'>X</button>
 </form>
 </body>
 <?php }
-    print ("in totaal kost het €$totPriceCorrect");
+print ("in totaal kost het €$totPriceCorrect");
 } else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
