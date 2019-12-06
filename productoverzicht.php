@@ -70,7 +70,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             }
 
             //login popup
-            if ($_SESSION['isIngelogt']) {
+            if (isset($_SESSION['isIngelogt']) and $_SESSION['isIngelogt']) {
                 printIsIngelogt();
             } else { ?>
                 <div class="login-popup" id="myLogin">
