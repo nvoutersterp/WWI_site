@@ -187,6 +187,19 @@ if ($vervolg == 0) { ?>
     <input type="hidden" name="username" value="<?php print ($eMail); ?>">
     <input type="hidden" name="password" value="<?php print ($pasword); ?>">
     <h1><?php print ($firstName); ?>, uw account is succesvol aangemaak</h1>
+    <?php
+    include "PHPMailer-master/src/PHPMailer.php";
+
+    $mail = new PHPMailer();
+    $mail -> setFrom('Noreply@wideworldimporters.com');
+    $mail-> addAdress($eMail, $firstName)
+
+
+    ?>
+
+
+
+
     <button type="submit"><?php if (isset($_SESSION['fromShoppingCart']) and $_SESSION['fromShoppingCart']) {
             print ('Ga verder met afrekkennen');
         } else {
