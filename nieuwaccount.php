@@ -135,13 +135,32 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                             $to = $eMail;
                             $subject = "Email Verificatie";
                             $message = "<a href='http://localhost/WWI_site/verify.php?vkey=$vkey'>Register Account</a>";
-                            $headers = "From: wwi_site@yahoo.com";
-                            $headers .= "MIME-Version: 1.0\r\n";
-                            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                            $headers = 'From: wwi_site@yahoo.com' . "\r\n" . "MIME-Version: 1.0" . "\r\n" .
+                                "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-                            mail($to, $subject, $message, $headers);
+                            $htmlContent = '
+                                    <html> 
+                                    <head> 
+                                        <title>Welkom bij WorldWideImporters! </title> 
+                                    </head> 
+                                    <body> 
+                                        <h1>Dankjewel '. $firstName.'! Nog een paar stappen en dan ben je klaar voor de start!</h1> 
+                                           <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
+                                                <tr> 
+                                                    <th>Namens:</th><td>World Wide Importers</td> 
+                                                </tr> 
+                                                <tr style="background-color: #e0e0e0;"> 
+                                                    <th>Email:</th><td>contact@wwi.com</td> 
+                                                </tr> 
+                                                <tr> 
+                                                    <th></th><td><a href=\'http://localhost/WWI_site/verify.php?vkey='.$vkey.'\'>Verifieer</a></td> 
+                                                </tr>
+                                            </table> 
+                                    </body> 
+                                    </html>';
+
+                            mail($to, $subject, $htmlContent, $headers);
                         }
-
 
 
                         $vervolg = 1;
