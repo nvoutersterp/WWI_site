@@ -182,15 +182,18 @@ print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorre
     <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
     <button type='submit'>X</button>
 </form>
+
 </body>
 <?php }
 print ("in totaal kost het €$totPriceCorrect");
 } else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
-
-
 ?>
+<form action="redirectpayment.php" method="post">
+    <input type="hidden" name="value" value="<?php print ($totPriceCorrect); ?>">
+    <button type="submit">afrekenen</button>
+</form>
 
 <form action="winkelmand.php" method="post">
     <input type="hidden" name="clearBukket" value="true">
