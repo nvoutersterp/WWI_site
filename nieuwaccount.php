@@ -1,7 +1,9 @@
 <?php session_start();
 
 //db
+use PHPMailer\PHPMailer\PHPMailer;
 include 'function.php';
+
 $conn = dbconect();
 $output = "";
 $rij = 1;
@@ -122,7 +124,23 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                         $rowClientID = mysqli_fetch_array($queryCollectNieuwID);
                         $clientID = $rowClientID['clientID'];
 
-                        $querySubmitNieuwClient = mysqli_query($conn, "update client set gender = '$gender', firstName = '$firstName', middelName = '$middelName', lastName = '$lastName', birthday = '$birtday', phoneNumber = '$telefoonnummer', postcode = '$postcode', plaats = '$plaats', adres = '$adres', created = '$date' where clientID = '$clientID'") or die('Geen overeenkomst');
+                        //                        Hidde code
+                        $vkey = md5 (time() . $eMail);
+
+
+                        $querySubmitNieuwClient = mysqli_query($conn, "update client set gender = '$gender', firstName = '$firstName', middelName = '$middelName', lastName = '$lastName', birthday = '$birtday', phoneNumber = '$telefoonnummer', postcode = '$postcode', plaats = '$plaats', adres = '$adres', created = '$date', vkey = '$vkey' where clientID = '$clientID'") or die('Geen overeenkomst');
+
+                        // send email
+                        if ($querySubmitNieuwClient) {
+                            $to = $eMail;
+                            $subject = "Email Verificatie";
+                            $message = "<a href='http://localhost/WWI_site/verify.php?vkey=$vkey'>Register Account</a>";
+                            $headers = "From: WWI_2019@gmail.com";
+
+
+                        }
+
+
 
                         $vervolg = 1;
                     } else {
@@ -187,18 +205,6 @@ if ($vervolg == 0) { ?>
     <input type="hidden" name="username" value="<?php print ($eMail); ?>">
     <input type="hidden" name="password" value="<?php print ($pasword); ?>">
     <h1><?php print ($firstName); ?>, uw account is succesvol aangemaak</h1>
-    <?php
-    include "PHPMailer-master/src/PHPMailer.php";
-
-    $mail = new PHPMailer();
-    $mail -> setFrom('Noreply@wideworldimporters.com');
-    $mail-> addAdress($eMail, $firstName)
-
-
-    ?>
-
-
-
 
     <button type="submit"><?php if (isset($_SESSION['fromShoppingCart']) and $_SESSION['fromShoppingCart']) {
             print ('Ga verder met afrekkennen');
