@@ -86,7 +86,7 @@ $werktHet = '';
 
         </div>
         <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-        <div class="nav" id="nav">
+        <div class="rounded-bottom" id="nav">
             <?php printcategorie($conn); ?>
         </div>
 

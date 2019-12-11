@@ -124,32 +124,32 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 </div>
 
 
-<?php
-$dbname = "wideworldimporters";
+    <?php
+        $dbname = "wideworldimporters";
 
-$db = "mysql:host=localhost;dbname=cursus;port=3306";
-$user = "root";
-$pass = "";
-$pdo = new PDO($db, $user, $pass);
+        $db = "mysql:host=localhost;dbname=cursus;port=3306";
+        $user = "root";
+        $pass = "";
+        $pdo = new PDO($db, $user, $pass);
 
-$query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
+        $query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
 
-$row = mysqli_fetch_array($query1);
+        $row = mysqli_fetch_array($query1);
 
 
-$naam = $row['StockItemName'];
-$prijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
-$vooraad = $row["QuantityOnHand"];
-$omschrijving = $row["SearchDetails"];
-$i = 1;
+        $naam = $row['StockItemName'];
+        $prijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
+        $vooraad = $row["QuantityOnHand"];
+        $omschrijving = $row["SearchDetails"];
+        $i = 1;
 
-//voor de foto's
-$photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
-$issetPhoto = mysqli_num_rows($photoRow);
-$p = 0;
-$q = 0;
+        //voor de foto's
+        $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+        $issetPhoto = mysqli_num_rows($photoRow);
+        $p = 0;
+        $q = 0;
 
-?>
+    ?>
 
 <div id="overzicht1">
     <div class="container" style="max-width: 400px; float: left">
