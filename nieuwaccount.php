@@ -136,6 +136,8 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                             $subject = "Email Verificatie";
                             $message = "<a href='http://localhost/WWI_site/verify.php?vkey=$vkey'>Register Account</a>";
                             $headers = "From: wwi_site@yahoo.com";
+                            $headers .= "MIME-Version: 1.0\r\n";
+                            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
                             mail($to, $subject, $message, $headers);
                         }
