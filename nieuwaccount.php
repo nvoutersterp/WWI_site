@@ -135,9 +135,9 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                             $to = $eMail;
                             $subject = "Email Verificatie";
                             $message = "<a href='http://localhost/WWI_site/verify.php?vkey=$vkey'>Register Account</a>";
-                            $headers = "From: WWI_2019@gmail.com";
+                            $headers = "From: wwi_site@yahoo.com";
 
-
+                            mail($to, $subject, $message, $headers);
                         }
 
 
