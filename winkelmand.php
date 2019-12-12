@@ -147,76 +147,119 @@ if (isset($_POST['clearBukket'])) {
 if (isset($_SESSION['winkelmand'])) {
 $totPrice = 0;
 foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
-    $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
-    $productInfo = mysqli_fetch_array($productInfoQuery);
-
-    $stockItemName = $productInfo['StockItemName'];
-    $unitPrice = $productInfo['UnitPrice'] * 0.9;
-    $unitPriceCorrect = countpoint($unitPrice);
-    $productprijs = $unitPrice * $quantity;
-    $productprijsCorrect = countpoint($productprijs);
-    $totPrice += $productprijs;
+$productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
+$productInfo = mysqli_fetch_array($productInfoQuery);
+$poLength = strlen($productInfo['SearchDetails']);
+if ($poLength < 30) {
+    $productOmschrijving = $productInfo['SearchDetails'];
+} else {
+    $maxLength = 30 - $poLength;
+    $productOmschrijving = substr_replace($productInfo['SearchDetails'], '...', $maxLength);
+}
+$productfoto = $productInfo['Photo'];
+$stockItemName = $productInfo['StockItemName'];
+$unitPrice = $productInfo['UnitPrice'] * 0.9;
+$unitPriceCorrect = countpoint($unitPrice);
+$productprijs = $unitPrice * $quantity;
+$productprijsCorrect = countpoint($productprijs);
+$totPrice += $productprijs;
 $totPriceCorrect = countpoint($totPrice);
 
-print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect"); ?>
-<form action='winkelmand.php' method='post'>
-    <select name='alterQuantity'>
-        <?php unset($i);
+$photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+$issetPhoto = mysqli_num_rows($photoRow);
+$Photo = mysqli_fetch_array($photoRow);
+
+if ($issetPhoto != 0) {
+    $productFoto = $Photo['photo'];
+} else {
+    $productFoto = 'images/archixl-logo.png';
+}
+?>
+<div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+<img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+</div>
+<div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+    <h5 class="card-title"><?php print($quantity . 'x '. $stockItemName); ?> </h5>
+    <p class="card-text"><?php print($productOmschrijving); ?> </p>
+    <p class="card-text"><?php print("Per stuk kost dit € $unitPriceCorrect"); ?> </p>
+    <p class="card-text"><?php print("In totaal kost dit € $productprijsCorrect "); ?> </p>
+    <form action='winkelmand.php' method='post'>
+        <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
+        <button type='submit'>X</button>
+    </form>
+    <form action='winkelmand.php' method='post'>
+        <select style='margin-left:9px' name='alterQuantity'>
+            <?php unset($i);
 
 
-        while ($i <= 10) {
-            if ($quantity == $i) {
-                $selected = 'selected';
-            } else {
-                $selected = '';
-            }
+            while ($i <= 10) {
+                if ($quantity == $i) {
+                    $selected = 'selected';
+                } else {
+                    $selected = '';
+                }
 
-            print ("<option value='$i' $selected>$i</option>");
-            $i++;
-        } ?>
-    </select>
-    <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
-    <button type='submit'>>></button>
-</form>
+                print ("<option value='$i' $selected>$i</option>");
+                $i++;
+            } ?>
+        </select>
+        <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
+        <button type='submit' class="btn btn-primary btn-sm">>></button>
+    </form>
 
-<form action='winkelmand.php' method='post'>
-    <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
-    <button type='submit'>X</button>
-</form>
+</div>
+
+
 
 </body>
 <?php }
-    print ("in totaal kost het €$totPriceCorrect<br>");
-}  else {
-    print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
+print ("in totaal kost het €$totPriceCorrect<br>");
+} else {
+    ?>
+
+    <h3 class="font-weight-bold"> U heeft nog niks in uw winkelmand liggen... </h3>
+    <?php
 }
 ?>
 <?php
 $databaseconnect = dbconect();
 $loginID = $_SESSION['clientID'];
 
-$queryafrekenen = mysqli_query($conn,"SELECT verify FROM client WHERE clientID = '$loginID'");
+$queryafrekenen = mysqli_query($conn, "SELECT verify FROM client WHERE clientID = '$loginID'");
 $resultafrekenen = mysqli_fetch_array($queryafrekenen);
 $verify = $resultafrekenen['verify'];
 
-if ($verify == 1){
 
-?>
-<form action="redirectpayment.php" method="post">
-    <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect); print ($totPriceNieuw); ?>">
-    <button type="submit">afrekenen</button>
-</form>
-<?php
-} else {
+
     ?>
-    <p class='color:red'><br><br>Om te kunnen betalen moet u eerst uw account verifieren! Dit staat in uw geregistreerde mail.</p>
 
-<?php
+    <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect);
+    print ($totPriceNieuw); ?>">
+    <?php
+    if ($totPriceNieuw != 0) {
+    if ($verify == 1) {
+        ?>
+        <form action="redirectpayment.php" method="post">
+        <button class="btn btn-primary btn-lg type=" submit
+        ">afrekenen</button>
+        </form><br>
+        <?php
+    } else {
+        ?>
+
+
+        <p style='color:red'><br><br>Om te kunnen betalen moet u eerst uw account verifieren! Dit staat in uw
+            geregistreerde
+            mail.</p>
+
+        <?php
+    }
 }
 ?>
+
 <form action="winkelmand.php" method="post">
     <input type="hidden" name="clearBukket" value="true">
-    <button type="submit">leeg winkelmand</button>
+    <button type="submit" class="btn btn-secondary btn-lg">leeg winkelmand</button>
 </form>
 
 </main>
