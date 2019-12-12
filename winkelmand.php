@@ -88,7 +88,7 @@ if (isset($_POST['clearBukket'])) {
             </div>
             <a>
                 <div class="icon">
-                    <i class="fa fa-sign-in" aria-hidden="true" onclick="openLogin()"></i>
+                    <i class="fa fa-user" aria-hidden="true" onclick="openLogin()"></i>
                 </div>
             </a>
             <?php if (isset($_SESSION['isIngelogt']) and $_SESSION['isIngelogt']) {
