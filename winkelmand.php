@@ -191,11 +191,29 @@ print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorre
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
 ?>
+<?php
+$databaseconnect = dbconect();
+$loginID = $_SESSION['clientID'];
+
+$queryafrekenen = mysqli_query($conn,"SELECT verify FROM client WHERE clientID = '$loginID'");
+$resultafrekenen = mysqli_fetch_array($queryafrekenen);
+$verify = $resultafrekenen['verify'];
+
+if ($verify == 1){
+
+?>
 <form action="redirectpayment.php" method="post">
     <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect); print ($totPriceNieuw); ?>">
     <button type="submit">afrekenen</button>
 </form>
+<?php
+} else {
+    ?>
+    <p class='color:red'><br><br>Om te kunnen betalen moet u eerst uw account verifieren! Dit staat in uw geregistreerde mail.</p>
 
+<?php
+}
+?>
 <form action="winkelmand.php" method="post">
     <input type="hidden" name="clearBukket" value="true">
     <button type="submit">leeg winkelmand</button>
