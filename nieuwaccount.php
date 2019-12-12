@@ -158,7 +158,7 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                                             </table> 
                                     </body> 
                                     </html>';
-                            mail
+
                             mail($to, $subject, $htmlContent, $headers);
                         }
 
