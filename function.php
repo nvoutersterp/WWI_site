@@ -296,6 +296,35 @@ function insertAccountData(array $info, string $username)
     $conn->close();
 }
 
+
+//betalingen
+function database_read($orderId)
+{
+    $orderId = intval($orderId);
+    $database = dirname(__FILE__) . "/database/order-{$orderId}.txt";
+
+    $status = @file_get_contents($database);
+
+    return $status ? $status : "unknown order";
+}
+
+function database_write_payment($orderId, $status)
+{
+    $conn = db
+}
+
+function countpoint($input) {
+    $count = strpos(strrev($input), '.');
+    $amount = str_replace('.', ',', $input);
+    if ($count == 1) {
+        $amount .= '0';
+        return $amount;
+    } else {
+        return $amount;
+    }
+}
+
+//overig
 function groet($name)
 {
     if (date('G') < 12) {

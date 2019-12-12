@@ -5,11 +5,8 @@ include 'function.php';
 $conn = dbconect();
 $output = "";
 
-
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-//verder....
-$werktHet = '';
 
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $eMail = $_POST['username'];

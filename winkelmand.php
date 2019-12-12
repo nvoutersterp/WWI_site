@@ -52,6 +52,7 @@ if (isset($_POST['alterQuantity']) and isset($_POST['alterQuantityID'])) {
 if (isset($_POST['clearBukket'])) {
     if ($_POST['clearBukket']) {
         unset($_SESSION['winkelmand']);
+        header("refresh:0");
     }
 }
 
@@ -151,11 +152,11 @@ foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
 
     $stockItemName = $productInfo['StockItemName'];
     $unitPrice = $productInfo['UnitPrice'] * 0.9;
-    $unitPriceCorrect = str_replace('.', ',', $unitPrice);
+    $unitPriceCorrect = countpoint($unitPrice);
     $productprijs = $unitPrice * $quantity;
-    $productprijsCorrect = str_replace('.', ',', $productprijs);
+    $productprijsCorrect = countpoint($productprijs);
     $totPrice += $productprijs;
-$totPriceCorrect = str_replace('.', ',', $totPrice);
+$totPriceCorrect = countpoint($totPrice);
 
 print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorrect en in totaal €$productprijsCorrect"); ?>
 <form action='winkelmand.php' method='post'>
@@ -185,13 +186,13 @@ print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorre
 
 </body>
 <?php }
-print ("in totaal kost het €$totPriceCorrect");
-} else {
+    print ("in totaal kost het €$totPriceCorrect");
+}  else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
 ?>
 <form action="redirectpayment.php" method="post">
-    <input type="hidden" name="value" value="<?php print ($totPriceCorrect); ?>">
+    <input type="hidden" name="value" value="<?php print ($totPrice); ?>">
     <button type="submit">afrekenen</button>
 </form>
 

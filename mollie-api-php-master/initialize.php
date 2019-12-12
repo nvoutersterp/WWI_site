@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once "c:/Users/nickv/vendor/autoload.php";
-require_once __DIR__ . "/functions.php";
+require_once "vendor/autoload.php";
+require_once "function.php";
 
 /*
  * Initialize the Mollie API library with your API key.

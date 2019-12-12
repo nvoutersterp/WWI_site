@@ -21,16 +21,3 @@ $query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings
 
 $row = mysqli_fetch_array($query1);
 
-
-$naam = $row['StockItemName'];
-$prijs = $row["UnitPrice"] * 0.9;
-$vooraad = $row["QuantityOnHand"];
-$omschrijving = $row["SearchDetails"];
-$row['photo'];
-$i = 1;
-
-
-    foreach ($row['photo'] as $photo) {
-        print ($photo);
-}
-
