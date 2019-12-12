@@ -186,13 +186,13 @@ print("u koopt $quantity x $stockItemName. Deze kost per stuk €$unitPriceCorre
 
 </body>
 <?php }
-    print ("in totaal kost het €$totPriceCorrect");
+    print ("in totaal kost het €$totPriceCorrect<br>");
 }  else {
     print ('u heeft nog niks in uw winkelmand liggen, doe dat gauw!');
 }
 ?>
 <form action="redirectpayment.php" method="post">
-    <input type="hidden" name="value" value="<?php print ($totPrice); ?>">
+    <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect); print ($totPriceNieuw); ?>">
     <button type="submit">afrekenen</button>
 </form>
 
