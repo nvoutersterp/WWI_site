@@ -310,7 +310,7 @@ function database_read($orderId)
 
 function database_write_payment($orderId, $status)
 {
-    $conn = db
+    $conn = db;
 }
 
 function countpoint($input) {
