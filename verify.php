@@ -123,7 +123,7 @@ if(isset($_GET['vkey'])) {
     $Resultset = $databaseconnect -> query("SELECT verify, vkey FROM client WHERE verify = 0 AND vkey = '$vkey' LIMIT 1");
 
     if($Resultset->num_rows == 1) {
-        $updateaccount = $databaseconnect -> query("UPDATE client SET verify = 1 WHERE '$vkey' LIMIT 1");
+        $updateaccount = $databaseconnect -> query("UPDATE client SET verify = 1 WHERE vkey= '$vkey' LIMIT 1");
 
         if ($updateaccount) {
             print("Je account is geverifieerd! Je kunt nu inloggen.");
