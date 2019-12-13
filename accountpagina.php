@@ -124,7 +124,7 @@ $werktHet = '';
             print("Email is gewijzigd naar: $nieuweEmail"); print('</br>');
         }
         if(!empty($_POST['voornaam'])){
-            $nieuweVoornaam = $_POST['voornaam'];
+            $nieuweVoornaam = ucfirst($_POST['voornaam']);
             $queryvoornaam = mysqli_query($conn,"UPDATE client SET firstName='$nieuweVoornaam' WHERE clientID='$clientid'");
             print("Voornaam is gewijzigd naar: $nieuweVoornaam"); print('</br>');
         }
@@ -134,7 +134,7 @@ $werktHet = '';
             print("Tussenvoegsels is gewijzigd naar: $nieuweTussenvoegsels"); print('</br>');
         }
         if(!empty($_POST['achternaam'])) {
-            $nieuweAchternaam = $_POST['achternaam'];
+            $nieuweAchternaam = ucfirst($_POST['achternaam']);
             $queryachetrnaam = mysqli_query($conn,"UPDATE client SET lastName='$nieuweAchternaam' WHERE clientID='$clientid'");
             print("Achternaam is gewijzigd naar: $nieuweAchternaam"); print('</br>');
         }
