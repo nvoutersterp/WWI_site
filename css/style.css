@@ -133,6 +133,7 @@ form.example::after {
     position: page;
     background-image: url("image/Background.jpg");
     z-index: 1;
+    height: 100%;
 }
 .footer {
     float: left;
@@ -262,4 +263,19 @@ input[type=submit]:hover {
 
 .card-body button{
     float: right;
+}
+
+.row2{
+    width:160px;
+    border:1px solid grey;
+    text-align:center;
+    min-height:150px;
+    height:auto;
+    vertical-align:middle;
+    padding:8px;
+    float:left;
+}
+
+#sticky-footer {
+    flex-shrink: none;
 }

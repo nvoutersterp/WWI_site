@@ -27,7 +27,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
         //andere fout
     }
-} elseif (!isset($_SESSION['isIngelogt'])){
+} elseif (!isset($_SESSION['isIngelogt'])) {
     $_SESSION['isIngelogt'] = false;
 }
 
@@ -47,14 +47,14 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1" style="z-index: 100">
-    <div class="top-container" id="top-container" >
+    <div class="top-container" id="top-container">
         <!--        Laat logo zien met de juiste afmetingen-->
         <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
         <!--        snelkoppelingen naar de accountinformatie's-->
         <div class="top-container-right">
             <div> <?php
                 if (isset($_SESSION['firstName'])) {
-                    $name =  $_SESSION['firstName'];
+                    $name = $_SESSION['firstName'];
                 } else {
                     $name = '';
                 }
@@ -72,16 +72,19 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                 <div class="login-popup" id="myLogin">
                     <form action="index.php" method="post" class="login-container">
                         inloggen
-                        <button type="button" onclick="closeLogin()">Close</button><br>
-                        gebruikersnaam: <input type="email" name="username" placeholder="email" style="background: gray; color: white" required><br>
-                        wachtwoord: <input type="password" name="password" style="background: gray ; color: white" required><br>
+                        <button type="button" onclick="closeLogin()">Close</button>
+                        <br>
+                        gebruikersnaam: <input type="email" name="username" placeholder="email"
+                                               style="background: gray; color: white" required><br>
+                        wachtwoord: <input type="password" name="password" style="background: gray ; color: white"
+                                           required><br>
                         <a href="nieuwaccount.php">nog geen account? Maak er nu een aan!</a><br>
                         <input type="hidden"<?php if (isset($_POST['search'])) {
                             $search = $_POST['search'];
-                            print ('naam="search" value="'.$search.'"');
+                            print ('naam="search" value="' . $search . '"');
                         } elseif (isset($_POST['input'])) {
                             $input = $_POST['input'];
-                            print ('naam="input" value="'.$input.'""');
+                            print ('naam="input" value="' . $input . '""');
                         } ?> >
                         <button type="submit">inloggen</button>
                     </form>
@@ -89,6 +92,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                         function openLogin() {
                             document.getElementById("myLogin").style.display = "block";
                         }
+
                         function closeLogin() {
                             document.getElementById("myLogin").style.display = "none";
                         }
@@ -124,81 +128,112 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 <!-- werkt niet voor demo
     <form action="productpagina.php" method="post">
         <select name="aantal">
-            <option value="25" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '25'){ print ('selected') ; }} ?>>25</option>
-            <option value="50" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '50'){ print ('selected') ; }} ?>>50</option>
-            <option value="100" <?php if (isset($_POST['aantal'])) { if ($_POST['aantal'] == '100'){ print ('selected') ; }} ?>>100</option>
+            <option value="25" <?php if (isset($_POST['aantal'])) {
+    if ($_POST['aantal'] == '25') {
+        print ('selected');
+    }
+} ?>>25</option>
+            <option value="50" <?php if (isset($_POST['aantal'])) {
+    if ($_POST['aantal'] == '50') {
+        print ('selected');
+    }
+} ?>>50</option>
+            <option value="100" <?php if (isset($_POST['aantal'])) {
+    if ($_POST['aantal'] == '100') {
+        print ('selected');
+    }
+} ?>>100</option>
         </select>
         <select name="orderBy">
-            <option value="abc_up" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'abc_up'){ print ('selected') ; }} ?>>abc</option>
-            <option value="abc_down" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'abc_down'){ print ('selected') ; }} ?>>zyx</option>
-            <option value="price_up" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'price_up'){ print ('selected') ; }} ?>>123</option>
-            <option value="price_down" <?php if (isset($_POST['orderBy'])) { if ($_POST['orderBy'] == 'price_down'){ print ('selected') ; }} ?>>321</option>
+            <option value="abc_up" <?php if (isset($_POST['orderBy'])) {
+    if ($_POST['orderBy'] == 'abc_up') {
+        print ('selected');
+    }
+} ?>>abc</option>
+            <option value="abc_down" <?php if (isset($_POST['orderBy'])) {
+    if ($_POST['orderBy'] == 'abc_down') {
+        print ('selected');
+    }
+} ?>>zyx</option>
+            <option value="price_up" <?php if (isset($_POST['orderBy'])) {
+    if ($_POST['orderBy'] == 'price_up') {
+        print ('selected');
+    }
+} ?>>123</option>
+            <option value="price_down" <?php if (isset($_POST['orderBy'])) {
+    if ($_POST['orderBy'] == 'price_down') {
+        print ('selected');
+    }
+} ?>>321</option>
         </select>
-        <?php if (isset($_POST['input'])){
-            $input = $_POST['input'];
-            print ("<input type='hidden' name='input' value='$input'>");
-        } else {
+        <?php if (isset($_POST['input'])) {
+    $input = $_POST['input'];
+    print ("<input type='hidden' name='input' value='$input'>");
+} else {
 
-        } ?>
+} ?>
         <button type="submit">>></button>
     </form>
     -->
 
-    <?php
-    //sorteren op...
-    if (isset($_POST['orderBy'])) {                                     //nog implementieren in SQL
-        $pieces = explode('_', $_POST['orderBy']);
-        if ($pieces[0] == 'abc') {
-            $orderSoort = 'StockItemName';
-        } elseif ($pieces[0] == 'price') {
-            $orderSoort = 'UnitPrice';
-        }
-        if ($pieces[1] == 'up') {
-            $orderType = 'asc';
-        } else {
-            $orderType = 'desc';
-        }
-        $orderBy = 'order by '. $orderSoort.' '.$orderType;
-    } else {
-        $orderBy = '';
+<?php
+//sorteren op...
+if (isset($_POST['orderBy'])) {                                     //nog implementieren in SQL
+    $pieces = explode('_', $_POST['orderBy']);
+    if ($pieces[0] == 'abc') {
+        $orderSoort = 'StockItemName';
+    } elseif ($pieces[0] == 'price') {
+        $orderSoort = 'UnitPrice';
     }
-
-    //verkrijgen producten uit zoek resultaat
-    $count = 0;
-    $sqlTijdelijk = "select StockItemName, StockItemID, UnitPrice, SearchDetails from stockitems where";
-    if (isset($_POST['search'])) {
-        $searchInput = $_POST['search'];
-        $searchq = explode(' ', $searchInput);
-        foreach ($searchq as $value => $item) {
-            $sqlTijdelijk .= " (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%') and";
-        }
-        $sql = substr_replace($sqlTijdelijk, '', -3);
-        $query1 = mysqli_query($conn, $sql) or die('Geen overeenkomst');
-        $count = mysqli_num_rows($query1);
-    } elseif (isset($_POST['input'])) {
-        $inputq = $_POST['input'];
-        $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice, SearchDetails from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');
-        $count = mysqli_num_rows($query1);
-    }
-
-    if ($count == 0) {
-        print ('sorry, we konden geen producten ophalen');
+    if ($pieces[1] == 'up') {
+        $orderType = 'asc';
     } else {
+        $orderType = 'desc';
+    }
+    $orderBy = 'order by ' . $orderSoort . ' ' . $orderType;
+} else {
+    $orderBy = '';
+}
+
+//verkrijgen producten uit zoek resultaat
+$count = 0;
+$sqlTijdelijk = "select StockItemName, StockItemID, UnitPrice, SearchDetails from stockitems where";
+if (isset($_POST['search'])) {
+    $searchInput = $_POST['search'];
+    $searchq = explode(' ', $searchInput);
+    foreach ($searchq as $value => $item) {
+        $sqlTijdelijk .= " (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%') and";
+    }
+    $sql = substr_replace($sqlTijdelijk, '', -3);
+    $query1 = mysqli_query($conn, $sql) or die('Geen overeenkomst');
+    $count = mysqli_num_rows($query1);
+} elseif (isset($_POST['input'])) {
+    $inputq = $_POST['input'];
+    $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice, SearchDetails from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');
+    $count = mysqli_num_rows($query1);
+}
+
+if ($count == 0) {
+    print ('sorry, we konden geen producten ophalen');
+} else {
     //gegevens ophalen//
-         print ('<div>');
-         printProducten($query1, $conn);
-         print ("<div> $count producten gevonden </div>");
-    }
+    print ('<div>');
+    printProducten($query1, $conn);
+    print ("<div> $count producten gevonden </div>");
+}
 
-    mysqli_close($conn);
-    ?>
+mysqli_close($conn);
+?>
 
-        <!--te komen-->
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="position-absolute">
-    <?php printFooter(); ?>
+<!--te komen-->
+<br>
+
+
+
 </div>
 <!--sticky effect-->
+
+<?php printFooter(); ?>
 <script src="js/effecten.js"></script>
 </body>
 </html>

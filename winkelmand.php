@@ -175,40 +175,40 @@ if ($issetPhoto != 0) {
     $productFoto = 'images/archixl-logo.png';
 }
 ?>
-<div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-    <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+<div class="row2">
+    <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+        <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+    </div>
+    <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+        <h5 class="card-title"><?php print($quantity . 'x ' . $stockItemName); ?> </h5>
+        <p class="card-text"><?php print($productOmschrijving); ?> </p>
+        <p class="card-text"><?php print("Per stuk kost dit € $unitPriceCorrect"); ?> </p>
+        <p class="card-text"><?php print("In totaal kost dit € $productprijsCorrect "); ?> </p>
+        <form action='winkelmand.php' method='post'>
+            <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
+            <button type='submit'>X</button>
+        </form>
+        <form action='winkelmand.php' method='post'>
+            <select style='margin-left:9px' name='alterQuantity'>
+                <?php unset($i);
+
+
+                while ($i <= 10) {
+                    if ($quantity == $i) {
+                        $selected = 'selected';
+                    } else {
+                        $selected = '';
+                    }
+
+                    print ("<option value='$i' $selected>$i</option>");
+                    $i++;
+                } ?>
+            </select>
+            <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
+            <button type='submit' class="btn btn-primary btn-sm">>></button>
+        </form>
+    </div>
 </div>
-<div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-    <h5 class="card-title"><?php print($quantity . 'x ' . $stockItemName); ?> </h5>
-    <p class="card-text"><?php print($productOmschrijving); ?> </p>
-    <p class="card-text"><?php print("Per stuk kost dit € $unitPriceCorrect"); ?> </p>
-    <p class="card-text"><?php print("In totaal kost dit € $productprijsCorrect "); ?> </p>
-    <form action='winkelmand.php' method='post'>
-        <input type='hidden' name='toDelete' value='<?php print ($productID); ?>'>
-        <button type='submit'>X</button>
-    </form>
-    <form action='winkelmand.php' method='post'>
-        <select style='margin-left:9px' name='alterQuantity'>
-            <?php unset($i);
-
-
-            while ($i <= 10) {
-                if ($quantity == $i) {
-                    $selected = 'selected';
-                } else {
-                    $selected = '';
-                }
-
-                print ("<option value='$i' $selected>$i</option>");
-                $i++;
-            } ?>
-        </select>
-        <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
-        <button type='submit' class="btn btn-primary btn-sm">>></button>
-    </form>
-
-</div>
-
 
 </body>
 <?php }
