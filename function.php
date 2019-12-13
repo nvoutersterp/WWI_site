@@ -79,9 +79,9 @@ function printIsIngelogt()
 
 function printFooter()
 {
-    print('  <footer id="sticky-footer" style="margin-top:4%; width: 100%" class="py-4 bg-dark text-white-50">
+    print('  <footer id="sticky-footer" style="margin-top:7.8%; width: 100%" class="py-4 bg-dark text-white-50">
     <div class="container text-center">
-      <small>Copyright &copy; Your Website</small>
+      <small>Copyright &copy; World Wide Importers</small>
     </div>
   </footer>
 <!-- Footer -->');

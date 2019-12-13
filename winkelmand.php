@@ -246,7 +246,7 @@ if ($totPrice != 0) {
         ?>
 
 
-        <p style='color:red'><br><br>Om te kunnen betalen moet u eerst uw account verifieren! Dit staat in uw
+        <p style='color:red'><br><br>Om te kunnen betalen moet u eerst inloggen of uw account verifieren! Dit staat in uw
             geregistreerde
             mail.</p>
 
