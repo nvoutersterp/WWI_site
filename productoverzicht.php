@@ -124,80 +124,81 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 </div>
 
 
-    <?php
-        $dbname = "wideworldimporters";
+<?php
+$dbname = "wideworldimporters";
 
-        $db = "mysql:host=localhost;dbname=cursus;port=3306";
-        $user = "root";
-        $pass = "";
-        $pdo = new PDO($db, $user, $pass);
+$db = "mysql:host=localhost;dbname=cursus;port=3306";
+$user = "root";
+$pass = "";
+$pdo = new PDO($db, $user, $pass);
 
-        $query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
+$query1 = mysqli_query($conn, "SELECT * FROM stockitems S JOIN stockitemholdings H ON S.StockItemid = H.StockItemid WHERE S.StockItemid='$productID'") or die('Geen overeenkomst');
 
-        $row = mysqli_fetch_array($query1);
+$row = mysqli_fetch_array($query1);
 
 
-        $naam = $row['StockItemName'];
-        $prijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
-        $vooraad = $row["QuantityOnHand"];
-        $omschrijving = $row["SearchDetails"];
-        $i = 1;
+$naam = $row['StockItemName'];
+$prijs = number_format((float)$row['UnitPrice'] * 0.9, 2, ',', '');
+$vooraad = $row["QuantityOnHand"];
+$omschrijving = $row["SearchDetails"];
+$i = 1;
 
-        //voor de foto's
-        $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
-        $issetPhoto = mysqli_num_rows($photoRow);
-        $p = 0;
-        $q = 0;
+//voor de foto's
+$photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
+$issetPhoto = mysqli_num_rows($photoRow);
+$p = 0;
+$q = 0;
 
-    ?>
+?>
+<div>
+    <div id="overzicht1">
+        <div class="container" style="max-width: 400px; float: left">
+            <?php if ($issetPhoto != 0) { ?>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" style="max-width: 400px">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <?php while ($q < $issetPhoto) { ?>
+                            <li data-target="#myCarousel" data-slide-to="1" class="<?php if ($q == 0) {
+                                print ('active ');
+                            } ?>btn-dark border-dark"></li>
+                            <?php $q++;
+                        } ?>
+                    </ol>
 
-<div id="overzicht1">
-    <div class="container" style="max-width: 400px; float: left">
-        <?php if ($issetPhoto != 0) { ?>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="max-width: 400px">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <?php while ($q < $issetPhoto) { ?>
-                        <li data-target="#myCarousel" data-slide-to="1" class="<?php if ($q == 0) {
-                            print ('active ');
-                        } ?>btn-dark border-dark"></li>
-                        <?php $q++;
-                    } ?>
-                </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                        <?php while ($photo = mysqli_fetch_array($photoRow)) { ?>
+                            <div class="item <?php if ($p == 0) {
+                                print ('active');
+                            } ?>">
+                                <img src="<?php print ($photo['photo']); ?>">
+                                <div class="carousel-caption"></div>
+                            </div>
+                            <?php $p++;
+                        } ?>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <?php while ($photo = mysqli_fetch_array($photoRow)) { ?>
-                        <div class="item <?php if ($p == 0) {
-                            print ('active');
-                        } ?>">
-                            <img src="<?php print ($photo['photo']); ?>">
-                            <div class="carousel-caption"></div>
-                        </div>
-                        <?php $p++;
-                    } ?>
-
+                    </div>
+                    <!-- Left and right controls -->
+                    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <!-- Left and right controls -->
-                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        <?php } else {
-            print ("<img src='images/archixl-logo.png'>");
-        }
+            <?php } else {
+                print ("<img src='images/archixl-logo.png'>");
+            }
 
-        //Afsluiten Database//
-        mysqli_close($conn);
-        ?>
+            //Afsluiten Database//
+            mysqli_close($conn);
+            ?>
+        </div>
     </div>
     <br>
-    <div id="overzicht2" style="float: right; max-width: 40%;">
+    <div id="overzicht2" style="float: left; margin-left: 30px;">
         <form action="#favorieten.php" method="post" style="margin-left: 0px">
             <div class="col-md-15"><h2><?php print(' ');
                     print($naam); ?></h2>
@@ -221,7 +222,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
                 print("<p style='color:darkred'> Nog paar items in vooraad! <br> Vooraad: $vooraad </p>");
             }
             ?>
-            <p><select name="quantity" class="form-control">
+            <p><select name="quantity" class="form-control" style="max-width:65px">
                     <?php
                     if ($vooraad > 10) {
                         $verkoopbaar = 10;
@@ -239,18 +240,19 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             <button type="submit" class="btn btn-success"><i class="fa fa-cart-arrow-down"></i></button>
         </form>
     </div>
-    <?php printFooter(); ?>
+</div>
+<div style="margin-top: 50%">
+<?php printFooter(); ?>
+<script src="js/effecten.js"></script>
+</div>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="js/bootstrap.js" rel="script"></script>
+<script src="js/effecten.js"></script>
 
-    <script src="js/effecten.js"></script>
-
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="js/bootstrap.js" rel="script"></script>
-    <script src="js/effecten.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>
