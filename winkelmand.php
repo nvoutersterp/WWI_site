@@ -156,7 +156,7 @@ if ($poLength < 30) {
     $maxLength = 30 - $poLength;
     $productOmschrijving = substr_replace($productInfo['SearchDetails'], '...', $maxLength);
 }
-$productfoto = $productInfo['Photo'];
+
 $stockItemName = $productInfo['StockItemName'];
 $unitPrice = $productInfo['UnitPrice'] * 0.9;
 $unitPriceCorrect = number_format((float)$unitPrice, 2, ',', '');
@@ -231,13 +231,13 @@ $verify = $resultafrekenen['verify'];
 
 ?>
 
-<input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect);
-print ($totPriceNieuw); ?>">
+
 <?php
-if ($totPriceNieuw != 0) {
+if ($totPrice != 0) {
     if ($verify == 1) {
         ?>
         <form action="redirectpayment.php" method="post">
+            <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect); print ($totPriceNieuw); ?>">
             <button class="btn btn-primary btn-lg type=" submit
             ">afrekenen</button>
         </form><br>

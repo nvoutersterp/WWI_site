@@ -203,21 +203,21 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
 if ($vervolg == 0) { ?>
     <h1 class="text">maak nu uw account aan</h1>
     <form method="post" action="nieuwaccount.php">
-        geslacht: <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'male') {print ('checked');} ?> required> man &nbsp;
+        *geslacht: <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'male') {print ('checked');} ?> required> man &nbsp;
         <input type="radio" name="gender" value="female" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'female') {print ('checked');} ?>> vrouw &nbsp;
         <input type="radio" name="gender" value="other" <?php if (isset($_POST['gender']) and $_POST['gender'] == 'other') {print ('checked');} ?>> anders<br>
-        voornaam: <input type="text" name="firstName" placeholder="Henk" value="<?php if (isset($_POST['firstName'])) {print ($_POST['firstName']);} ?>" autofocus required><br>
+        *voornaam: <input type="text" name="firstName" placeholder="Henk" value="<?php if (isset($_POST['firstName'])) {print ($_POST['firstName']);} ?>" autofocus required><br>
         tussenvoegel: <input type="text" name="middelName" placeholder="van" value="<?php if (isset($_POST['middelName'])) {print ($_POST['middelName']);} ?>" autofocus><br>
-        achternaam: <input type="text" name="lastName" placeholder="Dreesden" value="<?php if (isset($_POST['lastName'])) {print ($_POST['lastName']);} ?>" autofocus required><br>
-        geboortedag: <input type="date" name="birtday" value="<?php if (isset($_POST['birtday'])) {print ($_POST['birtday']);} ?>" autofocus required><br>
-        mail: <input type="email" name="eMail" placeholder="h.vandreesen@domein.com" value="<?php if (isset($_POST['eMail'])) {print ($_POST['eMail']);} ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Geef a.u.b. een geldige email op" autofocus required><br>
-        controlle mail: <input type="email" name="eMailControlle" placeholder="h.vandreesen@domein.com" value="<?php if (isset($_POST['eMailControlle'])) {print ($_POST['eMailControlle']);} ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Geef a.u.b. een geldige email op" autofocus required><br>
+        *achternaam: <input type="text" name="lastName" placeholder="Dreesden" value="<?php if (isset($_POST['lastName'])) {print ($_POST['lastName']);} ?>" autofocus required><br>
+        *geboortedag: <input type="date" name="birtday" value="<?php if (isset($_POST['birtday'])) {print ($_POST['birtday']);} ?>" autofocus required><br>
+        *mail: <input type="email" name="eMail" placeholder="h.vandreesen@domein.com" value="<?php if (isset($_POST['eMail'])) {print ($_POST['eMail']);} ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Geef a.u.b. een geldige email op" autofocus required><br>
+        *controlle mail: <input type="email" name="eMailControlle" placeholder="h.vandreesen@domein.com" value="<?php if (isset($_POST['eMailControlle'])) {print ($_POST['eMailControlle']);} ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Geef a.u.b. een geldige email op" autofocus required><br>
         telefoonnummer: <input type="tel" name="phoneNumber" placeholder="0612345678" value="<?php if (isset($_POST['phoneNumber'])) {print ($_POST['phoneNumber']);} ?>" pattern="[0-9.+]{,12}" title="geef een geldig nummer op (zonder '-')." autofocus><br>
-        adres: <input type="text" name="adres" placeholder="hendriklaan 1" value="<?php if (isset($_POST['adres'])) {print ($_POST['adres']);} ?>" autofocus required><br>
-        postcode: <input type="text" name="postcode" placeholder="1234AB" value="<?php if (isset($_POST['postcode'])) {print ($_POST['postcode']);} ?>" pattern="[0-9]{4}[A-Z]{2}$" title="geef een geldig postcode op in de vorm: 1234AB" autofocus required>
-        plaats: <input type="text" name="plaats" placeholder="Zwolle" value="<?php if (isset($_POST['plaats'])) {print ($_POST['plaats']);} ?>" autofocus required><br><br>
-        wachtwoord: <input type="password" name="password" value="<?php if (isset($_POST['password'])) {print ($_POST['password']);} ?>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Gebruik minimaal een cijfer, een hoofdletter en een kleine letter. Ook moet het wachtwoord minimaal acht karakters hebben" autofocus required><br>
-        controlle wachtwoord: <input type="password" name="passwordControlle" value="<?php if (isset($_POST['passwordControlle'])) {print ($_POST['passwordControlle']);} ?>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Gebruik minimaal een cijfer, een hoofdletter en een kleine letter. Ook moet het wachtwoord minimaal acht karakters hebben" autofocus required><br>
+        *adres: <input type="text" name="adres" placeholder="hendriklaan 1" value="<?php if (isset($_POST['adres'])) {print ($_POST['adres']);} ?>" autofocus required><br>
+        *postcode: <input type="text" name="postcode" placeholder="1234AB" value="<?php if (isset($_POST['postcode'])) {print ($_POST['postcode']);} ?>" pattern="[0-9]{4}[A-Z]{2}$" title="geef een geldig postcode op in de vorm: 1234AB" autofocus required>
+        *plaats: <input type="text" name="plaats" placeholder="Zwolle" value="<?php if (isset($_POST['plaats'])) {print ($_POST['plaats']);} ?>" autofocus required><br><br>
+        *wachtwoord: <input type="password" name="password" value="<?php if (isset($_POST['password'])) {print ($_POST['password']);} ?>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Gebruik minimaal een cijfer, een hoofdletter en een kleine letter. Ook moet het wachtwoord minimaal acht karakters hebben" autofocus required><br>
+        *controlle wachtwoord: <input type="password" name="passwordControlle" value="<?php if (isset($_POST['passwordControlle'])) {print ($_POST['passwordControlle']);} ?>" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Gebruik minimaal een cijfer, een hoofdletter en een kleine letter. Ook moet het wachtwoord minimaal acht karakters hebben" autofocus required><br>
         <button type="submit">verder</button>
     </form>
     <?php
