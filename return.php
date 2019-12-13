@@ -113,7 +113,30 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 </div>
 
+<?php
 
+require "mollie-api-php-master/initialize.php";
+/*
+ * Retrieve the payment's current state.
+ */
+$payment = $mollie->payments->get($_POST["id"]);
+$orderId = $payment->metadata->order_id;
+
+database_write_payment($orderId);
+
+
+
+// alternatief:
+//  $ant = database_read_payment($orderId, $status);
+//if ($ant['paymentStatus'] == 'isPaid' || $ant['paymentStatus'] == 'isAuthorized') {
+//    print ('u bestelling is ontvangnen en word zsm verstuurd');
+//    unset($_SESSION['winkelmand']);
+//} else {
+//    print ('nog niet af');
+//}
+
+
+?>
 
 
 

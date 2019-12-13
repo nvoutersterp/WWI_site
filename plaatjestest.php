@@ -15,9 +15,7 @@ $conn = dbconect();
 
 mysqli_select_db($conn, $dbname) or die ("could not connect");
 
-$blobimage = addslashes(file_get_contents($_FILES['files']['tmp_name'][$key]));
-
-foreach ()
+$blobimage = addslashes(file_get_contents($_FILES['files']['tmp_name']['...']));
 
 
 ?>
@@ -43,7 +41,7 @@ else
 <!--//$conn = dbconect();-->
 <!--//$output = "";-->
 <!--//if (isset($_POST['verzenden'])){-->
-<!--//      <img height="300" width="300" src="data:image;base64,' . $row[1]. ' ">
+<!--//      <img height="300" width="300" src="data:image;base64,' . $row[1]. ' "-->
 <!--//    mysqli_select_db($conn, $dbname) or die ("could not connect");-->
 <!--//-->
 <!--//    $query = mysqli_query($conn,"select photo from stockitems");-->

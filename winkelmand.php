@@ -159,11 +159,11 @@ if ($poLength < 30) {
 $productfoto = $productInfo['Photo'];
 $stockItemName = $productInfo['StockItemName'];
 $unitPrice = $productInfo['UnitPrice'] * 0.9;
-$unitPriceCorrect = countpoint($unitPrice);
+$unitPriceCorrect = number_format((float)$unitPrice, 2, ',', '');
 $productprijs = $unitPrice * $quantity;
-$productprijsCorrect = countpoint($productprijs);
+$productprijsCorrect = number_format((float)$productprijs, 2, ',', '');
 $totPrice += $productprijs;
-$totPriceCorrect = countpoint($totPrice);
+$totPriceCorrect = number_format((float)$totPrice, 2, ',', '');
 
 $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
 $issetPhoto = mysqli_num_rows($photoRow);
@@ -176,10 +176,10 @@ if ($issetPhoto != 0) {
 }
 ?>
 <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-<img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
+    <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
 </div>
 <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-    <h5 class="card-title"><?php print($quantity . 'x '. $stockItemName); ?> </h5>
+    <h5 class="card-title"><?php print($quantity . 'x ' . $stockItemName); ?> </h5>
     <p class="card-text"><?php print($productOmschrijving); ?> </p>
     <p class="card-text"><?php print("Per stuk kost dit € $unitPriceCorrect"); ?> </p>
     <p class="card-text"><?php print("In totaal kost dit € $productprijsCorrect "); ?> </p>
@@ -210,7 +210,6 @@ if ($issetPhoto != 0) {
 </div>
 
 
-
 </body>
 <?php }
 print ("in totaal kost het €$totPriceCorrect<br>");
@@ -230,18 +229,17 @@ $resultafrekenen = mysqli_fetch_array($queryafrekenen);
 $verify = $resultafrekenen['verify'];
 
 
+?>
 
-    ?>
-
-    <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect);
-    print ($totPriceNieuw); ?>">
-    <?php
-    if ($totPriceNieuw != 0) {
+<input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect);
+print ($totPriceNieuw); ?>">
+<?php
+if ($totPriceNieuw != 0) {
     if ($verify == 1) {
         ?>
         <form action="redirectpayment.php" method="post">
-        <button class="btn btn-primary btn-lg type=" submit
-        ">afrekenen</button>
+            <button class="btn btn-primary btn-lg type=" submit
+            ">afrekenen</button>
         </form><br>
         <?php
     } else {

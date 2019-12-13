@@ -166,7 +166,8 @@ function printProducten($query1, $conn)
             //weergave//
             ?>
             <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
-            <a href="productoverzicht.php?productID=<?php print ($productID); ?>" style="text-decoration: none; color: black">
+            <a href="productoverzicht.php?productID=<?php print ($productID); ?>"
+               style="text-decoration: none; color: black">
                 <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?php print($productNaam); ?> </h5>
@@ -298,31 +299,35 @@ function insertAccountData(array $info, string $username)
 
 
 //betalingen
-function database_read($orderId)
+function database_read_payment($orderId)
 {
-    $orderId = intval($orderId);
-    $database = dirname(__FILE__) . "/database/order-{$orderId}.txt";
+    $conn = dbconect();
+    $sql = "select paymentStatus, bestellingID from bestelling where paymentID = '$orderId'";
+    $result = $conn->query($sql);
+    $conn->close();
+    while ($row = $result->fetch_assoc()) {
+        $return['paymentStatus'] = $row['paymentStatus'];
+        $return['bestellingID'] = $row['bestellingID'];
+    }
+    return $return;
+}
 
-    $status = @file_get_contents($database);
-
-    return $status ? $status : "unknown order";
+function database_write_new_payment($orderId, $status)
+{
+    $conn = dbconect();
+    $sql = "insert into bestelling (paymentID, paymentStatus)values ('$orderId', '$status')";
+    $conn->query($sql);
+    $conn->close();
 }
 
 function database_write_payment($orderId, $status)
 {
-    $conn = db;
+    $conn = dbconect();
+    $sql = "update bestelling set status='$status' where paymentID = '$orderId'";
+    $conn->query($sql);
+    $conn->close();
 }
 
-function countpoint($input) {
-    $count = strpos(strrev($input), '.');
-    $amount = str_replace('.', ',', $input);
-    if ($count == 1) {
-        $amount .= '0';
-        return $amount;
-    } else {
-        return $amount;
-    }
-}
 
 //overig
 function groet($name)
