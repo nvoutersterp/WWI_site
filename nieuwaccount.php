@@ -144,8 +144,8 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                                         <title>Welkom bij WorldWideImporters! </title> 
                                     </head> 
                                     <body> 
-                                        <h1>Dankjewel '. $firstName.'! Nog een paar stappen en dan ben je klaar voor de start!</h1> 
-                                           <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
+                                        <h1>Dankjewel '. $firstName.'! Klik op verifieer om uw account te activeren.</h1> 
+                                           <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
                                                 <tr> 
                                                     <th>Namens:</th><td>World Wide Importers</td> 
                                                 </tr> 
@@ -225,7 +225,7 @@ if ($vervolg == 0) { ?>
 <form action="index.php" method="post" class="accountResultForm">
     <input type="hidden" name="username" value="<?php print ($eMail); ?>">
     <input type="hidden" name="password" value="<?php print ($pasword); ?>">
-    <h1><?php print ($firstName); ?>, uw account is succesvol aangemaak</h1>
+    <h1><?php print ($firstName); ?>, uw account is succesvol aangemaak!</h1><br><p> Controlleer uw email voor de verificatiecode</p>
 
     <button type="submit"><?php if (isset($_SESSION['fromShoppingCart']) and $_SESSION['fromShoppingCart']) {
             print ('Ga verder met afrekkennen');
