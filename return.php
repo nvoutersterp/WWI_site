@@ -33,6 +33,8 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 }
 
+$orderId = $_GET['order_id']
+
 ?>
 <!DOCTYPE HTML>
 <head>
@@ -119,11 +121,9 @@ require "mollie-api-php-master/initialize.php";
 /*
  * Retrieve the payment's current state.
  */
-$payment = $mollie->payments->get($_POST["id"]);
-$orderId = $payment->metadata->order_id;
+$ant = database_read_payment($orderId);
 
-database_write_payment($orderId);
-
+print_r($ant);
 
 
 // alternatief:

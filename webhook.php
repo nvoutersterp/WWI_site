@@ -19,7 +19,7 @@ try {
     /*
      * Update the order in the database.
      */
-    database_write($orderId, $payment->status);
+    database_write_payment($orderId, $payment->status);
     if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
         /*
          * The payment is paid and isn't refunded or charged back.

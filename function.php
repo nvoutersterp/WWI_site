@@ -276,7 +276,7 @@ function database_write_new_payment($orderId, $status)
 function database_write_payment($orderId, $status)
 {
     $conn = dbconect();
-    $sql = "update bestelling set status='$status' where paymentID = '$orderId'";
+    $sql = "update bestelling set paymentStatus='$status' where paymentID = '$orderId'";
     $conn->query($sql);
     $conn->close();
 }
