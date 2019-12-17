@@ -175,8 +175,8 @@ if ($issetPhoto != 0) {
     $productFoto = 'images/archixl-logo.png';
 }
 ?>
-<div class="row2">
-    <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
+<div>
+    <div class="card" style="width: 18rem; z-index: 2; margin-left: 1%;">
         <img class="card-img-top" src="<?php print ($productFoto); ?>" alt="Card image cap">
     </div>
     <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
@@ -237,7 +237,8 @@ if ($totPrice != 0) {
     if ($verify == 1) {
         ?>
         <form action="redirectpayment.php" method="post">
-            <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect); print ($totPriceNieuw); ?>">
+            <input type="hidden" name="value" value="<?php $totPriceNieuw = str_replace(',', '.', $totPriceCorrect);
+            print ($totPriceNieuw); ?>">
             <button class="btn btn-primary btn-lg type=" submit
             ">afrekenen</button>
         </form><br>
@@ -246,7 +247,8 @@ if ($totPrice != 0) {
         ?>
 
 
-        <p style='color:red'><br><br>Om te kunnen betalen moet u eerst inloggen of uw account verifieren! Dit staat in uw
+        <p style='color:red'><br><br>Om te kunnen betalen moet u eerst inloggen of uw account verifieren! Dit staat in
+            uw
             geregistreerde
             mail.</p>
 

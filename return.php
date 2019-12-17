@@ -137,7 +137,7 @@ if ($ant['paymentStatus'] == 'paid') {
 } elseif ($ant['paymentStatus'] == 'open') {
 
 } else {
-    print ('Sorry, er ging iets fout bij de betaling. Probeer het a.u.b. opneuw te kopen:');
+    print ("Sorry, er ging iets fout bij de betaling. hij is '. $ant['paymentStatus] .' Probeer het a.u.b. opneuw te kopen:");
     ?>
     <form action="winkelmand.php">
         <button type="button">Terug naar winkelmand</button>
