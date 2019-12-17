@@ -135,9 +135,15 @@ if ($ant['paymentStatus'] == 'paid') {
     </form>
     <?php
 } elseif ($ant['paymentStatus'] == 'open') {
-
+    print ('dank voor uw koop. De betaling word nog verwerkt. Als we die hebben ontvangen sturen we het zsm naar u op.');
+    unset($_SESSION['winkelmand']);
+    ?>
+    <form action="index.php">
+        <button type="button">Terug naar home</button>
+    </form>
+    <?php
 } else {
-    print ("Sorry, er ging iets fout bij de betaling. hij is '. $ant['paymentStatus] .' Probeer het a.u.b. opneuw te kopen:");
+    print ("Sorry, er ging iets fout bij de betaling. hij is ". $ant['paymentStatus'] ."Probeer het a.u.b. opneuw te kopen:");
     ?>
     <form action="winkelmand.php">
         <button type="button">Terug naar winkelmand</button>
