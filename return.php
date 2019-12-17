@@ -131,7 +131,7 @@ if ($ant['paymentStatus'] == 'paid') {
     unset($_SESSION['winkelmand']);
     ?>
     <form action="index.php">
-        <button type="button">Terug naar home</button>
+        <button type="submit">Terug naar home</button>
     </form>
     <?php
 } elseif ($ant['paymentStatus'] == 'open') {
@@ -139,14 +139,14 @@ if ($ant['paymentStatus'] == 'paid') {
     unset($_SESSION['winkelmand']);
     ?>
     <form action="index.php">
-        <button type="button">Terug naar home</button>
+        <button type="submit">Terug naar home</button>
     </form>
     <?php
 } else {
     print ("Sorry, er ging iets fout bij de betaling. hij is ". $ant['paymentStatus'] ."Probeer het a.u.b. opneuw te kopen:");
     ?>
     <form action="winkelmand.php">
-        <button type="button">Terug naar winkelmand</button>
+        <button type="submit">Terug naar winkelmand</button>
     </form> <?php
 }
 
