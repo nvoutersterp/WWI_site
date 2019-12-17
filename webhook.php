@@ -21,10 +21,7 @@ try {
      */
     database_write_payment($orderId, $payment->status);
     if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
-        /*
-         * The payment is paid and isn't refunded or charged back.
-         * At this point you'd probably want to start the process of delivering the product to the customer.
-         */
+    // stuur hier de mail
 
         echo 'gelukt';
     } elseif ($payment->isOpen()) {
