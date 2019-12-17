@@ -144,18 +144,18 @@ if (isset($_POST['clearBukket'])) {
 </div>
 
 <?php
-if (isset($_SESSION['winkelmand'])) {
 $totPrice = 0;
-foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
-$productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
-$productInfo = mysqli_fetch_array($productInfoQuery);
-$poLength = strlen($productInfo['SearchDetails']);
-if ($poLength < 30) {
-    $productOmschrijving = $productInfo['SearchDetails'];
-} else {
-    $maxLength = 30 - $poLength;
-    $productOmschrijving = substr_replace($productInfo['SearchDetails'], '...', $maxLength);
-}
+if (isset($_SESSION['winkelmand'])) {
+    foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
+    $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
+    $productInfo = mysqli_fetch_array($productInfoQuery);
+    $poLength = strlen($productInfo['SearchDetails']);
+    if ($poLength < 30) {
+        $productOmschrijving = $productInfo['SearchDetails'];
+    } else {
+        $maxLength = 30 - $poLength;
+        $productOmschrijving = substr_replace($productInfo['SearchDetails'], '...', $maxLength);
+    }
 
 $stockItemName = $productInfo['StockItemName'];
 $unitPrice = $productInfo['UnitPrice'] * 0.9;
@@ -241,7 +241,9 @@ if ($totPrice != 0) {
             print ($totPriceNieuw); ?>">
             <button class="btn btn-primary btn-lg type=" submit
             ">afrekenen</button>
-        </form><br>
+        </form>
+        <br>
+
         <?php
     } else {
         ?>
@@ -254,13 +256,15 @@ if ($totPrice != 0) {
 
         <?php
     }
+    ?>
+    <form action="winkelmand.php" method="post">
+        <input type="hidden" name="clearBukket" value="true">
+        <button type="submit" class="btn btn-secondary btn-lg">leeg winkelmand</button>
+    </form>
+    <?php
 }
 ?>
 
-<form action="winkelmand.php" method="post">
-    <input type="hidden" name="clearBukket" value="true">
-    <button type="submit" class="btn btn-secondary btn-lg">leeg winkelmand</button>
-</form>
 
 </main>
 <?php printFooter(); ?>
