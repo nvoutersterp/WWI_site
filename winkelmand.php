@@ -43,6 +43,9 @@ if (isset($_POST['quantity']) and isset($_POST['stockItemID'])) {
 if (isset($_POST['toDelete'])) {
     $deleteID = $_POST['toDelete'];
     unset($_SESSION['winkelmand'][$deleteID]);
+    if ($_SESSION['winkelmand'] == '') {
+
+    }
 }
 
 if (isset($_POST['alterQuantity']) and isset($_POST['alterQuantityID'])) {
