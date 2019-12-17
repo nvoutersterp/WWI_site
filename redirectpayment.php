@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 <header>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -46,7 +47,8 @@ try {
         "redirectUrl" => "{$protocol}://{$hostname}{$path}/return.php?order_id={$orderId}",
         "webhookUrl" => "http://dcb5fb32.ngrok.io/untitled/webhook.php",
         "metadata" => [
-        "order_id" => $orderId,
+            "order_id" => $orderId,
+            "user_id" =>  $_SESSION['clientID'],
     ]]);
     /*
      * In this example we store the order with its payment status in a database.
