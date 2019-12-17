@@ -16,13 +16,51 @@ try {
      */
     $payment = $mollie->payments->get($_POST["id"]);
     $orderId = $payment->metadata->order_id;
-    /*
-     * Update the order in the database.
+    $userid = $payment->metadata->user_id;
+
+//    Haalt gegevens uit de database van de ingelogde gebruiker
+    $conn = dbconect();
+    $userquery = mysqli_query($conn, "SELECT * FROM client WHERE clientID='$userid'") or die('Geen overeenkomst');
+
+    $row = mysqli_fetch_array($userquery);
+
+
+    $naam = $row['firstname'];
+    $eMail = $row['eMail'];
+    $adres = $row ['adres'];
+
+    mysqli_close($conn);
+     /* Update the order in the database.
      */
     database_write_payment($orderId, $payment->status);
     if ($payment->isPaid() && !$payment->hasRefunds() && !$payment->hasChargebacks()) {
-    // stuur hier de mail
+        // stuur hier de mail
+        $to = $eMail;
+        $subject = "Orderid: " . $orderId .".";
+        $headers = 'From: wwi_site@yahoo.com' . "\r\n" . "MIME-Version: 1.0" . "\r\n" .
+            "Content-type:text/html;charset=UTF-8" . "\r\n";
 
+        $htmlContent = '
+                                    <html> 
+                                    <head> 
+                                        <title>'. $naam . ' uw WWI bestelling ' . $orderId . ' is voltooid</title> 
+                                    </head> 
+                                    <body> 
+                                        <h1>Dankjewel voor de bestelling! .</h1> 
+                                           <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
+                                                <tr> 
+                                                    <th>Webshop:</th><td>World Wide Importers</td> 
+                                                </tr> 
+                                                <tr style="background-color: #e0e0e0;"> 
+                                                    <th>order:</th><td>' . $orderId . '</td> 
+                                                </tr>
+                                                <tr style="background-color: #e0e0e0;"> 
+                                                    <th>Verzonden naar:</th><td>' . $adres . '</td> 
+                                                </tr>
+                                            </table> 
+                                    </body> 
+                                    </html>';
+        mail($to, $subject, $htmlContent, $headers);
         echo 'gelukt';
     } elseif ($payment->isOpen()) {
         /*
