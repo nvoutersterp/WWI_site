@@ -1,5 +1,5 @@
 <?php
-$to = 'jantjevantiggelaar@grr.la';
+$to = 'hidde.spenkelink@gmail.com';
 $vkey = "eiye8372kjilj83lk2j34ji";
 $subject = "Email Verificatie";
 $message = "<a href='http://localhost/WWI_site/verify.php?vkey=$vkey'>Register Account</a>";

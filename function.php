@@ -121,7 +121,7 @@ function printProducten($query1, $conn)
             <div class="card" style="width: 18rem; z-index: 0.5; margin-left: 1%">
             <a href="productoverzicht.php?productID=<?php print ($productID); ?>"
                style="text-decoration: none; color: black">
-                <img class="card-img-top" style ="" src="<?php print ($productFoto); ?>" alt="Card image cap">
+                <img class="card-img-top" style ="max-width:100%; height: 280px" src="<?php print ($productFoto); ?>" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?php print($productNaam); ?> </h5>
                     <p class="card-text"><?php print($productOmschrijving); ?> </p>
