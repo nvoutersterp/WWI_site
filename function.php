@@ -139,7 +139,7 @@ function printProducten($query1, $conn)
         $rij++;
     }
     ?>
-    <div> <?php
+    </div> <?php
 }
 
 

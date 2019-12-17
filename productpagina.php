@@ -113,7 +113,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
         </div>
         <!--            Het zoeken naar producten-->
         <form class="example" action="productpagina.php" method="POST">
-            <input class="searchbox" type="text" placeholder="Zoek hier naar producten" name="search">
+            <input class="searchbox" type="text" value="<?php if (isset($_POST['search'])) { print ($_POST['search']); } ?>" placeholder="Zoek hier naar producten" name="search">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
 
@@ -205,8 +205,13 @@ if (isset($_POST['search'])) {
         $sqlTijdelijk .= " (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%') and";
     }
     $sql = substr_replace($sqlTijdelijk, '', -3);
+    foreach ($searchq as $value => $item) {
+        $sql .= "or (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%')";
+    }
+
     $query1 = mysqli_query($conn, $sql) or die('Geen overeenkomst');
     $count = mysqli_num_rows($query1);
+
 } elseif (isset($_POST['input'])) {
     $inputq = $_POST['input'];
     $query1 = mysqli_query($conn, "select StockItemID, StockItemName, UnitPrice, SearchDetails from stockitems where stockitemid in (select StockItemID from stockitemstockgroups where StockGroupID in (select StockGroupID from stockgroups where StockGroupName = '$inputq'))") or die('');

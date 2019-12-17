@@ -30,12 +30,16 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     }
 }
 
+if (!isset($_SESSION['aantaInWinelmand'])) {
+    $_SESSION['aantaInWinelmand'] = 0;
+}
 if (isset($_POST['quantity']) and isset($_POST['stockItemID'])) {
     $_SESSION['winkelmand'][0] = 0;
     if (array_key_exists($_POST['stockItemID'], $_SESSION['winkelmand'])) {
         $_SESSION['winkelmand'][$_POST['stockItemID']] += $_POST['quantity'];
     } else {
         $_SESSION['winkelmand'][$_POST['stockItemID']] = $_POST['quantity'];
+        $_SESSION['aantaInWinelmand']++;
     }
     unset($_SESSION['winkelmand'][0]);
 }
@@ -43,8 +47,10 @@ if (isset($_POST['quantity']) and isset($_POST['stockItemID'])) {
 if (isset($_POST['toDelete'])) {
     $deleteID = $_POST['toDelete'];
     unset($_SESSION['winkelmand'][$deleteID]);
-    if ($_SESSION['winkelmand'] == '') {
-
+    $_SESSION['aantaInWinelmand']--;
+    if ($_SESSION['aantaInWinelmand'] < 1) {
+        unset($_SESSION['winkelmand']);
+        header('refresh:0');
     }
 }
 
@@ -147,8 +153,8 @@ if (isset($_POST['clearBukket'])) {
 </div>
 
 <?php
-$totPrice = 0;
 if (isset($_SESSION['winkelmand'])) {
+    $totPrice = 0;
     foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
     $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
     $productInfo = mysqli_fetch_array($productInfoQuery);
@@ -266,6 +272,7 @@ if ($totPrice != 0) {
     </form>
     <?php
 }
+
 ?>
 
 
