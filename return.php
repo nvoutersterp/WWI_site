@@ -126,25 +126,23 @@ require "mollie-api-php-master/initialize.php";
 $ant = database_read_payment($orderId);
 
 
-if ($ant['paymentStatus'] == 'paid') { ?>
+if ($ant['paymentStatus'] == 'paid') {
+    print ('Dank voor uw bestlling!<br>Het word zsm verstuurd.');
+    unset($_SESSION['winkelmand']);
+    ?>
+    <form action="index.php">
+        <button type="button">Terug naar home</button>
+    </form>
+    <?php
+} elseif ($ant['paymentStatus'] == 'open') {
 
-<?php } elseif ($ant['paymentStatus'] == 'failed') {
+} else {
     print ('Sorry, er ging iets fout bij de betaling. Probeer het a.u.b. opneuw te kopen:');
     ?>
     <form action="winkelmand.php">
         <button type="button">Terug naar winkelmand</button>
     </form> <?php
 }
-
-
-// alternatief:
-//  $ant = database_read_payment($orderId, $status);
-//if ($ant['paymentStatus'] == 'isPaid' || $ant['paymentStatus'] == 'isAuthorized') {
-//    print ('u bestelling is ontvangnen en word zsm verstuurd');
-//    unset($_SESSION['winkelmand']);
-//} else {
-//    print ('nog niet af');
-//}
 
 
 ?>
