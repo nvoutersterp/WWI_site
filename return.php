@@ -27,7 +27,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     } else {
         //andere fout
     }
-} elseif (isset($_POST['uitloggen'])){
+} elseif (isset($_POST['uitloggen'])) {
     unset($_SESSION['clientID'], $_SESSION['isHoS'], $_SESSION['firstName']);
     $_SESSION['isIngelogt'] = false;
 
@@ -51,14 +51,14 @@ $orderId = $_GET['order_id']
 </header>
 <!--header1 gedefinieerd om een sticky effect te krijgen van top-container en nav-bar-->
 <div class=header1 id="header1" style="z-index: 100">
-    <div class="top-container" id="top-container" >
+    <div class="top-container" id="top-container">
         <!--        Laat logo zien met de juiste afmetingen-->
         <a href="index.php" class="logo"><img alt src="images/wwi%20logo%20text.png" width=180px height=50px> </a>
         <!--        snelkoppelingen naar de accountinformatie's-->
         <div class="top-container-right">
             <div> <?php
                 if (isset($_SESSION['firstName'])) {
-                    $name =  $_SESSION['firstName'];
+                    $name = $_SESSION['firstName'];
                 } else {
                     $name = '';
                 }
@@ -76,9 +76,10 @@ $orderId = $_GET['order_id']
                 <div class="login-popup" id="myLogin">
                     <form action="index.php" method="post" class="login-container">
                         Inloggen
-                        <button type="button" onclick="closeLogin()">Close</button><br>
+                        <button type="button" onclick="closeLogin()">Close</button>
+                        <br>
                         Gebruikersnaam: <input type="text" name="username" placeholder="e-mail"><br>
-                        Wachtwoord: <input type="password" name="password" ><br>
+                        Wachtwoord: <input type="password" name="password"><br>
                         <a href="nieuwaccount.php">Nog geen account? Maak er nu een aan!</a><br>
                         <button type="submit">inloggen</button>
                     </form>
@@ -86,6 +87,7 @@ $orderId = $_GET['order_id']
                         function openLogin() {
                             document.getElementById("myLogin").style.display = "block";
                         }
+
                         function closeLogin() {
                             document.getElementById("myLogin").style.display = "none";
                         }
@@ -123,7 +125,16 @@ require "mollie-api-php-master/initialize.php";
  */
 $ant = database_read_payment($orderId);
 
-print_r($ant);
+
+if ($ant['paymentStatus'] == 'paid') { ?>
+
+<?php } elseif ($ant['paymentStatus'] == 'failed') {
+    print ('Sorry, er ging iets fout bij de betaling. Probeer het a.u.b. opneuw te kopen:');
+    ?>
+    <form action="winkelmand.php">
+        <button type="button">Terug naar winkelmand</button>
+    </form> <?php
+}
 
 
 // alternatief:
