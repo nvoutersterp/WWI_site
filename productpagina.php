@@ -205,10 +205,6 @@ if (isset($_POST['search'])) {
         $sqlTijdelijk .= " (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%') and";
     }
     $sql = substr_replace($sqlTijdelijk, '', -3);
-    foreach ($searchq as $value => $item) {
-        $sql .= "or (StockItemName like '%$item%' or SearchDetails like '%$item%' or Tags like '%$item%')";
-    }
-
     $query1 = mysqli_query($conn, $sql) or die('Geen overeenkomst');
     $count = mysqli_num_rows($query1);
 

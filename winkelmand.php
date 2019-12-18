@@ -48,7 +48,7 @@ if (isset($_POST['toDelete'])) {
     $deleteID = $_POST['toDelete'];
     unset($_SESSION['winkelmand'][$deleteID]);
     $_SESSION['aantaInWinelmand']--;
-    if ($_SESSION['aantaInWinelmand'] < 1) {
+    if ($_SESSION['aantaInWinelmand'] < 0.9) {
         unset($_SESSION['winkelmand']);
         header('refresh:0');
     }
@@ -153,8 +153,9 @@ if (isset($_POST['clearBukket'])) {
 </div>
 
 <?php
+$totPrice = 0;
 if (isset($_SESSION['winkelmand'])) {
-    $totPrice = 0;
+    $BTW = 0;
     foreach ($_SESSION['winkelmand'] as $productID => $quantity) {
     $productInfoQuery = mysqli_query($conn, "select * from stockitems where StockItemID = '$productID'");
     $productInfo = mysqli_fetch_array($productInfoQuery);
@@ -167,12 +168,18 @@ if (isset($_SESSION['winkelmand'])) {
     }
 
 $stockItemName = $productInfo['StockItemName'];
-$unitPrice = $productInfo['UnitPrice'] * 0.9;
+
+    //te betalen prijs
+$unitPrice = $productInfo['RecommendedRetailPrice'] * 0.9;
 $unitPriceCorrect = number_format((float)$unitPrice, 2, ',', '');
 $productprijs = $unitPrice * $quantity;
 $productprijsCorrect = number_format((float)$productprijs, 2, ',', '');
 $totPrice += $productprijs;
 $totPriceCorrect = number_format((float)$totPrice, 2, ',', '');
+
+//btw
+$productBTW = $productprijs * ($productInfo['TaxRate']/100);
+$BTW += $productBTW;
 
 $photoRow = mysqli_query($conn, "select * from photo where StockItemID = '$productID'");
 $issetPhoto = mysqli_num_rows($photoRow);
@@ -198,7 +205,7 @@ if ($issetPhoto != 0) {
             <button type='submit'>X</button>
         </form>
         <form action='winkelmand.php' method='post'>
-            <select style='margin-left:9px' name='alterQuantity'>
+            <select style='margin-left:9px' name='alterQuantity' onchange="this.form.submit()">
                 <?php unset($i);
 
 
@@ -214,14 +221,14 @@ if ($issetPhoto != 0) {
                 } ?>
             </select>
             <input type='hidden' name='alterQuantityID' value='<?php print ($productID); ?>'>
-            <button type='submit' class="btn btn-primary btn-sm">>></button>
         </form>
     </div>
 </div>
 
 </body>
 <?php }
-print ("in totaal kost het €$totPriceCorrect<br>");
+    $BTWcorrect = number_format((float)$BTW, 2, ',', '');
+print ("in totaal kost het €$totPriceCorrect, dit is inc. €$BTWcorrect BTW.<br> ");
 } else {
     ?>
 
