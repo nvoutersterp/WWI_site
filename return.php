@@ -127,7 +127,7 @@ $ant = database_read_payment($orderId);
 
 
 if ($ant['paymentStatus'] == 'paid') {
-    print ('Dank voor uw bestlling!<br>Het word zsm verstuurd.');
+    print ('Dank voor uw bestelling!<br>Het word zsm verstuurd.');
     unset($_SESSION['winkelmand']);
     ?>
     <form action="index.php">
