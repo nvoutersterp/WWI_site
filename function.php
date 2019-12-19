@@ -242,15 +242,6 @@ function createAccount(string $username, string $wachtwoord)
     }
 }
 
-function insertAccountData(array $info, string $username)
-{
-    $conn = dbconect();
-    $sql = "update people set firstName='$info[voornaam]',middelName='$info[tussenvoegsel]',lastName='$info[achternaam]',PhoneNumber='$info[phonenummer]', EmailAddress='$username',postalCode='$info[postcode]',street='$info[straat]',city='$info[stad]' where LogonName='$username'";
-    $conn->query($sql);
-    $conn->close();
-}
-
-
 //betalingen
 function database_read_payment($orderId)
 {
@@ -265,12 +256,17 @@ function database_read_payment($orderId)
     return $return;
 }
 
-function database_write_new_payment($orderId, $status)
+function database_write_new_payment($orderId, $status, $client)
 {
     $conn = dbconect();
-    $sql = "insert into bestelling (paymentID, paymentStatus)values ('$orderId', '$status')";
+    $sql = "insert into bestelling (paymentID, paymentStatus, buyer)values ('$orderId', '$status', '$client')";
     $conn->query($sql);
+    $sql = "select * from bestelling where paymentID = '$orderId'";
+    $ant = $conn->query($sql);
     $conn->close();
+
+    $row = mysqli_fetch_array($ant);
+    return $row['bestellingID'];
 }
 
 function database_write_payment($orderId, $status)
@@ -281,6 +277,14 @@ function database_write_payment($orderId, $status)
     $conn->close();
 }
 
+function database_write_order(array $winkelmand, $bestellingID) {
+    $conn = dbconect();
+    foreach ($winkelmand as $stockItem => $quantity) {
+        $sql = "insert into bestelregel (stockitemID, bestellingID, quantity) values ('$stockItem', '$bestellingID', '$quantity')";
+        $conn->query($sql);
+    }
+    $conn->close();
+}
 
 //overig
 function groet($name)

@@ -125,7 +125,6 @@ require "mollie-api-php-master/initialize.php";
  */
 $ant = database_read_payment($orderId);
 
-
 if ($ant['paymentStatus'] == 'paid') {
     print ('Dank voor uw bestelling!<br>Het word zsm verstuurd.');
     unset($_SESSION['winkelmand']);
@@ -149,7 +148,6 @@ if ($ant['paymentStatus'] == 'paid') {
         <button type="submit">Terug naar winkelmand</button>
     </form> <?php
 }
-
 
 ?>
 

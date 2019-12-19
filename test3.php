@@ -1,10 +1,7 @@
 <?php
 include "function.php";
 
-$status = "hoi";
-$orderId = "1576153866";
+$winkelmand['winkelmand'] = array(2 => 2, 5 => 1);
+$besttelingID = "6";
 
-$conn = dbconect();
-$sql = "update bestelling set paymentStatus='$status' where paymentID = '$orderId'";
-$conn->query($sql);
-$conn->close();
+database_write_order($winkelmand['winkelmand'], $besttelingID);

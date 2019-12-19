@@ -228,7 +228,7 @@ if ($issetPhoto != 0) {
 </body>
 <?php }
     $BTWcorrect = number_format((float)$BTW, 2, ',', '');
-print ("in totaal kost het €$totPriceCorrect, dit is inc. €$BTWcorrect BTW.<br> ");
+print ("in totaal kost het €$totPriceCorrect, dit is inc. €$BTWcorrect BTW en incl. €0,00 verzendkosten.<br> ");
 } else {
     ?>
 
@@ -238,12 +238,15 @@ print ("in totaal kost het €$totPriceCorrect, dit is inc. €$BTWcorrect BTW.<
 ?>
 <?php
 $databaseconnect = dbconect();
-$loginID = $_SESSION['clientID'];
+if (isset($_SESSION['clientID'])) {
+    $loginID = $_SESSION['clientID'];
 
-$queryafrekenen = mysqli_query($conn, "SELECT verify FROM client WHERE clientID = '$loginID'");
-$resultafrekenen = mysqli_fetch_array($queryafrekenen);
-$verify = $resultafrekenen['verify'];
-
+    $queryafrekenen = mysqli_query($conn, "SELECT verify FROM client WHERE clientID = '$loginID'");
+    $resultafrekenen = mysqli_fetch_array($queryafrekenen);
+    $verify = $resultafrekenen['verify'];
+} else {
+    $verify = 0;
+}
 
 ?>
 
@@ -266,9 +269,7 @@ if ($totPrice != 0) {
 
 
         <p style='color:red'><br><br>Om te kunnen betalen moet u eerst inloggen of uw account verifieren! Dit staat in
-            uw
-            geregistreerde
-            mail.</p>
+            uw geregistreerde mail.</p>
 
         <?php
     }
