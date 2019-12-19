@@ -45,7 +45,7 @@ try {
         ],
         "description" => "Order #{$orderId}",
         "redirectUrl" => "{$protocol}://{$hostname}{$path}/return.php?order_id={$orderId}",
-        "webhookUrl" => "http://1a4cd031.ngrok.io/{$path}/webhook.php",
+        "webhookUrl" => "http://9269fb6f.ngrok.io/{$path}/webhook.php",
         "metadata" => [
             "order_id" => $orderId,
             "user_id" =>  $_SESSION['clientID'],

@@ -147,7 +147,7 @@ if (isset($_POST['gender']) and isset($_POST['firstName']) and isset($_POST['mid
                                         <h1>Dankjewel '. $firstName.'! Klik op verifieer om uw account te activeren.</h1> 
                                            <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
                                                 <tr> 
-                                                    <th>Namens:</th><td>World Wide Importers</td> 
+                                                    <th>Namens:</th><td><img src="https://i.ibb.co/Tg0WHsY/wwi-logo-text.png" alt="wwi-logo-text"></td> 
                                                 </tr> 
                                                 <tr style="background-color: #e0e0e0;"> 
                                                     <th>Email:</th><td>contact@wwi.com</td> 

@@ -317,7 +317,7 @@ $werktHet = '';
                                         <h1>Klik op wachtwoord wijzigen voor uw WWI-account.</h1> 
                                            <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
                                                 <tr> 
-                                                    <th>Namens:</th><td>World Wide Importers</td> 
+                                                    <th>Namens:</th><td><img src="https://i.ibb.co/Tg0WHsY/wwi-logo-text.png" alt="wwi-logo-text"></td> 
                                                 </tr> 
                                                 <tr style="background-color: #e0e0e0;"> 
                                                     <th>Email:</th><td>contact@wwi.com</td> 

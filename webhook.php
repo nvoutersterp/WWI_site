@@ -51,8 +51,8 @@ try {
                                         <h1>Dankjewel voor uw bestelling! </h1> 
                                            <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
                                                 <tr> 
-                                                    <th>Webshop:</th><td>World Wide Importers</td> 
-                                                </tr> 
+                                                    <th>Webshop:</th><td><img src="https://i.ibb.co/Tg0WHsY/wwi-logo-text.png" alt="wwi-logo-text"></td> 
+                                                </tr>
                                                 <tr style="background-color: #e0e0e0;"> 
                                                     <th>order:</th><td>' . $orderId . '</td> 
                                                 </tr>
