@@ -117,10 +117,16 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 
 <?php
-$clientid = $_SESSION['clientID'];
+if (isset($_SESSION['clientID'])) {
+    $clientid = $_SESSION['clientID'];
+} else {
+    $clientid = 0;
+    print("<h2>Log eerst in voordat je je wachtwoord wijzigd.</h2>");
+}
+
 
 if (isset($_GET['Recovercode'])) {
-    if ($clientid) {
+    if ($clientid != 0) {
         $Recovercode = $_GET['Recovercode'];
         $databaseconnect = dbconect();
 
@@ -168,9 +174,9 @@ if (isset($_GET['Recovercode'])) {
                     print("Wachtwoorden komen niet overeen, of een van de velden is niet ingevuld! ");
                 }
             }
+        } else {
+            die("<h2>Link is al gebruikt. Vraag een nieuwe link aan via accountpagina of neem contact op!</h2>");
         }
-    } else {
-        die("Er ging iets mis, probeer het opnieuw, of neem contact op met de administrator van deze website");
     }
 }
 ?>
