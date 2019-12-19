@@ -149,6 +149,11 @@ $issetPhoto = mysqli_num_rows($photoRow);
 $p = 0;
 $q = 0;
 
+//voor video's
+$query2 = mysqli_query($conn, "select * from video where StockItemID = '$productID'");
+$row2 = mysqli_fetch_array($query2);
+$video = $row2['video'];
+
 ?>
 <div>
     <div id="overzicht1">
@@ -241,18 +246,63 @@ $q = 0;
         </form>
     </div>
 </div>
+    <div id="video">
+    <?php if(isset($row2['video'])){?>
+        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+        <div id="player"></div>
+
+        <script>
+            // 2. This code loads the IFrame Player API code asynchronously.
+            var tag = document.createElement('script');
+
+            tag.src = "https://www.youtube.com/iframe_api";
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+            // 3. This function creates an <iframe> (and YouTube player)
+            //    after the API code downloads.
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '390',
+                    width: '640',
+                    videoId: '<?php print($video); ?>',
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            }
+
+            // 4. The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                //event.target.playVideo();
+            }
+            // 5. The API calls this function when the player's state changes.
+            var done = false;
+            function onPlayerStateChange(event) {
+                if (event.data == YT.PlayerState.PLAYING && !done) {
+                    done = true;
+                }
+            }
+            function stopVideo() {
+                player.stopVideo();
+            }
+        </script>
+    <?php } ?>
+    </div>
 <div style="margin-top: 50%">
 <?php printFooter(); ?>
-<script src="js/effecten.js"></script>
-</div>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="js/bootstrap.js" rel="script"></script>
-<script src="js/effecten.js"></script>
+        <script src="js/effecten.js"></script>
+        </div>
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="js/bootstrap.js" rel="script"></script>
+        <script src="js/effecten.js"></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</body>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    </body>
 </html>
