@@ -246,8 +246,10 @@ $video = $row2['video'];
         </form>
     </div>
 </div>
-    <div id="video">
-    <?php if(isset($row2['video'])){?>
+
+
+<div class="video">
+    <?php if (isset($row2['video'])) { ?>
         <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
         <div id="player"></div>
 
@@ -262,6 +264,7 @@ $video = $row2['video'];
             // 3. This function creates an <iframe> (and YouTube player)
             //    after the API code downloads.
             var player;
+
             function onYouTubeIframeAPIReady() {
                 player = new YT.Player('player', {
                     height: '390',
@@ -278,31 +281,34 @@ $video = $row2['video'];
             function onPlayerReady(event) {
                 //event.target.playVideo();
             }
+
             // 5. The API calls this function when the player's state changes.
             var done = false;
+
             function onPlayerStateChange(event) {
                 if (event.data == YT.PlayerState.PLAYING && !done) {
                     done = true;
                 }
             }
+
             function stopVideo() {
                 player.stopVideo();
             }
         </script>
     <?php } ?>
-    </div>
-<div style="margin-top: 50%">
-<?php printFooter(); ?>
-        <script src="js/effecten.js"></script>
-        </div>
-        <link href="css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css">
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <script src="js/bootstrap.js" rel="script"></script>
-        <script src="js/effecten.js"></script>
+</div>
+<div style="margin-top: 25%">
+    <?php printFooter(); ?>
+    <script src="js/effecten.js"></script>
+</div>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="js/bootstrap.js" rel="script"></script>
+<script src="js/effecten.js"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    </body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</body>
 </html>
