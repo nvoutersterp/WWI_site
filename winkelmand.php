@@ -146,9 +146,7 @@ if (isset($_POST['clearBukket'])) {
 
     </div>
     <!-- snelkoppelingen naar de juist betreffende catogorie met icon's van de bootstrap-->
-    <div class="nav" id="nav">
         <?php printcategorie($conn); ?>
-    </div>
 
 </div>
 

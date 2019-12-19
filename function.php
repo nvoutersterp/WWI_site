@@ -282,6 +282,8 @@ function database_write_order(array $winkelmand, $bestellingID) {
     foreach ($winkelmand as $stockItem => $quantity) {
         $sql = "insert into bestelregel (stockitemID, bestellingID, quantity) values ('$stockItem', '$bestellingID', '$quantity')";
         $conn->query($sql);
+        $sql = "update stockitemholdings set QuantityOnHand = QuantityOnHand-'$quantity' where StockItemID = '$stockItem'";
+        $conn->query($sql);
     }
     $conn->close();
 }
