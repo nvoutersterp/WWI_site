@@ -211,14 +211,17 @@ form.example::after {
 }
 
 #overzicht1 img  {
-    width: 400px;
+    width: 400px;bott
     height: 400px;
 }
 
 #overzicht2{
     float: left;
 }
-
+.video{
+    margin-top:25%;
+    margin-left: 22%;
+}
 
 /* voor responsifnes*/
 @media screen and (max-width: 600px) {
