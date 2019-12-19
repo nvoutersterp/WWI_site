@@ -159,8 +159,10 @@ if (isset($_GET['Recovercode'])) {
                 if ((!empty($_POST['nieuwwachtwoord'])) && (($_POST['nieuwwachtwoord']) == ($_POST['nieuwwachtwoord2']))) {
                     $newhashedpassword = password_hash($_POST['nieuwwachtwoord'], 1);
                     $querywachtwoord = mysqli_query($conn, "UPDATE client SET hashedPassword='$newhashedpassword' WHERE clientID='$clientid'");
-                    print("Wachtwoord is gewijzigd");
+                    print(" <h3> Wachtwoord is gewijzigd </h3>");
                     print('</br>');
+                    $Recovercode = md5(time() . $Recovercode);
+                    $updaterecovercode = $conn -> query("UPDATE client SET RecoverCode = '$Recovercode' WHERE clientID = '$clientid' LIMIT 1");
 
                 } else {
                     print("Wachtwoorden komen niet overeen, of een van de velden is niet ingevuld! ");

@@ -301,7 +301,7 @@ $werktHet = '';
     $useringelogd = $row['clientID'];
     //wijzig wachtwoord
     if (isset($_POST['submitnieuwWW'])) {
-        print("Link is gestuurd naar uw e-mail adres");
+        print("<h2>    Link is gestuurd naar uw e-mailadres!</h2>");
         $to = $eMail;
         $subject = "E-mail voor wachtwoord wijziging";
         $Recovercode = md5(time() . $email);
