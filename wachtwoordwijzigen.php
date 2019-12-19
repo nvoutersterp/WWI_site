@@ -117,64 +117,60 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
 
 
 <?php
+$clientid = $_SESSION['clientID'];
 
 if (isset($_GET['Recovercode'])) {
-    $Recovercode = $_GET['Recovercode'];
-    $databaseconnect = dbconect();
+    if ($clientid) {
+        $Recovercode = $_GET['Recovercode'];
+        $databaseconnect = dbconect();
 
-    $Resultset = $databaseconnect->query("SELECT * FROM client WHERE RecoverCode = '$Recovercode' LIMIT 1");
+        $Resultset = $databaseconnect->query("SELECT * FROM client WHERE RecoverCode = '$Recovercode' LIMIT 1");
 
-    if ($Resultset->num_rows == 1) {
+        if ($Resultset->num_rows == 1) {
 
-        print('
-                <div class="col-md-9" id="profiel">
-        <div class="card">
-                            
-                <form method="POST" action="wachtwoordwijzigen.php">
+            print('                            
+                <form method="POST" action="wachtwoordwijzigen.php?Recovercode='.$Recovercode.'">
                     <hr>
                     <h5>Wachtwoord vergeten? Vraag een nieuwe aan!</h5>
                     <hr>
-                    <div class=\"form-group row\">
-                        <label class=\"col-4 col-form-label\">Nieuw wachtwoord</label>
+                    <div style="padding-left: 10px">
+                        <label>Nieuw wachtwoord</label>
                         <div>
-                            <input name="nieuwwachtwoord" placeholder="Voer nieuw wachtwoord in\" class=\"form-control here\" type="password" >
+                            <input name="nieuwwachtwoord" placeholder="Voer nieuw wachtwoord in\" type="password" >
                       
                         </div>
                     </div>
-                    <div class=\"form-group row\">
+                    <div style="padding-left: 10px">
                         <label class=\"col-4 col-form-label\">Herhaal wachtwoord</label>
                         <div class=\"col-8\">
-                            <input id=\"newpass2\" name="nieuwwachtwoord2" placeholder="voer nieuwe wachtwoord nogmaals in\" class=\"form-control here\" type=\"password\">
+                            <input id=\"newpass2\" name="nieuwwachtwoord2" placeholder="voer nieuwe wachtwoord nogmaals in\" class=\"form-control here\" type="password">
                         </div>
                     </div>
-                    <div class=\"form-group row\">
+                    <div style="padding-left: 10px; padding-top: 5px" >
                         <div class=\"offset-4 col-8\">
-                            <button name="submitnieuwWW" type=\"submit\" class=\"btn btn-primary\">Bevestigen</button>
+                            <button name="submitnieuwWW" type="submit" class="btn btn-primary">Bevestigen</button>
                         </div>
                     </div>
                 </form>
-            </div>
-            </div>
             
             ');
 
-        if (isset($_POST['submitnieuwWW'])) {
-            if ((!empty($_POST['nieuwwachtwoord'])) && (($_POST['nieuwwachtwoord']) == ($_POST['nieuwwachtwoord2']))) {
-                $newhashedpassword = password_hash($_POST['nieuwwachtwoord'], 1);
-                $querywachtwoord = mysqli_query($conn, "UPDATE client SET hashedPassword='$newhashedpassword' WHERE clientID='$clientid'");
-                print("Wachtwoord is gewijzigd");
-                print('</br>');
+            if (isset($_POST['submitnieuwWW'])) {
+                if ((!empty($_POST['nieuwwachtwoord'])) && (($_POST['nieuwwachtwoord']) == ($_POST['nieuwwachtwoord2']))) {
+                    $newhashedpassword = password_hash($_POST['nieuwwachtwoord'], 1);
+                    $querywachtwoord = mysqli_query($conn, "UPDATE client SET hashedPassword='$newhashedpassword' WHERE clientID='$clientid'");
+                    print("Wachtwoord is gewijzigd");
+                    print('</br>');
 
-            } else {
-                print("Wachtwoorden komen niet overeen, of een van de velden is niet ingevuld! ");
+                } else {
+                    print("Wachtwoorden komen niet overeen, of een van de velden is niet ingevuld! ");
+                }
             }
         }
+    } else {
+        die("Er ging iets mis, probeer het opnieuw, of neem contact op met de administrator van deze website");
     }
-} else {
-    die("Er ging iets mis, probeer het opnieuw, of neem contact op met de administrator van deze website");
 }
-
-
 ?>
 
 

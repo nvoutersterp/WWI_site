@@ -28,6 +28,8 @@ try {
     $naam = $row['firstname'];
     $eMail = $row['eMail'];
     $adres = $row ['adres'];
+    $postcode = $row ['postcode'];
+    $plaats = $row ['plaats'];
 
     mysqli_close($conn);
      /* Update the order in the database.
@@ -46,7 +48,7 @@ try {
                                         <title>'. $naam . ' uw WWI bestelling ' . $orderId . ' is voltooid</title> 
                                     </head> 
                                     <body> 
-                                        <h1>Dankjewel voor de bestelling! .</h1> 
+                                        <h1>Dankjewel voor uw bestelling! </h1> 
                                            <table cellspacing="0" style="border: 2px dashed #0b7dda; width: 100%;"> 
                                                 <tr> 
                                                     <th>Webshop:</th><td>World Wide Importers</td> 
@@ -55,7 +57,8 @@ try {
                                                     <th>order:</th><td>' . $orderId . '</td> 
                                                 </tr>
                                                 <tr style="background-color: #e0e0e0;"> 
-                                                    <th>Verzonden naar:</th><td>' . $adres . '</td> 
+                                                    <th>Verzonden naar:</th><td>' . $adres . ' <br>
+                                                                                ' . $postcode .' '. $plaats .'</td>
                                                 </tr>
                                             </table> 
                                     </body> 
